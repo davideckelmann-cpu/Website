@@ -1,0 +1,71 @@
+---
+---
+<footer class="footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <p class="footer-logo">Lilac &amp; Bergamot</p>
+      <p class="tagline">Florale Gestaltung in Berlin — saisonal, bewusst, ästhetisch.</p>
+    </div>
+
+    <nav class="footer-col" aria-label="Navigation">
+      <h4 class="col-head">Navigation</h4>
+      <a href="/angebot/">Angebot</a>
+      <a href="/events/">Events</a>
+      <a href="/abo/">Abo &amp; Preise</a>
+      <a href="/impressionen/">Impressionen</a>
+      <a href="/kontakt/">Kontakt</a>
+    </nav>
+
+    <div class="footer-col">
+      <h4 class="col-head">Kontakt</h4>
+      <span>Berliner Allee 121 · 13088 Berlin</span>
+      <a href="tel:+493062904677">+49 (0) 30 629 046 77</a>
+      <a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a>
+      <a href="https://instagram.com/lilac_bergamot">@lilac_bergamot</a>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="container footer-bar-inner">
+      <span>© {new Date().getFullYear()} Lilac &amp; Bergamot</span>
+      <nav class="legal-links" aria-label="Rechtliches">
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--creme); margin-top: var(--sp-2xl); }
+
+  .footer-top {
+    display: flex; flex-wrap: wrap; gap: 2.5rem 4rem; justify-content: space-between;
+    padding-block: 3rem 2.5rem;
+  }
+  .footer-brand { max-width: 300px; }
+  .footer-logo { font-family: var(--serif); font-weight: 600; font-size: 1.6rem; color: var(--pflaume); }
+  .tagline { color: var(--pflaume-soft); font-size: 0.95rem; margin-top: 0.6rem; line-height: 1.5; }
+
+  .footer-col { display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.95rem; color: var(--pflaume); }
+  .col-head {
+    font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 600; color: var(--malve); margin-bottom: 0.5rem;
+  }
+  .footer-col a { transition: color 0.3s ease; }
+  .footer-col a:hover { color: var(--malve); }
+
+  .footer-bar { background: var(--pflaume); color: var(--limette); }
+  .footer-bar-inner {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
+    padding-block: 1rem; font-size: 0.82rem;
+  }
+  .footer-bar-inner > span { opacity: 0.85; }
+  .legal-links { display: flex; gap: 1.5rem; }
+  .legal-links a { opacity: 0.85; transition: opacity 0.3s ease; }
+  .legal-links a:hover { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .footer-top { flex-direction: column; gap: 1.75rem; padding-block: 2.5rem 2rem; }
+  }
+</style>

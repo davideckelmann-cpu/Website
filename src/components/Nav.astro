@@ -1,0 +1,44 @@
+---
+const links = [
+  { href: '/ueber-uns/', label: 'Über uns' },
+  { href: '/angebot/', label: 'Angebot' },
+  { href: '/events/', label: 'Events' },
+  { href: '/abo/', label: 'Abo & Preise' },
+  { href: '/angebot/straeusse/', label: 'Sträuße' },
+  { href: '/kontakt/', label: 'Kontakt' },
+];
+---
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo">Lilac &amp; Bergamot</a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+<style>
+  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--creme) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.4s ease; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 1.25rem; }
+  .logo { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; letter-spacing: 0.01em; }
+  .nav-links { display: flex; gap: 1.9rem; }
+  .nav-links a { position: relative; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; color: var(--text-soft); transition: color 0.3s ease; white-space: nowrap; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+  .nav-toggle span { width: 24px; height: 1.5px; background: var(--text); transition: 0.3s; }
+  @media (max-width: 900px) {
+    .nav-links { position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px); flex-direction: column; gap: 1.5rem; background: var(--bg); padding: 6rem 2rem; transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); box-shadow: var(--shadow-card); }
+    .nav-links.open { transform: translateX(0); }
+    .nav-toggle { display: flex; z-index: 60; }
+  }
+</style>
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle?.addEventListener('click', () => {
+    const open = links?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+</script>

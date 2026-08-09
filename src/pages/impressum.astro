@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Impressum — Lilac & Bergamot"
+  description="Impressum von Lilac & Bergamot, Floristik in Berlin. Anbieterkennzeichnung nach § 5 DDG."
+  path="/impressum/"
+>
+  <section class="container legal">
+    <h1 data-reveal>Impressum</h1>
+
+    <div class="legal-body" data-reveal style="--reveal-delay:120ms">
+      <p class="hint">Hinweis: Bitte die mit [ ] markierten Angaben durch eure echten Daten ersetzen
+        und die Vollständigkeit rechtlich prüfen lassen (z. B. eRecht24 oder Anwalt).</p>
+
+      <h2>Angaben gemäß § 5 DDG</h2>
+      <p>
+        [Vor- und Nachname / Inhaber:in]<br>
+        Lilac &amp; Bergamot<br>
+        Berliner Allee 121<br>
+        13088 Berlin<br>
+        Deutschland
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: +49 (0) 30 629 046 77<br>
+        Telefon: +49 (0) 17 669 118 837<br>
+        E-Mail: hello@lilac-bergamot.com
+      </p>
+
+      <h2>Umsatzsteuer-ID</h2>
+      <p>
+        Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+        [USt-IdNr. eintragen – oder diesen Abschnitt entfernen, falls nicht vorhanden]
+      </p>
+
+      <h2>Redaktionell verantwortlich</h2>
+      <p>
+        [Vor- und Nachname]<br>
+        Berliner Allee 121, 13088 Berlin
+      </p>
+
+      <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+      <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+      <h2>Haftung für Inhalte</h2>
+      <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 DDG für eigene Inhalte auf diesen Seiten nach
+        den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter
+        jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen
+        oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+
+      <h2>Haftung für Links</h2>
+      <p>Unser Angebot enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen
+        Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+        Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
+        Seiten verantwortlich.</p>
+
+      <h2>Urheberrecht</h2>
+      <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem
+        deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
+        Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
+        jeweiligen Autors bzw. Erstellers.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding-block: var(--sp-2xl); max-width: 820px; }
+  .legal h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: var(--sp-lg); }
+  .legal-body { display: grid; gap: var(--sp-sm); }
+  .legal-body h2 { font-size: 1.35rem; margin-top: var(--sp-md); color: var(--accent); }
+  .legal-body p { color: var(--text-soft); line-height: 1.75; }
+  .hint { background: var(--bg-alt); border-left: 3px solid var(--accent-warm); padding: 1rem 1.25rem; border-radius: var(--r-md); font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+</style>

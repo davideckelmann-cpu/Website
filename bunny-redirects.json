@@ -1,0 +1,26 @@
+{
+  "_comment": "301-Weiterleitungen für den Wix->Bunny Umzug. Alte Wix-URL -> neue URL. In Bunny als Edge Rules (Redirect) anlegen. Basiert auf der echten URL-Struktur von lilac-bergamot.com (Juli 2026).",
+  "redirects": [
+    { "from": "/floristik-angebot", "to": "/angebot/", "status": 301 },
+    { "from": "/floristik-angebot/blumen-fuer-salons", "to": "/angebot/salons/", "status": 301 },
+    { "from": "/floristik-angebot/floristik-gastronomie-berlin", "to": "/angebot/gastronomie/", "status": 301 },
+    { "from": "/floristik-angebot/floristik-galerien-berlin", "to": "/angebot/galerien/", "status": 301 },
+    { "from": "/floristik-angebot/blumen-fuer-praxen", "to": "/angebot/praxen/", "status": 301 },
+    { "from": "/floristik-angebot/blumen-kanzleien-berlin", "to": "/angebot/kanzleien/", "status": 301 },
+    { "from": "/floristik-angebot/editorial-floristik", "to": "/angebot/editorials/", "status": 301 },
+    { "from": "/event-floristik-berlin", "to": "/events/", "status": 301 },
+    { "from": "/event-floristik-berlin/blumen-firmenevents-berlin", "to": "/events/firmenevents/", "status": 301 },
+    { "from": "/event-floristik-berlin/floristik-markenpraesentation-berlin", "to": "/events/markenpraesentation/", "status": 301 },
+    { "from": "/event-floristik-berlin/hochzeit-floristik-berlin", "to": "/events/hochzeiten/", "status": 301 },
+    { "from": "/event-floristik-berlin/floristik-szenografie", "to": "/events/szenografie/", "status": 301 },
+    { "from": "/event-floristik-berlin/trauerfloristik-berlin", "to": "/events/trauerfloristik/", "status": 301 },
+    { "from": "/event-floristik-berlin/blumen-private-feiern-berlin", "to": "/events/private-anlaesse/", "status": 301 },
+    { "from": "/blumenabonements-fur-geschaeftskunden", "to": "/abo/", "status": 301 },
+    { "from": "/blumenstraeusse-berlin", "to": "/angebot/straeusse/", "status": 301 },
+    { "from": "/portfolio-florale-gestaltungen", "to": "/impressionen/", "status": 301 },
+    { "from": "/ueber-uns", "to": "/ueber-uns/", "status": 301 },
+    { "from": "/kontakt", "to": "/kontakt/", "status": 301 },
+    { "from": "/impressum-datenschutz-agb", "to": "/impressum/", "status": 301 }
+  ],
+  "_offen": "Noch anzulegen als eigene Seiten: /impressionen/ (Portfolio) und /impressum/ (Impressum/Datenschutz/AGB)."
+}

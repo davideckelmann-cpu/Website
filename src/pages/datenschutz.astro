@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Datenschutz — Lilac & Bergamot"
+  description="Datenschutzerklärung von Lilac & Bergamot, Floristik in Berlin. Informationen zur Verarbeitung personenbezogener Daten nach DSGVO."
+  path="/datenschutz/"
+>
+  <section class="container legal">
+    <h1 data-reveal>Datenschutzerklärung</h1>
+
+    <div class="legal-body" data-reveal style="--reveal-delay:120ms">
+      <p class="hint">Hinweis: Diese Datenschutzerklärung ist ein strukturierter Entwurf. Bitte an eure
+        tatsächlich eingesetzten Dienste anpassen (Hosting, Formular-Dienst, Analyse-Tools) und
+        rechtlich prüfen lassen – z. B. mit einem geprüften Generator (eRecht24, Dr. Schwenke) oder
+        durch eine:n Anwält:in. Die [ ]-Stellen müssen ausgefüllt werden.</p>
+
+      <h2>1. Verantwortliche Stelle</h2>
+      <p>
+        Verantwortlich für die Datenverarbeitung auf dieser Website:<br>
+        [Vor- und Nachname / Inhaber:in]<br>
+        Lilac &amp; Bergamot, Berliner Allee 121, 13088 Berlin<br>
+        E-Mail: hello@lilac-bergamot.com · Telefon: +49 (0) 30 629 046 77
+      </p>
+
+      <h2>2. Allgemeines zur Datenverarbeitung</h2>
+      <p>Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer
+        funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist. Rechtsgrundlage
+        ist in der Regel Art. 6 DSGVO.</p>
+
+      <h2>3. Hosting & Auslieferung (Bunny.net)</h2>
+      <p>Diese Website wird als statische Seite über das Content Delivery Network von [Bunny.net —
+        BunnyWay d.o.o., Slowenien] ausgeliefert. Beim Aufruf der Website werden technisch notwendige
+        Daten (z. B. IP-Adresse, Datum/Uhrzeit des Zugriffs, abgerufene Datei, Browsertyp) in
+        Server-Logfiles verarbeitet, um die Auslieferung und Sicherheit der Website zu gewährleisten.
+        Rechtsgrundlage ist unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO). Sofern ein
+        Auftragsverarbeitungsvertrag mit dem Anbieter besteht, ist dieser Teil der Verarbeitung.
+        [Bitte AV-Vertrag prüfen/verlinken.]</p>
+
+      <h2>4. Kontaktformular & Kontaktaufnahme</h2>
+      <p>Wenn Sie uns über das Kontaktformular oder per E-Mail kontaktieren, werden Ihre Angaben
+        (z. B. Name, E-Mail-Adresse, Nachricht) zum Zweck der Bearbeitung Ihrer Anfrage verarbeitet.
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen/Vertrag) bzw.
+        lit. f (berechtigtes Interesse an der Beantwortung). Die Daten werden gelöscht, sobald sie
+        für den Zweck nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten
+        entgegenstehen. [Falls ein externer Formular-Dienst genutzt wird, hier benennen —
+        z. B. Formspree/Basin — inkl. Datenverarbeitung.]</p>
+
+      <h2>5. Schriftarten</h2>
+      <p>Diese Website nutzt die Schriftarten Cormorant Garamond und EB Garamond. Diese werden
+        <strong>lokal von unserem Server ausgeliefert</strong> (self-hosted). Es findet dabei
+        <strong>keine Verbindung zu Servern von Google</strong> statt, und es werden hierfür keine
+        personenbezogenen Daten (z. B. IP-Adressen) an Dritte übertragen.</p>
+
+      <h2>6. Cookies & Analyse</h2>
+      <p>Diese Website setzt [keine / folgende] Cookies ein und nutzt [keine / folgende]
+        Analyse-Tools. [Falls Analyse/Marketing-Tools eingesetzt werden, hier ergänzen inkl.
+        Einwilligungslösung/Consent-Banner.]</p>
+
+      <h2>7. Ihre Rechte</h2>
+      <p>Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17),
+        Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch
+        (Art. 21 DSGVO). Zudem können Sie sich bei einer Aufsichtsbehörde beschweren. Zuständig ist
+        u. a. die Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
+
+      <h2>8. Widerruf Ihrer Einwilligung</h2>
+      <p>Sofern die Verarbeitung auf Ihrer Einwilligung beruht, können Sie diese jederzeit mit Wirkung
+        für die Zukunft widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung
+        bleibt unberührt.</p>
+
+      <p class="hint">Stand: [Datum eintragen]. Diese Erklärung ist bei Änderungen der eingesetzten
+        Dienste zu aktualisieren.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding-block: var(--sp-2xl); max-width: 820px; }
+  .legal h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: var(--sp-lg); }
+  .legal-body { display: grid; gap: var(--sp-sm); }
+  .legal-body h2 { font-size: 1.25rem; margin-top: var(--sp-md); color: var(--accent); }
+  .legal-body p { color: var(--text-soft); line-height: 1.75; }
+  .hint { background: var(--bg-alt); border-left: 3px solid var(--accent-warm); padding: 1rem 1.25rem; border-radius: var(--r-md); font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+</style>

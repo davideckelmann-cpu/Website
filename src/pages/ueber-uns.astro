@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+---
+<Base
+  title="Über uns — Lilac & Bergamot, Floristik in Berlin"
+  description="Lilac & Bergamot – florale Gestaltung mit Handschrift in Berlin. Saisonal, regional und persönlich: Blumen, die Räume verwandeln und Menschen berühren."
+  path="/ueber-uns/"
+>
+  <section class="container page-head">
+    <span class="eyebrow" data-reveal>Über uns</span>
+    <h1 data-reveal style="--reveal-delay:80ms">Räume, die durchatmen lassen.</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">
+      Menschen, die sich aufgehoben fühlen. Und Blumen, die all das ermöglichen.
+    </p>
+  </section>
+
+  <section class="container story">
+    <div class="story-media" data-reveal>
+      <img src="/images/hero.jpg" alt="Florales Arrangement von Lilac & Bergamot" width="560" height="620" loading="lazy" />
+    </div>
+    <div class="story-copy" data-reveal style="--reveal-delay:120ms">
+      <p>Wir stehen für florale Kompositionen, die den Moment feiern. Ob großes Bouquet oder eine
+        einzelne Blüte, die den Mittelpunkt des gedeckten Tisches mit ihrer Besonderheit ziert –
+        wir gestalten nach Ihren Wünschen.</p>
+      <p>Unsere Leidenschaft gilt Blumen und ihrer Kraft, Räume zu verwandeln und Menschen zu
+        berühren. Florale Gestaltung in Berlin – für Räume, Menschen und besondere Momente. Ob
+        wöchentliches Blumen-Abo für Geschäftsräume, florale Begleitung für Events oder liebevoll
+        gebundene Sträuße als Geschenk: Lilac & Bergamot steht für handgemachte Blumenkunst, die
+        Atmosphäre schafft und verbindet.</p>
+      <p class="signature">Saisonal, bewusst, ästhetisch – und direkt zu Ihnen geliefert in Berlin.</p>
+    </div>
+  </section>
+
+  <section class="values">
+    <div class="container values-inner">
+      {[
+        { h: 'Saisonal', p: 'Wir arbeiten mit dem, was die Jahreszeit schenkt – für Arrangements, die immer im Einklang mit dem Moment stehen.' },
+        { h: 'Regional', p: 'Regional bezogen und bewusst komponiert. Nähe zu unseren Blumen ist uns wichtig.' },
+        { h: 'Persönlich', p: 'Jede Komposition entsteht individuell – mit Beratung, Gespür und Liebe zum Detail.' },
+      ].map((v, i) => (
+        <article class="value" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+          <h3>{v.h}</h3>
+          <p>{v.p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
+  .page-head h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 18ch; }
+  .lead { font-size: 1.2rem; color: var(--text-soft); max-width: 50ch; font-family: var(--serif); font-style: italic; }
+
+  .story { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--sp-xl); align-items: center; padding-block: var(--sp-lg) var(--sp-2xl); }
+  .story-media img { width: 100%; height: clamp(360px, 46vw, 560px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
+  .story-copy { display: grid; gap: var(--sp-sm); }
+  .story-copy p { font-size: 1.08rem; color: var(--text-soft); }
+  .signature { font-family: var(--serif); font-style: italic; font-size: 1.25rem !important; color: var(--accent) !important; }
+
+  .values { background: var(--bg-alt); padding-block: var(--sp-2xl); }
+  .values-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-lg); }
+  .value h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent); }
+  .value p { color: var(--text-soft); }
+
+  @media (max-width: 860px) {
+    .story { grid-template-columns: 1fr; gap: var(--sp-lg); }
+    .story-media { order: -1; }
+    .values-inner { grid-template-columns: 1fr; gap: var(--sp-md); }
+  }
+</style>

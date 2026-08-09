@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const {
+  title = 'Lilac & Bergamot — Florale Gestaltung in Berlin',
+  description = 'Florale Gestaltung in Berlin: Blumen-Abos für Geschäftskunden, Event- und Hochzeitsfloristik, Trauerfloristik und handgebundene Sträuße. Saisonal, bewusst, ästhetisch.',
+  image = '/images/hero.jpg',
+  path = '',
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site).href;
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="preload" href="/fonts/CormorantGaramond.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/EBGaramond.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph (social sharing) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.site).href} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="de_DE" />
+
+  <!-- Fonts -->
+
+  <!-- Local business structured data (helps local SEO) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Florist",
+    "name": "Lilac & Bergamot",
+    "image": new URL(image, Astro.site).href,
+    "description": description,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Berliner Allee 121",
+      "postalCode": "13088",
+      "addressLocality": "Berlin",
+      "addressCountry": "DE"
+    },
+    "telephone": "+49 30 62904677",
+    "email": "hello@lilac-bergamot.com",
+    "url": canonical,
+    "areaServed": "Berlin"
+  })} />
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+
+  <!-- Scroll reveal: dezent-elegant, respects reduced-motion -->
+  <script>
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = document.querySelectorAll('[data-reveal]');
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+    }
+  </script>
+</body>
+</html>
