@@ -4,31 +4,49 @@ import ContactCTA from '../components/ContactCTA.astro';
 ---
 <Base
   title="Über uns — Lilac & Bergamot, Floristik in Berlin"
-  description="Lilac & Bergamot – florale Gestaltung mit Handschrift in Berlin. Saisonal, regional und persönlich: Blumen, die Räume verwandeln und Menschen berühren."
+  description="Hinter Lilac & Bergamot: florale Gestaltung mit einem Blick aus der Kunst. Ikebana-inspiriert, saisonal und regional. Berlin."
   path="/ueber-uns/"
 >
   <section class="container page-head">
     <span class="eyebrow" data-reveal>Über uns</span>
-    <h1 data-reveal style="--reveal-delay:80ms">Räume, die durchatmen lassen.</h1>
-    <p class="lead" data-reveal style="--reveal-delay:160ms">
-      Menschen, die sich aufgehoben fühlen. Und Blumen, die all das ermöglichen.
-    </p>
+    <h1 data-reveal style="--reveal-delay:80ms">Gesten der Aufmerksamkeit — ganz still, ganz lebendig</h1>
   </section>
 
   <section class="container story">
     <div class="story-media" data-reveal>
-      <img src="/images/hero.jpg" alt="Florales Arrangement von Lilac & Bergamot" width="560" height="620" loading="lazy" />
+      <img src="/images/ueber-uns.jpg" alt="Florales Arrangement von Lilac & Bergamot" width="560" height="620" loading="lazy" />
     </div>
     <div class="story-copy" data-reveal style="--reveal-delay:120ms">
-      <p>Wir stehen für florale Kompositionen, die den Moment feiern. Ob großes Bouquet oder eine
-        einzelne Blüte, die den Mittelpunkt des gedeckten Tisches mit ihrer Besonderheit ziert –
-        wir gestalten nach Ihren Wünschen.</p>
-      <p>Unsere Leidenschaft gilt Blumen und ihrer Kraft, Räume zu verwandeln und Menschen zu
-        berühren. Florale Gestaltung in Berlin – für Räume, Menschen und besondere Momente. Ob
-        wöchentliches Blumen-Abo für Geschäftsräume, florale Begleitung für Events oder liebevoll
-        gebundene Sträuße als Geschenk: Lilac & Bergamot steht für handgemachte Blumenkunst, die
-        Atmosphäre schafft und verbindet.</p>
-      <p class="signature">Saisonal, bewusst, ästhetisch – und direkt zu Ihnen geliefert in Berlin.</p>
+      <p class="intro-lead">Exploration der Erinnerung und Sinne</p>
+      <p>Der Duft von Flieder ist eine Erinnerung, die wohl die meisten Menschen mit dem nahenden
+        Sommer verbinden – ein kurzer, eindrücklicher Moment im Jahr. Die Präsenz, der Wandel, die
+        Farbnuancen des Flieders haben mich schon immer fasziniert.</p>
+      <p>Die Bergamotte begeistert mich ebenfalls: eine Zitrusfrucht mit klarer Form, markantem Duft
+        und begrenzter Saison, die es von dem kleinen, kalabrischen Küstenstreifen zu Weltruhm
+        gebracht hat.</p>
+      <p class="signature">Zwei Pflanzen, die Gegensätze vereinen – nie gleichzeitig in voller Blüte
+        und Fruchtstand – und deshalb den Namen meines Studios tragen.</p>
+    </div>
+  </section>
+
+  <section class="container story-b">
+    <div class="story-copy" data-reveal>
+      <p>Raum und Licht haben schon meine Arbeit in den Darstellenden Künsten geprägt, immer begleitet
+        von der Faszination für die natürliche Formensprache und deren Vielfalt. Form, Farbe, Rhythmus
+        und die Leerstelle begleiten mich bis heute.</p>
+      <p>Lilac &amp; Bergamot verbindet florale Gestaltung mit einem gestalterischen Blick aus der
+        Kunst. Ikebana inspiriert mit dem konzentrierten Blick auf die Klarheit der Linie, die
+        Schnörkel und Krümmung des lebendigen Materials. Oder die Opulenz des fein arrangierten
+        Bouquets, das erst durch seine Vergänglichkeit zu strahlen beginnt.</p>
+      <p>Ich arbeite gerne im Einklang mit den Jahreszeiten – intuitiv, reduziert und mit dem, was
+        gerade Saison hat – und nutze möglichst regionale und saisonale Pflanzen als Grundlage meiner
+        Gestaltung. Materialien und Formen wähle ich mit Bedacht, aus dem Moment heraus. Dabei entsteht
+        eine Ästhetik, deren Eigenheiten, Formen, Texturen und Farben den Ausdruck der Komposition
+        bestimmen.</p>
+      <p>Hinter Lilac &amp; Bergamot stehen wir zu zweit: Ich kümmere mich um die florale Gestaltung,
+        während Justyna – Designerin mit einem Blick für das Ganze – Konzepte, Social Media und
+        visuelle Gestaltung übernimmt. Und manchmal ist auch Cashew, unser Pudel, mit dabei.</p>
+      <p class="signature">Flüchtig, lebendig, echt.</p>
     </div>
   </section>
 
@@ -59,7 +77,11 @@ import ContactCTA from '../components/ContactCTA.astro';
   .story-media img { width: 100%; height: clamp(360px, 46vw, 560px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
   .story-copy { display: grid; gap: var(--sp-sm); }
   .story-copy p { font-size: 1.08rem; color: var(--text-soft); }
+  .intro-lead { font-family: var(--serif); font-style: italic; font-size: 1.35rem !important; color: var(--pflaume) !important; margin-bottom: 0.25rem; }
   .signature { font-family: var(--serif); font-style: italic; font-size: 1.25rem !important; color: var(--accent) !important; }
+
+  .story-b { padding-bottom: var(--sp-2xl); max-width: 760px; }
+  .story-b .story-copy p { font-size: 1.08rem; }
 
   .values { background: var(--bg-alt); padding-block: var(--sp-2xl); }
   .values-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-lg); }
