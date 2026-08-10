@@ -24,7 +24,7 @@ jobs:
         run: npm run build
 
       - name: Zu Bunny hochladen und Cache leeren
-        uses: ayeressian/bunnycdn-storage-deploy@v2.4.6
+        uses: ayeressian/bunnycdn-storage-deploy@v2.4.0
         with:
           source: "dist"
           destination: ""
