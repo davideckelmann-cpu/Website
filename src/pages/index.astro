@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
+import PhotoBanner from '../components/PhotoBanner.astro';
 
 const cards = [
   { img: '/images/start-events.jpg', tag: 'Events & Hochzeiten', h: 'Event-Floristik',
@@ -71,6 +72,19 @@ const cards = [
   </section>
 
   <!-- CONTACT -->
+  <PhotoBanner
+    images={[
+      { src: '/images/banner-1.jpg', alt: 'Florales Arrangement' },
+      { src: '/images/banner-2.jpg', alt: 'Event-Floristik in Berlin' },
+      { src: '/images/banner-3.jpg', alt: 'Florale Tafel' },
+      { src: '/images/banner-4.jpg', alt: 'Florales Detail' },
+      { src: '/images/banner-5.jpg', alt: 'Handgebundener Strauß' },
+      { src: '/images/banner-6.jpg', alt: 'Florale Gestaltung' },
+    ]}
+    speed={70}
+    height="360px"
+  />
+
   <section class="contact">
     <div class="container contact-inner">
       <div data-reveal>
@@ -157,7 +171,7 @@ const cards = [
   .field::placeholder { color: var(--text-muted); }
   .field:focus {
     outline: none; border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+    box-shadow: 0 0 0 3px rgba(138,62,125,0.15);
   }
   .form .btn { align-self: flex-start; }
 

@@ -4,8 +4,10 @@ import ContactCTA from './ContactCTA.astro';
 
 const {
   title, description, path, cluster, clusterHref, clusterLabel,
-  eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, icon,
+  eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, images = [], icon,
 } = Astro.props;
+// Entweder ein Querformat-Bild (image) ODER mehrere Hochkant-Bilder (images)
+const portraitSet = images.length > 0;
 ---
 <Base title={title} description={description} path={path} image={image}>
   <section class="container lp-head">
@@ -15,7 +17,18 @@ const {
     {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
   </section>
 
-  {image && (
+  {portraitSet && (
+    <section class="container lp-media-set" data-reveal>
+      {images.map((img) => (
+        <figure class="lp-portrait">
+          <img src={typeof img === 'string' ? img : img.src}
+               alt={typeof img === 'string' ? h1 : (img.alt || h1)}
+               width="600" height="900" loading="lazy" />
+        </figure>
+      ))}
+    </section>
+  )}
+  {!portraitSet && image && (
     <section class="container lp-media" data-reveal>
       <img src={image} alt={h1} width="1200" height="620" loading="lazy" />
     </section>
@@ -73,6 +86,26 @@ const {
 
   .lp-media { padding-bottom: var(--sp-lg); }
   .lp-media img { width: 100%; height: clamp(280px, 40vw, 460px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
+
+  /* Mehrere Hochkant-Bilder nebeneinander (Triptychon) */
+  .lp-media-set {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+    gap: var(--sp-sm); padding-bottom: var(--sp-lg);
+  }
+  .lp-portrait img {
+    width: 100%; height: clamp(340px, 46vw, 560px); object-fit: cover;
+    border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
+  }
+  @media (max-width: 760px) {
+    /* Auf dem Handy: nebeneinander scrollbar statt gequetscht */
+    .lp-media-set {
+      grid-auto-columns: 72%;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .lp-portrait { scroll-snap-align: center; }
+    .lp-portrait img { height: 380px; }
+  }
 
   .lp-intro { padding-block: var(--sp-md) var(--sp-xl); }
   .lp-intro > div { max-width: 70ch; display: grid; gap: var(--sp-sm); }

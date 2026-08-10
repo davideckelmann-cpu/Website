@@ -19,12 +19,12 @@ const links = [
   <div class="nav-backdrop" aria-hidden="true"></div>
 </header>
 <style>
-  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--creme) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.4s ease; }
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(252,252,242,0.96); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.4s ease; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 0.6rem; position: relative; z-index: 60; }
   .logo { display: inline-flex; align-items: center; }
   .logo img { height: 92px; width: auto; display: block; }
   .nav-links { display: flex; gap: 1.9rem; }
-  .nav-links a { position: relative; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; color: var(--text-soft); transition: color 0.3s ease; white-space: nowrap; }
+  .nav-links a { position: relative; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; color: var(--text-soft); transition: color 0.3s ease; white-space: nowrap; }
   .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
@@ -37,7 +37,7 @@ const links = [
     /* Abdunkler hinter dem Menü */
     .nav-backdrop {
       display: block; position: fixed; inset: 0; z-index: 55;
-      background: rgba(46, 20, 42, 0.45); backdrop-filter: blur(2px);
+      background: rgba(46, 20, 42, 0.45); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
       opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
     }
     .nav-backdrop.open { opacity: 1; pointer-events: auto; }
@@ -46,7 +46,7 @@ const links = [
     .nav-links {
       position: fixed; top: 0; right: 0; height: 100vh; height: 100dvh; width: min(80vw, 340px);
       flex-direction: column; justify-content: flex-start; gap: 1.5rem;
-      background: color-mix(in srgb, var(--pflaume) 82%, transparent);
+      background: rgba(86,28,76,0.82);
       backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
       padding: 6rem 2.5rem; z-index: 60;
       transform: translateX(100%);

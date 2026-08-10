@@ -54,7 +54,7 @@ const gallery = [
     transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
   }
   .tile:hover img { transform: scale(1.05); }
-  .tile.tall img { aspect-ratio: 3/4; object-fit: cover; }
+  .tile.tall img { height: 420px; aspect-ratio: 3/4; object-fit: cover; }
 
   @media (max-width: 900px) { .gallery { columns: 2; } }
   @media (max-width: 560px) { .gallery { columns: 1; } }

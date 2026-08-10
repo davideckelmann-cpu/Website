@@ -49,7 +49,7 @@ const ACCESS_KEY = "799b7099-e75e-4b32-b151-9f7a2c7e13e2"; // Web3Forms Key (akt
   .field::placeholder { color: var(--text-muted); }
   .field:focus {
     outline: none; border-color: var(--malve);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--malve) 15%, transparent);
+    box-shadow: 0 0 0 3px rgba(138,62,125,0.15);
   }
   /* Honeypot — visuell versteckt, aber für Bots ausfüllbar */
   .cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
@@ -72,15 +72,15 @@ const ACCESS_KEY = "799b7099-e75e-4b32-b151-9f7a2c7e13e2"; // Web3Forms Key (akt
 
   /* Auf dunklem (Pflaume) Grund: helle Felder */
   .cf-form.on-dark .field {
-    background: color-mix(in srgb, #fff 92%, transparent);
+    background: rgba(255,255,255,0.92);
     border-color: transparent; color: var(--pflaume);
   }
   .cf-form.on-dark .field::placeholder { color: var(--text-sek); }
   .cf-form.on-dark .field:focus {
     border-color: var(--flieder);
-    box-shadow: 0 0 0 3px color-mix(in srgb, #fff 30%, transparent);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.30);
   }
-  .cf-form.on-dark .cf-consent { color: color-mix(in srgb, var(--limette) 82%, transparent); }
+  .cf-form.on-dark .cf-consent { color: rgba(248,254,206,0.82); }
   .cf-form.on-dark .cf-consent a { color: var(--flieder); }
   .cf-form.on-dark .cf-consent input { accent-color: var(--flieder); }
   .cf-form.on-dark .btn-primary { background: var(--limette); color: var(--pflaume); }

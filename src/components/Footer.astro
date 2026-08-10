@@ -61,25 +61,25 @@
   .f-address { text-align: center; position: relative; padding-inline: 2.5rem; gap: 0.35rem; }
   .f-address::before, .f-address::after {
     content: ''; position: absolute; top: 50%; transform: translateY(-50%);
-    width: 1px; height: 78%; background: color-mix(in srgb, var(--limette) 40%, transparent);
+    width: 1px; height: 78%; background: rgba(248,254,206,0.40);
   }
   .f-address::before { left: 0; }
   .f-address::after { right: 0; }
   .f-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; }
-  .f-address p { color: color-mix(in srgb, var(--limette) 92%, transparent); }
+  .f-address p { color: rgba(248,254,206,0.92); }
 
   /* Rechts: Rechtslinks, rechtsbündig */
   .f-legal { align-items: flex-end; }
   .f-legal a { color: var(--limette); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color 0.3s ease; }
   .f-legal a:hover { color: #fff; }
 
-  .f-copy { text-align: center; margin-top: 2rem; font-size: 0.82rem; color: color-mix(in srgb, var(--limette) 70%, transparent); }
+  .f-copy { text-align: center; margin-top: 2rem; font-size: 0.82rem; color: rgba(248,254,206,0.70); }
 
   @media (max-width: 760px) {
     .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
     .f-contact, .f-legal { align-items: center; }
     .f-address { padding-inline: 0; }
     .f-address::before, .f-address::after { display: none; }
-    .f-address { border-block: 1px solid color-mix(in srgb, var(--limette) 30%, transparent); padding-block: 1.5rem; }
+    .f-address { border-block: 1px solid rgba(248,254,206,0.30); padding-block: 1.5rem; }
   }
 </style>
