@@ -16,6 +16,7 @@ const sizes = [
   path="/angebot/straeusse/"
 >
   <section class="container page-head">
+    <img src="/icons/icon-tulpen-strauss.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
     <span class="eyebrow" data-reveal><a href="/angebot/">Angebot</a> · Sträuße</span>
     <h1 data-reveal style="--reveal-delay:80ms">Ein Strauß ist eine Geste voller Gefühl.</h1>
     <p class="lead" data-reveal style="--reveal-delay:160ms">
@@ -60,9 +61,10 @@ const sizes = [
 </Base>
 
 <style>
+  .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
   .page-head { padding-block: var(--sp-2xl) var(--sp-md); }
   .page-head .eyebrow a { color: inherit; }
-  .page-head h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 18ch; }
+  .page-head h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 18ch; }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 54ch; }
 
   .intro { padding-bottom: var(--sp-xl); }

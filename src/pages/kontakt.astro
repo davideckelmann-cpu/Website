@@ -19,7 +19,7 @@ import ContactForm from '../components/ContactForm.astro';
         <div><dt>Adresse</dt><dd>Berliner Allee 121<br>13088 Berlin</dd></div>
         <div><dt>Telefon</dt><dd><a href="tel:+493062904677">+49 (0) 30 629 046 77</a><br><a href="tel:+4917669118837">+49 (0) 17 669 118 837</a></dd></div>
         <div><dt>E-Mail</dt><dd><a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a></dd></div>
-        <div><dt>Instagram</dt><dd><a href="https://instagram.com/lilac_bergamot">@lilac_bergamot</a></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://instagram.com/lilac_bergamot" class="ig-link"><svg class="ig-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>@lilac_bergamot</span></a></dd></div>
       </dl>
     </div>
 
@@ -31,8 +31,8 @@ import ContactForm from '../components/ContactForm.astro';
 </Base>
 
 <style>
-  .contact-page { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2xl); padding-block: var(--sp-2xl); align-items: start; }
-  .contact-copy h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin: var(--sp-sm) 0 var(--sp-md); }
+  .contact-page { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2xl); padding-block: var(--sp-lg) var(--sp-2xl); align-items: start; }
+  .contact-copy h1 { font-size: clamp(2.6rem, 6vw, 4rem); margin: var(--sp-sm) 0 var(--sp-md); }
   .lead { font-size: 1.12rem; color: var(--text-soft); margin-bottom: var(--sp-lg); }
 
   .details { display: grid; gap: var(--sp-md); }
@@ -53,4 +53,7 @@ import ContactForm from '../components/ContactForm.astro';
     .contact-page { grid-template-columns: 1fr; gap: var(--sp-lg); }
     .form .btn { align-self: stretch; text-align: center; }
   }
+
+  .ig-link { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .ig-icon { flex: none; }
 </style>

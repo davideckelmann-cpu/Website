@@ -4,11 +4,12 @@ import ContactCTA from './ContactCTA.astro';
 
 const {
   title, description, path, cluster, clusterHref, clusterLabel,
-  eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image,
+  eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, icon,
 } = Astro.props;
 ---
 <Base title={title} description={description} path={path} image={image}>
   <section class="container lp-head">
+    {icon && <img src={icon} alt="" class="lp-icon" data-reveal width="120" height="150" loading="lazy" />}
     <span class="eyebrow" data-reveal><a href={clusterHref}>{clusterLabel}</a> · {cluster}</span>
     <h1 data-reveal style="--reveal-delay:80ms">{h1}</h1>
     {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
@@ -64,9 +65,10 @@ const {
 </Base>
 
 <style>
+  .lp-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
   .lp-head { padding-block: var(--sp-2xl) var(--sp-md); }
   .lp-head .eyebrow a { color: inherit; }
-  .lp-head h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 22ch; }
+  .lp-head h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 22ch; }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .lp-media { padding-bottom: var(--sp-lg); }

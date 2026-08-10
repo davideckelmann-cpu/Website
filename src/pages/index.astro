@@ -30,7 +30,7 @@ const cards = [
         <a href="/abo/" class="btn btn-ghost">Blumen-Abo ansehen</a>
       </div>
     </div>
-    <div class="hero-media" data-reveal style="--reveal-delay:120ms">
+    <div class="hero-media">
       <img src="/images/hero.jpg" alt="Blumenarrangement mit Flieder und Bergamotte-Tönen"
            width="560" height="620" loading="eager" />
     </div>
@@ -90,12 +90,22 @@ const cards = [
     display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sp-xl);
     align-items: center; padding-block: var(--sp-xl) var(--sp-2xl);
   }
-  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
+  .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
   .lead { font-size: 1.12rem; color: var(--text-soft); max-width: 46ch; }
   .cta-row { display: flex; gap: var(--sp-sm); margin-top: var(--sp-lg); flex-wrap: wrap; }
+  .hero-media { overflow: hidden; border-radius: var(--r-lg); }
   .hero-media img {
     width: 100%; height: clamp(360px, 52vw, 620px); object-fit: cover;
     border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+    animation: bloom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes bloom {
+    0%   { opacity: 0; transform: scale(1.12); filter: blur(14px) saturate(0.7); }
+    60%  { opacity: 1; }
+    100% { opacity: 1; transform: scale(1); filter: blur(0) saturate(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media img { animation: none; }
   }
 
   /* SERVICES */
