@@ -1,0 +1,108 @@
+---
+---
+<footer class="footer">
+  <div class="container footer-grid">
+    <!-- Links: Kontakt + Instagram -->
+    <div class="f-col f-contact">
+      <a href="tel:+493062904677">+49 (0) 30 629 046 77</a>
+      <a href="tel:+4917669118837">+49 (0) 17 669 118 837</a>
+      <a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a>
+      <a href="https://instagram.com/lilac_bergamot" class="ig" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <defs>
+            <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+              <stop offset="0%" stop-color="#fdf497"/>
+              <stop offset="5%" stop-color="#fdf497"/>
+              <stop offset="45%" stop-color="#fd5949"/>
+              <stop offset="60%" stop-color="#d6249f"/>
+              <stop offset="90%" stop-color="#285AEB"/>
+            </radialGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig-grad)"/>
+          <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"/>
+          <circle cx="17.2" cy="6.8" r="1.3" fill="#fff"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Mitte: Adresse -->
+    <div class="f-col f-address">
+      <p class="f-name">Lilac &amp; Bergamot</p>
+      <p>Berliner Allee 121</p>
+      <p>13088 Berlin</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="f-col f-nav" aria-label="Footer-Navigation">
+      <h4 class="f-head">Navigation</h4>
+      <a href="/ueber-uns/">Über uns</a>
+      <a href="/angebot/">Angebot</a>
+      <a href="/events/">Events</a>
+      <a href="/abo/">Abo &amp; Preise</a>
+      <a href="/impressionen/">Impressionen</a>
+      <a href="/kontakt/">Kontakt</a>
+    </nav>
+
+    <!-- Rechts: Rechtliches -->
+    <nav class="f-col f-legal" aria-label="Rechtliches">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+      <a href="/agb/">AGB</a>
+    </nav>
+  </div>
+
+  <p class="f-copy">© {new Date().getFullYear()} Lilac &amp; Bergamot</p>
+</footer>
+
+<style>
+  .footer { background: var(--pflaume); color: var(--limette); padding-block: 3rem 1.75rem; margin-top: var(--sp-xl); }
+  .footer-grid {
+    display: grid; grid-template-columns: 1fr auto auto 1fr; gap: 2.5rem 3rem;
+    align-items: center;
+  }
+  .f-col { display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.95rem; }
+
+  /* Links */
+  .f-contact { align-items: flex-start; }
+  .f-contact a { color: var(--limette); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color 0.3s ease; }
+  .f-contact a:hover { color: #fff; }
+  .f-contact .ig { text-decoration: none; margin-top: 0.4rem; display: inline-flex; }
+
+  /* Mitte: Adresse, zentriert, mit Trennlinien links/rechts */
+  .f-address { text-align: center; position: relative; padding-inline: 2.5rem; gap: 0.35rem; }
+  .f-address::before, .f-address::after {
+    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+    width: 1px; height: 78%; background: rgba(248,254,206,0.40);
+  }
+  .f-address::before { left: 0; }
+  .f-address::after { right: 0; }
+  .f-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; }
+  .f-address p { color: rgba(248,254,206,0.92); }
+
+  /* Rechts: Rechtslinks, rechtsbündig */
+  .f-legal { align-items: flex-end; }
+  .f-legal a { color: var(--limette); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color 0.3s ease; }
+  .f-legal a:hover { color: #fff; }
+
+
+  /* Navigation-Spalte */
+  .f-nav { align-items: flex-start; }
+  .f-nav a { color: var(--limette); transition: color 0.3s ease; }
+  .f-nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .f-head {
+    font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 600; color: var(--flieder);
+    margin-bottom: 0.3rem;
+  }
+
+  .f-copy { text-align: center; margin-top: 2rem; font-size: 0.82rem; color: rgba(248,254,206,0.70); }
+
+  @media (max-width: 760px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+    .f-nav { align-items: center; }
+    .f-contact, .f-legal { align-items: center; }
+    .f-address { padding-inline: 0; }
+    .f-address::before, .f-address::after { display: none; }
+    .f-address { border-block: 1px solid rgba(248,254,206,0.30); padding-block: 1.5rem; }
+  }
+</style>

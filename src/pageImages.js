@@ -1,0 +1,156 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPageImages, baseFromPath } from '../utils/pageImages.js';
+import ContactCTA from './ContactCTA.astro';
+
+const {
+  title, description, path, cluster, clusterHref, clusterLabel,
+  eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, images = [], icon,
+} = Astro.props;
+// AUTOMATISCHE BILD-ERKENNUNG
+// Schaut selbst nach, welche Bilder in public/images liegen.
+// Manuell gesetzte image=/images= Werte haben weiterhin Vorrang.
+const auto = getPageImages(baseFromPath(path));
+const autoImages = images.length > 0 ? images : auto.images;
+const autoImage  = image || auto.image;
+const portraitSet = autoImages.length > 1;
+// Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
+const altVariants = [
+  `Florale Gestaltung für ${cluster} in Berlin`,
+  `Blumenarrangement von Lilac & Bergamot für ${cluster}`,
+  `Detail einer floralen Komposition für ${cluster}`,
+  `Saisonale Floristik für ${cluster} in Berlin`,
+];
+function altFor(img, i) {
+  if (typeof img !== 'string' && img.alt) return img.alt;
+  return altVariants[i % altVariants.length];
+}
+---
+<Base title={title} description={description} path={path} image={image}>
+  <section class="container lp-head">
+    {icon && <img src={icon} alt="" class="lp-icon" data-reveal width="120" height="150" loading="lazy" />}
+    <span class="eyebrow" data-reveal><a href={clusterHref}>{clusterLabel}</a> · {cluster}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{h1}</h1>
+    {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
+  </section>
+
+  {portraitSet && (
+    <section class="container lp-media-set" data-reveal>
+      {autoImages.map((img, i) => (
+        <figure class="lp-portrait">
+          <img src={typeof img === 'string' ? img : img.src}
+               alt={altFor(img, i)}
+               width="600" height="900" loading="lazy"
+               onerror="this.closest('figure').style.display='none'" />
+        </figure>
+      ))}
+    </section>
+  )}
+  {!portraitSet && autoImage && (
+    <section class="container lp-media" data-reveal>
+      <img src={autoImage} alt={h1} width="1200" height="620" loading="lazy" onerror="this.closest('section').style.display='none'" />
+    </section>
+  )}
+
+  {intro && (
+    <section class="container lp-intro">
+      <div data-reveal set:html={intro} />
+    </section>
+  )}
+
+  {services.length > 0 && (
+    <section class="container lp-services">
+      <h2 data-reveal>Unsere Leistungen</h2>
+      <ul class="svc-list">
+        {services.map((s, i) => (
+          <li data-reveal style={`--reveal-delay:${(i % 4) * 70}ms`}>{s}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {sections.map((sec) => (
+    <section class="lp-band">
+      <div class="container" data-reveal>
+        <h2>{sec.h}</h2>
+        <div set:html={sec.body} />
+      </div>
+    </section>
+  ))}
+
+  {faq.length > 0 && (
+    <section class="container lp-faq">
+      <h2 data-reveal>Häufige Fragen</h2>
+      <div class="faq-list">
+        {faq.map((f, i) => (
+          <details data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .lp-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
+  .lp-head { padding-block: var(--sp-2xl) var(--sp-md); }
+  .lp-head .eyebrow a { color: inherit; }
+  .lp-head h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 22ch; }
+  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
+
+  .lp-media { padding-bottom: var(--sp-lg); }
+  .lp-media img { width: 100%; height: clamp(280px, 40vw, 460px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
+
+  /* Mehrere Hochkant-Bilder nebeneinander (Triptychon) */
+  .lp-media-set {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+    gap: var(--sp-sm); padding-bottom: var(--sp-lg);
+  }
+  .lp-portrait img {
+    width: 100%; height: clamp(340px, 46vw, 560px); object-fit: cover;
+    border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
+  }
+  @media (max-width: 760px) {
+    /* Auf dem Handy: nebeneinander scrollbar statt gequetscht */
+    .lp-media-set {
+      grid-auto-columns: 72%;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .lp-portrait { scroll-snap-align: center; }
+    .lp-portrait img { height: 380px; }
+  }
+
+  .lp-intro { padding-block: var(--sp-md) var(--sp-xl); }
+  .lp-intro > div { max-width: 70ch; display: grid; gap: var(--sp-sm); }
+  .lp-intro :global(p) { font-size: 1.08rem; color: var(--text-soft); }
+  .lp-intro :global(a) { color: var(--accent); }
+
+  .lp-services { padding-bottom: var(--sp-xl); }
+  .lp-services > h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: var(--sp-md); }
+  .svc-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 2rem; max-width: 70ch; }
+  .svc-list li { position: relative; padding-left: 1.6rem; color: var(--text); }
+  .svc-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  .lp-band { background: var(--bg-alt); padding-block: var(--sp-xl); margin-block: var(--sp-sm); }
+  .lp-band h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: var(--sp-sm); }
+  .lp-band :global(p) { color: var(--text-soft); max-width: 70ch; margin-bottom: 0.5rem; }
+  .lp-band :global(ul) { color: var(--text-soft); max-width: 70ch; padding-left: 1.2rem; display: grid; gap: 0.4rem; }
+
+  .lp-faq { padding-block: var(--sp-xl) var(--sp-2xl); }
+  .lp-faq > h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: var(--sp-md); }
+  .faq-list { display: grid; gap: 0.75rem; max-width: 76ch; }
+  .lp-faq details { border: 1px solid var(--n-200); border-radius: var(--r-md); padding: 0 1.25rem; background: var(--bg); transition: border-color 0.3s ease; }
+  .lp-faq details[open] { border-color: var(--accent); }
+  .lp-faq summary { padding: 1.1rem 0; cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .lp-faq summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; transition: transform 0.3s ease; }
+  .lp-faq details[open] summary::after { transform: rotate(45deg); }
+  .lp-faq summary::-webkit-details-marker { display: none; }
+  .lp-faq details p { padding: 0 0 1.1rem; color: var(--text-soft); }
+
+  @media (max-width: 720px) { .svc-list { grid-template-columns: 1fr; } }
+</style>

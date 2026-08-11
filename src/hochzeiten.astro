@@ -1,0 +1,82 @@
+// Automatische Bild-Erkennung
+// -----------------------------------------------------------
+// Schaut beim Bauen der Seite selbst im Ordner public/images nach,
+// welche Bilder für eine Seite vorhanden sind – ohne Code-Änderung.
+//
+// Regeln (Beispiel Seite "galerien"):
+//   1) Liegen galerien-1 / galerien-2 / galerien-3 dort?
+//      -> Triptychon (mehrere Bilder nebeneinander)
+//   2) Sonst: liegt galerien dort?
+//      -> Einzelbild
+//   3) Sonst: kein Bild (Seite bleibt heil, zeigt einfach keins)
+//
+// Endungen .jpg, .jpeg, .png und .webp werden alle erkannt.
+
+import fs from 'node:fs';
+import path from 'node:path';
+
+const IMAGE_DIR = path.join(process.cwd(), 'public', 'images');
+const EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG'];
+const MAX_NUMBERED = 8; // bis zu 8 nummerierte Bilder pro Seite
+
+// Dateiliste einmal einlesen (schnell, passiert nur beim Bauen)
+let files = [];
+try {
+  files = fs.readdirSync(IMAGE_DIR);
+} catch {
+  files = [];
+}
+
+/** Findet die Datei für einen Namen. Liegen mehrere Endungen vor
+ *  (z.B. alter Platzhalter .jpg + neues Foto .jpeg), gewinnt die NEUERE. */
+function findFile(baseName) {
+  const matches = [];
+  for (const ext of EXTENSIONS) {
+    const candidate = `${baseName}.${ext}`;
+    if (files.includes(candidate)) {
+      let mtime = 0;
+      try {
+        mtime = fs.statSync(path.join(IMAGE_DIR, candidate)).mtimeMs;
+      } catch {}
+      matches.push({ candidate, mtime });
+    }
+  }
+  if (matches.length === 0) return null;
+  // neueste Datei zuerst
+  matches.sort((a, b) => b.mtime - a.mtime);
+  return `/images/${matches[0].candidate}`;
+}
+
+/**
+ * Liefert die Bilder für eine Seite.
+ * @param {string} base - z.B. "galerien" oder "hochzeiten"
+ * @returns {{ mode: 'set'|'single'|'none', images: string[], image: string|null }}
+ */
+export function getPageImages(base) {
+  // 1) Nummerierte Bilder suchen (galerien-1, galerien-2, ...)
+  const numbered = [];
+  for (let i = 1; i <= MAX_NUMBERED; i++) {
+    const found = findFile(`${base}-${i}`);
+    if (found) numbered.push(found);
+    else if (i > 1) break; // Lücke -> aufhören
+  }
+  if (numbered.length > 1) {
+    return { mode: 'set', images: numbered, image: null };
+  }
+  if (numbered.length === 1) {
+    // nur ein nummeriertes Bild -> wie Einzelbild behandeln
+    return { mode: 'single', images: [], image: numbered[0] };
+  }
+
+  // 2) Einzelbild ohne Nummer suchen
+  const single = findFile(base);
+  if (single) return { mode: 'single', images: [], image: single };
+
+  // 3) Nichts gefunden
+  return { mode: 'none', images: [], image: null };
+}
+
+/** Leitet den Bild-Namen aus dem Seitenpfad ab: "/angebot/galerien/" -> "galerien" */
+export function baseFromPath(pagePath = '') {
+  return pagePath.replace(/\/+$/, '').split('/').filter(Boolean).pop() || '';
+}
