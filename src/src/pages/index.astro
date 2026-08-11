@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import PhotoBanner from '../components/PhotoBanner.astro';
+
+const cards = [
+  { img: '/images/start-events.jpg', tag: 'Events & Hochzeiten', h: 'Event-Floristik',
+    p: 'Florale Begleitung für Firmenevents, Markenpräsentationen und Hochzeiten.', href: '/events/' },
+  { img: '/images/start-marken.jpg', tag: 'Markenpräsentation', h: 'Brand Events',
+    p: 'Szenografie und florale Inszenierung für Marken – wie hier für Caudalie.', href: '/events/' },
+  { img: '/images/start-straeusse.jpg', tag: 'Private Anlässe', h: 'Handgebundene Sträuße',
+    p: 'Liebevoll gebundene Sträuße als Geschenk oder für den besonderen Moment.', href: '/angebot/' },
+];
+---
+<Base
+  title="Lilac & Bergamot — Florale Gestaltung in Berlin"
+  description="Florale Gestaltung in Berlin: Blumen-Abos für Geschäftskunden, Event- & Hochzeitsfloristik, Trauerfloristik & handgebundene Sträuße. Saisonal & ästhetisch."
+  path="/"
+>
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero-copy">
+      <span class="eyebrow" data-reveal>Floristik in Berlin</span>
+      <h1 data-reveal style="--reveal-delay:80ms">Arrangements, die einladen innezuhalten.</h1>
+      <p class="lead" data-reveal style="--reveal-delay:160ms">
+        Florale Kompositionen, die den Moment feiern – ob großes Bouquet oder eine
+        einzelne Blüte als Mittelpunkt des gedeckten Tisches. Saisonal, bewusst, ästhetisch.
+      </p>
+      <div class="cta-row" data-reveal style="--reveal-delay:240ms">
+        <a href="/angebot/" class="btn btn-primary">Angebot entdecken</a>
+        <a href="/abo/" class="btn btn-ghost">Blumen-Abo ansehen</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="/images/hero.jpg" alt="Blumenarrangement mit Flieder und Bergamotte-Tönen"
+           width="560" height="620" loading="eager" />
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="container">
+      <div class="services-head">
+        <span class="eyebrow" data-reveal>Unser Angebot</span>
+        <h2 data-reveal style="--reveal-delay:80ms">Florale Gestaltung für Räume,<br>Menschen und Momente.</h2>
+      </div>
+      <div class="cards">
+        {cards.map((c, i) => (
+          <a class="card" href={c.href} data-reveal style={`--reveal-delay:${i * 120}ms`}>
+            <div class="card-media"><img src={c.img} alt={c.h} width="380" height="260" loading="lazy" /></div>
+            <span class="eyebrow">{c.tag}</span>
+            <h3>{c.h}</h3>
+            <p>{c.p}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL -->
+  <section class="editorial container">
+    <div class="editorial-media" data-reveal>
+      <img src="/images/start-editorial.jpg" alt="Florale Tafelgestaltung für ein Event in Berlin"
+           width="600" height="560" loading="lazy" />
+    </div>
+    <div class="editorial-copy" data-reveal style="--reveal-delay:120ms">
+      <h2>Räume, die durchatmen lassen. Menschen, die sich aufgehoben fühlen. Und Blumen, die all das ermöglichen.</h2>
+      <p>Unsere Leidenschaft gilt Blumen – und ihrer Kraft, Räume zu verwandeln und Menschen
+        zu berühren. Ob im Abonnement frisch geliefert oder als private Überraschung: Wir beraten Sie gerne.</p>
+      <a href="/ueber-uns/" class="link-arrow">Mehr über uns →</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <PhotoBanner
+    images={[
+      { src: '/images/banner-1.jpg', alt: 'Florales Arrangement' },
+      { src: '/images/banner-2.jpg', alt: 'Event-Floristik in Berlin' },
+      { src: '/images/banner-3.jpg', alt: 'Florale Tafel' },
+      { src: '/images/banner-4.jpg', alt: 'Florales Detail' },
+      { src: '/images/banner-5.jpg', alt: 'Handgebundener Strauß' },
+      { src: '/images/banner-6.jpg', alt: 'Saisonale Blumen von Lilac & Bergamot' },
+    ]}
+    speed={38}
+    height="360px"
+  />
+
+  <section class="contact">
+    <div class="container contact-inner">
+      <div data-reveal>
+        <span class="eyebrow">Kontakt</span>
+        <h2>Erzählen Sie uns von<br>Ihrer Idee.</h2>
+        <p>Sie möchten eine florale Komposition anfragen oder einen Anlass gestalten lassen?
+          Wir freuen uns auf Ihre Nachricht.</p>
+      </div>
+      <div class="form" data-reveal style="--reveal-delay:120ms"><ContactForm compact={true} /></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* HERO */
+  .hero {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sp-xl);
+    align-items: center; padding-block: var(--sp-xl) var(--sp-2xl);
+  }
+  .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
+  .lead { font-size: 1.12rem; color: var(--text-soft); max-width: 46ch; }
+  .cta-row { display: flex; gap: var(--sp-sm); margin-top: var(--sp-lg); flex-wrap: wrap; }
+  .hero-media { overflow: hidden; border-radius: var(--r-lg); }
+  .hero-media img {
+    width: 100%; height: clamp(360px, 52vw, 620px); object-fit: cover;
+    border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+    animation: bloom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes bloom {
+    0%   { opacity: 0; transform: scale(1.12); filter: blur(14px) saturate(0.7); }
+    60%  { opacity: 1; }
+    100% { opacity: 1; transform: scale(1); filter: blur(0) saturate(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media img { animation: none; }
+  }
+
+  /* SERVICES */
+  .services { background: #FBFBEF; padding-block: var(--sp-2xl); }
+  .services-head { text-align: center; margin-bottom: var(--sp-xl); }
+  .services-head h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top: var(--sp-sm); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
+  .card {
+    background: var(--bg); border-radius: var(--r-lg); padding: var(--sp-md);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s ease;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+  .card-media { overflow: hidden; border-radius: var(--r-md); margin-bottom: var(--sp-sm); }
+  .card-media img {
+    width: 100%; height: 220px; object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
+  }
+  .card:hover .card-media img { transform: scale(1.05); }
+  .card h3 { font-size: 1.4rem; margin: 0.5rem 0 0.6rem; }
+  .card p { font-size: 0.95rem; color: var(--text-soft); }
+
+  /* EDITORIAL */
+  .editorial {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-xl);
+    align-items: center; padding-block: var(--sp-2xl);
+  }
+  .editorial-media img {
+    width: 100%; height: clamp(360px, 46vw, 560px); object-fit: cover;
+    border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+  }
+  .editorial-copy h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.3; margin-bottom: var(--sp-md); }
+  .editorial-copy p { font-size: 1.08rem; color: var(--text-soft); margin-bottom: var(--sp-md); }
+  .link-arrow { color: var(--accent); font-weight: 500; letter-spacing: 0.03em; transition: letter-spacing 0.4s ease; }
+  .link-arrow:hover { letter-spacing: 0.08em; }
+
+  /* CONTACT */
+  .contact { background: #FBFBEF; padding-block: var(--sp-2xl); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2xl); }
+  .contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: var(--sp-sm) 0 var(--sp-md); }
+  .contact p { color: var(--text-soft); font-size: 1.08rem; }
+  .form { display: flex; flex-direction: column; gap: var(--sp-sm); }
+  .field {
+    padding: 1rem 1.25rem; border-radius: var(--r-md);
+    background: var(--bg); border: 1px solid var(--n-200);
+    font-family: var(--sans); font-size: 1rem; color: var(--text);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .field::placeholder { color: var(--text-muted); }
+  .field:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(138,62,125,0.15);
+  }
+  .form .btn { align-self: flex-start; }
+
+  @media (max-width: 860px) {
+    .hero, .editorial, .contact-inner { grid-template-columns: 1fr; gap: var(--sp-lg); }
+    .cards { grid-template-columns: 1fr; }
+    .hero { padding-block: var(--sp-lg) var(--sp-xl); }
+    .hero-media { order: -1; }
+    .form .btn { align-self: stretch; text-align: center; }
+  }
+</style>

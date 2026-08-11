@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+
+const services = [
+  { h: 'Blumenkränze & Gestecke', p: 'Klassisch, modern oder naturnah – auf Wunsch mit Symbolblumen wie Lilien, Calla, Rosen oder Efeu.' },
+  { h: 'Urnen- und Sargschmuck', p: 'Schlichte Blumenbänder oder aufwändig gestaltete Umrahmungen für die Zeremonie.' },
+  { h: 'Kondolenzsträuße & Abschiedsblumen', p: 'Als Geste der Anteilnahme oder zur persönlichen Verabschiedung am Grab.' },
+  { h: 'Lieferung & Aufstellung in Berlin', p: 'Pünktlich zum Ort der Trauerfeier oder zum Friedhof.' },
+  { h: 'Beratung mit Feingefühl', p: 'In einem persönlichen Gespräch klären wir Blüten, Farben und Gestaltung – auch kurzfristig.' },
+];
+
+const faq = [
+  { q: 'Welche Blumen sind für eine Trauerfeier geeignet?', a: 'Blumen mit Symbolcharakter wie Lilien, Calla, Nelken oder Rosen in gedeckten Farben sind üblich – wir beraten Sie gerne.' },
+  { q: 'Ist auch eine dezente, moderne Gestaltung möglich?', a: 'Ja. Wir bieten auch naturnahe, reduzierte oder saisonale Konzepte – passend zur Persönlichkeit des Verstorbenen.' },
+  { q: 'Wann sollte ich bestellen?', a: 'Gerne so früh wie möglich – in Notfällen sind auch kurzfristige Aufträge möglich.' },
+];
+---
+<Base
+  title="Trauerfloristik Berlin — Lilac & Bergamot"
+  description="Stilvolle, einfühlsame Floristik für Trauerfeiern in Berlin. Individuelle Blumenarrangements, die Abschied & Erinnerung würdevoll begleiten."
+  path="/events/trauerfloristik/"
+>
+  <section class="container page-head">
+    <img src="/icons/icon-calla-herz.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
+    <span class="eyebrow" data-reveal><a href="/events/">Events</a> · Trauer</span>
+    <h1 data-reveal style="--reveal-delay:80ms">Florale Zeichen des Gedenkens</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">
+      Blumen sagen oft mehr als Worte – besonders, wenn es um Abschied geht. In dieser stillen
+      Zeit begleiten wir Sie mit einfühlsam gestalteter Trauerfloristik, die Erinnerungen ehrt
+      und Trost spendet.
+    </p>
+  </section>
+  <section class="container head-set" data-reveal>
+    <figure><img onerror="this.closest('figure').style.display='none'" src="/images/trauerfloristik-1.jpg" alt="Trauerfloristik in Berlin – würdevolles Blumenarrangement" loading="lazy" /></figure>
+    <figure><img onerror="this.closest('figure').style.display='none'" src="/images/trauerfloristik-2.jpg" alt="Florale Gestaltung für eine Trauerfeier" loading="lazy" /></figure>
+    <figure><img onerror="this.closest('figure').style.display='none'" src="/images/trauerfloristik-3.jpg" alt="Detail eines Trauergestecks von Lilac & Bergamot" loading="lazy" /></figure>
+  </section>
+
+
+  <section class="container services">
+    <h2 data-reveal>Für Abschied und Erinnerung</h2>
+    <div class="svc-grid">
+      {services.map((s, i) => (
+        <article class="svc" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+          <h3>{s.h}</h3>
+          <p>{s.p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="meaning">
+    <div class="container meaning-inner" data-reveal>
+      <h2>Blumen mit Bedeutung</h2>
+      <p>Welche Blume passt zum Abschied eines geliebten Menschen? Weiße Lilien stehen für Reinheit,
+        Calla für Würde, Rosen für Liebe. Wir helfen Ihnen bei der Auswahl und gestalten florale
+        Erinnerungen, die wirken – zurückhaltend, stark oder ganz individuell. Auch persönliche
+        Gegenstände oder handgeschriebene Kärtchen lassen sich einfügen.</p>
+    </div>
+  </section>
+
+  <section class="container faq">
+    <h2 data-reveal>Häufige Fragen</h2>
+    <div class="faq-list">
+      {faq.map((f, i) => (
+        <details class="faq-item" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <p class="note" data-reveal>
+      Die Preise richten sich nach Aufwand, Blütenwahl und Größe des Arrangements. Wir kalkulieren
+      transparent und beraten Sie persönlich. Trauerfloristik ist auch im Abo möglich, etwa zur
+      Grabgestaltung oder für regelmäßige Gedenktage.
+    </p>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .head-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
+  .head-set img { width: 100%; height: clamp(340px,46vw,560px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block; }
+  @media (max-width: 760px) {
+    .head-set { grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .head-set figure { scroll-snap-align: center; }
+    .head-set img { height: 380px; }
+  }
+
+  .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
+  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
+  .page-head .eyebrow a { color: inherit; }
+  .page-head h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); }
+  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
+
+  .services { padding-block: var(--sp-lg) var(--sp-2xl); }
+  .services > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
+  .svc { padding: var(--sp-md); border-radius: var(--r-lg); background: var(--bg-alt); }
+  .svc h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .svc p { font-size: 0.95rem; color: var(--text-soft); }
+
+  .meaning { background: var(--bg-alt); padding-block: var(--sp-2xl); }
+  .meaning-inner { max-width: 72ch; }
+  .meaning h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-md); }
+  .meaning p { font-size: 1.08rem; color: var(--text-soft); }
+
+  .faq { padding-block: var(--sp-2xl); }
+  .faq > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
+  .faq-list { display: grid; gap: 0.75rem; max-width: 76ch; }
+  .faq-item { border: 1px solid var(--n-200); border-radius: var(--r-md); padding: 0 1.25rem; background: var(--bg); transition: border-color 0.3s ease; }
+  .faq-item[open] { border-color: var(--accent); }
+  .faq-item summary { padding: 1.1rem 0; cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .faq-item summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; transition: transform 0.3s ease; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item p { padding: 0 0 1.1rem; color: var(--text-soft); }
+  .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 72ch; }
+
+  @media (max-width: 860px) { .svc-grid { grid-template-columns: 1fr; } }
+  .head-img { padding-bottom: var(--sp-lg); }
+  .head-img img { width: 100%; height: clamp(280px,40vw,460px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
+</style>

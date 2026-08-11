@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+
+const models = [
+  { name: 'Basic', desc: 'Ein zarter Akzent für kleine Räume oder den Empfang. Kleiner Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 155 €' },
+  { name: 'Standard', desc: 'Ein ausgewogener Strauß, der Atmosphäre schafft. Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 235 €' },
+  { name: 'Flex', desc: 'Für mehr Präsenz – individuell auf den Raum abgestimmt. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 135 €' },
+  { name: 'Gallery', desc: 'Großzügig, wirkungsvoll – ein Statement im Raum. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 195 €' },
+];
+
+const benefits = [
+  'Regelmäßig Atmosphäre & Stil',
+  'Kein Planen, kein Einkaufen',
+  'Immer besonders: Sie entscheiden den Rhythmus',
+  'Zuverlässig direkt in Ihre Räume geliefert',
+  'Mit passendem Gefäß auf Wunsch',
+  'Im Einklang mit Raum, Stimmung und Menschen',
+  'Persönliche Beratung inklusive',
+];
+---
+<Base
+  title="Blumen-Abo Berlin für Geschäftskunden — Lilac & Bergamot"
+  description="Für Geschäftsräume und Privathaushalte bieten wir individuelle Blumen-Abos und florale Designs – saisonal, handgebunden und auf Ihre Räume abgestimmt."
+  path="/abo/"
+>
+  <section class="container page-head">
+    <span class="eyebrow" data-reveal>Abo & Preise</span>
+    <h1 data-reveal style="--reveal-delay:80ms">Blumen-Abo in Berlin für Geschäftskunden</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">
+      Für Geschäftsräume und Privathaushalte bieten wir individuelle Blumen-Abos und florale
+      Designs – saisonal, handgebunden und auf Ihre Räume abgestimmt.
+    </p>
+  </section>
+
+  <section class="container split">
+    <div data-reveal>
+      <h2>Blumen, die bleiben – im Gefühl, nicht nur im Raum.</h2>
+      <p>Ein Strauß als Begleitung – zum Feiern, Verschenken, den Alltag verwandeln und eigene
+        Blumen-Rituale genießen. Unsere Blumen sprechen von Wertschätzung, Stil und feiner
+        Aufmerksamkeit. Saisonal, regional, bewusst.</p>
+    </div>
+    <ul class="benefits" data-reveal style="--reveal-delay:120ms">
+      {benefits.map((b) => <li>{b}</li>)}
+    </ul>
+  </section>
+
+  <section class="container models">
+    <h2 data-reveal>Unsere Abo-Modelle</h2>
+    <div class="table-wrap" data-reveal style="--reveal-delay:80ms">
+      <table>
+        <thead>
+          <tr><th>Modell</th><th>Beschreibung</th><th>Rhythmus</th><th>Preis</th></tr>
+        </thead>
+        <tbody>
+          {models.map((m) => (
+            <tr>
+              <td class="model-name" data-label="Modell">{m.name}</td>
+              <td data-label="Beschreibung">{m.desc}</td>
+              <td class="nowrap" data-label="Rhythmus">{m.rhythm}</td>
+              <td class="price" data-label="Preis">{m.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note" data-reveal>
+      Wir liefern wöchentlich und nach Bedarf frische Sträuße und Bouquets – abgestimmt auf Ihre
+      Geschäftsräume, Wünsche und Vorlieben. Von Hand gestaltet und direkt zu Ihnen gebracht, in
+      Berlin. Wir beraten Sie gerne individuell zu Ihrem persönlichen Modell.
+    </p>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
+  .page-head h1 { font-size: clamp(2.7rem, 6vw, 4.3rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 20ch; }
+  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 56ch; }
+
+  .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-xl); align-items: center; padding-block: var(--sp-lg) var(--sp-2xl); }
+  .split h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.25; margin-bottom: var(--sp-sm); }
+  .split p { color: var(--text-soft); font-size: 1.08rem; }
+  .benefits { list-style: none; display: grid; gap: 0.75rem; }
+  .benefits li { position: relative; padding-left: 1.6rem; color: var(--text); }
+  .benefits li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  .models { padding-bottom: var(--sp-2xl); }
+  .models > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
+  .table-wrap { overflow-x: auto; border-radius: var(--r-lg); box-shadow: var(--shadow-soft); }
+  table { width: 100%; border-collapse: collapse; background: var(--bg); min-width: 640px; }
+  thead th { background: var(--accent); color: #fff; text-align: left; font-family: var(--sans); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; padding: 1rem 1.25rem; }
+  tbody td { padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--n-200); vertical-align: top; color: var(--text-soft); font-size: 0.95rem; }
+  tbody tr:nth-child(odd) td { background: var(--lilac-50); }
+  .model-name { font-family: var(--serif); font-size: 1.25rem; color: var(--text); font-weight: 500; }
+  .price { font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .nowrap { white-space: nowrap; }
+  .note { margin-top: var(--sp-md); color: var(--text-soft); max-width: 70ch; }
+
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: var(--sp-lg); } }
+
+  /* Auf dem Handy: aus jeder Tabellenzeile wird eine Karte (kein Wischen nötig) */
+  @media (max-width: 760px) {
+    .table-wrap { overflow-x: visible; box-shadow: none; background: transparent; }
+    table { min-width: 0; width: 100%; background: transparent; }
+    thead { display: none; }              /* Kopfzeile weg, Labels stehen in den Karten */
+    tbody, tr, td { display: block; width: 100%; }
+    tbody tr {
+      background: var(--bg-card) !important;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 1.25rem 1.35rem;
+      margin-bottom: var(--sp-sm);
+    }
+    tbody tr:nth-child(odd) td { background: transparent; }
+    tbody td {
+      border-bottom: none; padding: 0.35rem 0;
+      display: grid; grid-template-columns: 1fr; gap: 0.15rem;
+    }
+    /* Beschriftung über dem Wert */
+    tbody td::before {
+      content: attr(data-label);
+      font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.14em;
+      text-transform: uppercase; font-weight: 600; color: var(--malve);
+    }
+    /* Modellname als Karten-Überschrift, ohne Label */
+    tbody td.model-name {
+      font-family: var(--serif); font-size: 1.5rem; color: var(--pflaume);
+      font-weight: 600; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-soft); margin-bottom: 0.6rem;
+    }
+    tbody td.model-name::before { display: none; }
+    /* Preis hervorheben */
+    tbody td.price {
+      font-family: var(--serif); font-size: 1.35rem; color: var(--pflaume);
+      font-weight: 600; margin-top: 0.4rem;
+    }
+  }
+</style>
