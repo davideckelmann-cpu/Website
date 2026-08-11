@@ -33,6 +33,8 @@ const { compact = false } = Astro.props;
   .cta-contact a { color: var(--flieder); transition: color 0.3s ease; }
   .cta-contact a:hover { color: #fff; }
   @media (max-width: 860px) {
-    .cta-inner { grid-template-columns: 1fr; gap: var(--sp-lg); }
+    .cta-band { padding-block: var(--sp-lg); }
+    .cta-band.compact { padding-block: var(--sp-md); }
+    .cta-inner { grid-template-columns: 1fr; gap: var(--sp-md); }
   }
 </style>

@@ -55,10 +55,10 @@ const benefits = [
         <tbody>
           {models.map((m) => (
             <tr>
-              <td class="model-name">{m.name}</td>
-              <td>{m.desc}</td>
-              <td class="nowrap">{m.rhythm}</td>
-              <td class="price">{m.price}</td>
+              <td class="model-name" data-label="Modell">{m.name}</td>
+              <td data-label="Beschreibung">{m.desc}</td>
+              <td class="nowrap" data-label="Rhythmus">{m.rhythm}</td>
+              <td class="price" data-label="Preis">{m.price}</td>
             </tr>
           ))}
         </tbody>
@@ -99,4 +99,42 @@ const benefits = [
   .note { margin-top: var(--sp-md); color: var(--text-soft); max-width: 70ch; }
 
   @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: var(--sp-lg); } }
+
+  /* Auf dem Handy: aus jeder Tabellenzeile wird eine Karte (kein Wischen nötig) */
+  @media (max-width: 760px) {
+    .table-wrap { overflow-x: visible; box-shadow: none; background: transparent; }
+    table { min-width: 0; width: 100%; background: transparent; }
+    thead { display: none; }              /* Kopfzeile weg, Labels stehen in den Karten */
+    tbody, tr, td { display: block; width: 100%; }
+    tbody tr {
+      background: var(--bg-card) !important;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 1.25rem 1.35rem;
+      margin-bottom: var(--sp-sm);
+    }
+    tbody tr:nth-child(odd) td { background: transparent; }
+    tbody td {
+      border-bottom: none; padding: 0.35rem 0;
+      display: grid; grid-template-columns: 1fr; gap: 0.15rem;
+    }
+    /* Beschriftung über dem Wert */
+    tbody td::before {
+      content: attr(data-label);
+      font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.14em;
+      text-transform: uppercase; font-weight: 600; color: var(--malve);
+    }
+    /* Modellname als Karten-Überschrift, ohne Label */
+    tbody td.model-name {
+      font-family: var(--serif); font-size: 1.5rem; color: var(--pflaume);
+      font-weight: 600; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-soft); margin-bottom: 0.6rem;
+    }
+    tbody td.model-name::before { display: none; }
+    /* Preis hervorheben */
+    tbody td.price {
+      font-family: var(--serif); font-size: 1.35rem; color: var(--pflaume);
+      font-weight: 600; margin-top: 0.4rem;
+    }
+  }
 </style>
