@@ -72,18 +72,7 @@ const cards = [
   </section>
 
   <!-- CONTACT -->
-  <PhotoBanner
-    images={[
-      { src: '/images/banner-1.jpg', alt: 'Florales Arrangement' },
-      { src: '/images/banner-2.jpg', alt: 'Event-Floristik in Berlin' },
-      { src: '/images/banner-3.jpg', alt: 'Florale Tafel' },
-      { src: '/images/banner-4.jpg', alt: 'Florales Detail' },
-      { src: '/images/banner-5.jpg', alt: 'Handgebundener Strauß' },
-      { src: '/images/banner-6.jpg', alt: 'Saisonale Blumen von Lilac & Bergamot' },
-    ]}
-    speed={38}
-    height="360px"
-  />
+  <PhotoBanner height="360px" />
 
   <section class="contact">
     <div class="container contact-inner">
@@ -135,7 +124,7 @@ const cards = [
   .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
   .card-media { overflow: hidden; border-radius: var(--r-md); margin-bottom: var(--sp-sm); }
   .card-media img {
-    width: 100%; height: 220px; object-fit: cover;
+    width: 100%; height: 220px; object-fit: cover; object-position: bottom;
     transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
   }
   .card:hover .card-media img { transform: scale(1.05); }
@@ -181,5 +170,8 @@ const cards = [
     .hero { padding-block: var(--sp-lg) var(--sp-xl); }
     .hero-media { order: -1; }
     .form .btn { align-self: stretch; text-align: center; }
+    /* Buttons gleich breit statt unterschiedlich lang */
+    .cta-row { flex-direction: column; align-items: stretch; }
+    .cta-row .btn { width: 100%; text-align: center; }
   }
 </style>

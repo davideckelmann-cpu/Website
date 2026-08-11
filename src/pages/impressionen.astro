@@ -1,16 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import { getNumberedImages } from '../utils/pageImages.js';
 
 // Gallery — reuse available photos for now; add real ones later
-const gallery = [
-  { src: '/images/impressionen-1.jpg', alt: 'Arrangement mit Flieder und Bergamotte', tall: true },
-  { src: '/images/impressionen-2.jpg', alt: 'Florale Tafel für das Caudalie-Event' },
-  { src: '/images/impressionen-3.jpg', alt: 'Florale Gestaltung einer Tafel' },
-  { src: '/images/impressionen-4.jpg', alt: 'Florales Detail mit Kerzen', tall: true },
-  { src: '/images/impressionen-5.jpg', alt: 'Handgebundener Strauß' },
-  { src: '/images/impressionen-6.jpg', alt: 'Event-Floristik in Berlin' },
+// Findet AUTOMATISCH alle Bilder: impressionen-1.jpg, -2, -3 ... bis -40.
+// Einfach Dateien in public/images ablegen oder entfernen – fertig.
+const altTexte = [
+  'Florales Arrangement von Lilac & Bergamot',
+  'Event-Floristik in Berlin',
+  'Florale Tafelgestaltung',
+  'Detail einer floralen Komposition',
+  'Handgebundener Strauß',
+  'Saisonale Blumen aus Berlin',
+  'Florale Installation für ein Event',
+  'Blumen für besondere Anlässe',
 ];
+const gallery = getNumberedImages('impressionen', 40).map((src, i) => ({
+  src,
+  alt: altTexte[i % altTexte.length],
+  tall: i % 3 === 0,   // jedes dritte Bild größer -> lebendiges Raster
+}));
 ---
 <Base
   title="Impressionen — Lilac & Bergamot, Floristik in Berlin"

@@ -1,13 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getPageImages, baseFromPath } from '../utils/pageImages.js';
 import ContactCTA from './ContactCTA.astro';
 
 const {
   title, description, path, cluster, clusterHref, clusterLabel,
   eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, images = [], icon,
 } = Astro.props;
-// Entweder ein Querformat-Bild (image) ODER mehrere Hochkant-Bilder (images)
-const portraitSet = images.length > 0;
+// AUTOMATISCHE BILD-ERKENNUNG
+// Schaut selbst nach, welche Bilder in public/images liegen.
+// Manuell gesetzte image=/images= Werte haben weiterhin Vorrang.
+const auto = getPageImages(baseFromPath(path));
+const autoImages = images.length > 0 ? images : auto.images;
+const autoImage  = image || auto.image;
+const portraitSet = autoImages.length > 1;
 // Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
 const altVariants = [
   `Florale Gestaltung für ${cluster} in Berlin`,
@@ -30,18 +36,19 @@ function altFor(img, i) {
 
   {portraitSet && (
     <section class="container lp-media-set" data-reveal>
-      {images.map((img, i) => (
+      {autoImages.map((img, i) => (
         <figure class="lp-portrait">
           <img src={typeof img === 'string' ? img : img.src}
                alt={altFor(img, i)}
-               width="600" height="900" loading="lazy" />
+               width="600" height="900" loading="lazy"
+               onerror="this.closest('figure').style.display='none'" />
         </figure>
       ))}
     </section>
   )}
-  {!portraitSet && image && (
+  {!portraitSet && autoImage && (
     <section class="container lp-media" data-reveal>
-      <img src={image} alt={h1} width="1200" height="620" loading="lazy" />
+      <img src={autoImage} alt={h1} width="1200" height="620" loading="lazy" onerror="this.closest('section').style.display='none'" />
     </section>
   )}
 

@@ -1,19 +1,41 @@
 ---
 // Langsam durchlaufendes Foto-Banner (Endlosschleife)
-const { images = [], speed = 60, height = "260px" } = Astro.props;
+// Findet die Bilder AUTOMATISCH: banner-1.jpg, banner-2.jpg, ... bis banner-24
+// Einfach Dateien in public/images ablegen oder entfernen – fertig.
+import { getNumberedImages } from '../utils/pageImages.js';
+
+const { images = [], speed, height = "260px", base = "banner" } = Astro.props;
+
+// Beschreibungen abwechselnd, damit keine Dubletten entstehen
+const altTexte = [
+  'Florales Arrangement von Lilac & Bergamot',
+  'Event-Floristik in Berlin',
+  'Florale Tafelgestaltung',
+  'Detail einer floralen Komposition',
+  'Handgebundener Strauß',
+  'Saisonale Blumen aus Berlin',
+];
+
+// Automatisch gefundene Bilder, sofern keine manuell übergeben wurden
+const gefunden = images.length > 0
+  ? images
+  : getNumberedImages(base).map((src, i) => ({ src, alt: altTexte[i % altTexte.length] }));
+
+// Tempo bleibt gleich, egal wie viele Bilder: ca. 7 Sekunden pro Bild
+const dauer = speed || Math.max(30, gefunden.length * 7);
 // Für nahtlose Schleife: Bilder verdoppeln
 // Erste Reihe: echte Bildbeschreibungen. Zweite Reihe: reine Deko für die
 // nahtlose Endlosschleife -> aria-hidden + leeres alt (keine SEO-Dubletten).
 const strip = [
-  ...images.map((img) => ({ ...img, decorative: false })),
-  ...images.map((img) => ({ ...img, decorative: true })),
+  ...gefunden.map((img) => ({ ...img, decorative: false })),
+  ...gefunden.map((img) => ({ ...img, decorative: true })),
 ];
 ---
 <section class="banner" aria-label="Impressionen unserer Arbeit">
-  <div class="banner-track" style={`--dur:${speed}s`}>
+  <div class="banner-track" style={`--dur:${dauer}s`}>
     {strip.map((img) => (
       <figure class="banner-item" style={`--h:${height}`} aria-hidden={img.decorative ? "true" : undefined}>
-        <img src={img.src} alt={img.decorative ? "" : (img.alt || "")} loading="lazy" />
+        <img src={img.src} alt={img.decorative ? "" : (img.alt || "")} loading="lazy" onerror="this.closest('figure').style.display='none'" />
       </figure>
     ))}
   </div>
