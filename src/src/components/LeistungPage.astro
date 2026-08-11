@@ -1,13 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getPageImages, baseFromPath } from '../utils/pageImages.js';
 import ContactCTA from './ContactCTA.astro';
 
 const {
   title, description, path, cluster, clusterHref, clusterLabel,
   eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, images = [], icon,
 } = Astro.props;
-// Entweder ein Querformat-Bild (image) ODER mehrere Hochkant-Bilder (images)
-const portraitSet = images.length > 0;
+// AUTOMATISCHE BILD-ERKENNUNG
+// Schaut selbst nach, welche Bilder in public/images liegen.
+// Manuell gesetzte image=/images= Werte haben weiterhin Vorrang.
+const auto = getPageImages(baseFromPath(path));
+const autoImages = images.length > 0 ? images : auto.images;
+const autoImage  = image || auto.image;
+const portraitSet = autoImages.length > 1;
 // Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
 const altVariants = [
   `Florale Gestaltung für ${cluster} in Berlin`,
@@ -30,7 +36,7 @@ function altFor(img, i) {
 
   {portraitSet && (
     <section class="container lp-media-set" data-reveal>
-      {images.map((img, i) => (
+      {autoImages.map((img, i) => (
         <figure class="lp-portrait">
           <img src={typeof img === 'string' ? img : img.src}
                alt={altFor(img, i)}
@@ -40,9 +46,9 @@ function altFor(img, i) {
       ))}
     </section>
   )}
-  {!portraitSet && image && (
+  {!portraitSet && autoImage && (
     <section class="container lp-media" data-reveal>
-      <img src={image} alt={h1} width="1200" height="620" loading="lazy" />
+      <img src={autoImage} alt={h1} width="1200" height="620" loading="lazy" onerror="this.closest('section').style.display='none'" />
     </section>
   )}
 
@@ -90,14 +96,17 @@ function altFor(img, i) {
 </Base>
 
 <style>
-  .lp-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
+  .lp-icon { width: 64px; height: auto; margin-bottom: var(--sp-md); opacity: 0.9; }
   .lp-head { padding-block: var(--sp-2xl) var(--sp-md); }
   .lp-head .eyebrow a { color: inherit; }
-  .lp-head h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 22ch; }
+  .lp-head h1 { font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.05; letter-spacing: -0.015em; margin: var(--sp-sm) 0 var(--sp-md); max-width: 20ch; font-weight: 400; }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .lp-media { padding-bottom: var(--sp-lg); }
-  .lp-media img { width: 100%; height: clamp(280px, 40vw, 460px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
+  .lp-media img {
+    width: 100%; height: clamp(280px, 40vw, 460px); object-fit: contain;
+    background: var(--bg-alt); border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+  }
 
   /* Mehrere Hochkant-Bilder nebeneinander (Triptychon) */
   .lp-media-set {
@@ -105,18 +114,21 @@ function altFor(img, i) {
     gap: var(--sp-sm); padding-bottom: var(--sp-lg);
   }
   .lp-portrait img {
-    width: 100%; height: clamp(340px, 46vw, 560px); object-fit: cover;
-    border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
+    width: 100%; height: clamp(340px, 46vw, 560px); object-fit: contain;
+    background: var(--bg-alt); border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
   }
   @media (max-width: 760px) {
-    /* Auf dem Handy: nebeneinander scrollbar statt gequetscht */
-    .lp-media-set {
-      grid-auto-columns: 72%;
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+    /* Auf dem Handy untereinander – Bilder behalten ihre natürliche Form,
+       werden nicht beschnitten und passen immer in den Container. */
+    .lp-media-set { grid-auto-flow: row; grid-auto-columns: auto; gap: var(--sp-sm); }
+    .lp-portrait img {
+      height: auto; max-height: 62vh;
+      object-fit: contain; background: var(--bg-alt);
     }
-    .lp-portrait { scroll-snap-align: center; }
-    .lp-portrait img { height: 380px; }
+    .lp-media img {
+      height: auto; max-height: 62vh;
+      object-fit: contain; background: var(--bg-alt);
+    }
   }
 
   .lp-intro { padding-block: var(--sp-md) var(--sp-xl); }
