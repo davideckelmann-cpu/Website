@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 
 const models = [
-  { name: 'Basic', desc: 'Ein zarter Akzent für kleine Räume oder den Empfang. Kleiner Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 155 €' },
-  { name: 'Standard', desc: 'Ein ausgewogener Strauß, der Atmosphäre schafft. Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 235 €' },
-  { name: 'Flex', desc: 'Für mehr Präsenz – individuell auf den Raum abgestimmt. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 135 €' },
-  { name: 'Gallery', desc: 'Großzügig, wirkungsvoll – ein Statement im Raum. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 195 €' },
+  { name: 'Basic', desc: 'Ein zarter Akzent für kleine Räume oder den Empfang. Kleiner Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 155 €', img: '/images/ueber-uns-2.jpg' },
+  { name: 'Standard', desc: 'Ein ausgewogener Strauß, der Atmosphäre schafft. Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 235 €', img: '/images/ueber-uns-3.jpg' },
+  { name: 'Flex', desc: 'Für mehr Präsenz – individuell auf den Raum abgestimmt. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 135 €', img: '/images/ueber-uns-5.jpg' },
+  { name: 'Gallery', desc: 'Großzügig, wirkungsvoll – ein Statement im Raum. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 195 €', img: '/images/ueber-uns-6.jpg' },
 ];
 
 const benefits = [
@@ -50,11 +50,14 @@ const benefits = [
     <div class="table-wrap" data-reveal style="--reveal-delay:80ms">
       <table>
         <thead>
-          <tr><th>Modell</th><th>Beschreibung</th><th>Rhythmus</th><th>Preis</th></tr>
+          <tr><th class="th-img"></th><th>Modell</th><th>Beschreibung</th><th>Rhythmus</th><th>Preis</th></tr>
         </thead>
         <tbody>
           {models.map((m) => (
             <tr>
+              <td class="model-img" data-label="">
+                {m.img && <img src={m.img} alt={`Beispiel für das Abo-Modell ${m.name}`} width="120" height="120" loading="lazy" />}
+              </td>
               <td class="model-name" data-label="Modell">{m.name}</td>
               <td data-label="Beschreibung">{m.desc}</td>
               <td class="nowrap" data-label="Rhythmus">{m.rhythm}</td>
@@ -76,7 +79,7 @@ const benefits = [
 
 <style>
   .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
-  .page-head h1 { font-size: clamp(2.7rem, 6vw, 4.3rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 20ch; }
+  .page-head h1 { font-size: clamp(2rem, 4.2vw, 3rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 20ch; }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 56ch; }
 
   .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-xl); align-items: center; padding-block: var(--sp-lg) var(--sp-2xl); }
@@ -93,6 +96,8 @@ const benefits = [
   thead th { background: var(--accent); color: #fff; text-align: left; font-family: var(--sans); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; padding: 1rem 1.25rem; }
   tbody td { padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--n-200); vertical-align: top; color: var(--text-soft); font-size: 0.95rem; }
   tbody tr:nth-child(odd) td { background: var(--lilac-50); }
+  .model-img { width: 92px; padding: 0.75rem !important; }
+  .model-img img { width: 72px; height: 72px; object-fit: cover; border-radius: var(--r-md); display: block; }
   .model-name { font-family: var(--serif); font-size: 1.25rem; color: var(--text); font-weight: 500; }
   .price { font-weight: 600; color: var(--accent); white-space: nowrap; }
   .nowrap { white-space: nowrap; }
@@ -118,6 +123,13 @@ const benefits = [
       border-bottom: none; padding: 0.35rem 0;
       display: grid; grid-template-columns: 1fr; gap: 0.15rem;
     }
+    /* Bild: volle Kartenbreite, oben */
+    .model-img {
+      width: auto !important; padding: 0 !important;
+      margin: -1.25rem -1.35rem 0.8rem; grid-column: 1;
+    }
+    .model-img img { width: 100%; height: 140px; border-radius: 0; }
+    .model-img:empty { display: none; }
     /* Beschriftung über dem Wert */
     tbody td::before {
       content: attr(data-label);
