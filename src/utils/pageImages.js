@@ -88,3 +88,9 @@ export function getNumberedImages(base, max = 24) {
   }
   return found;
 }
+
+/** Sucht gezielt NUR die Datei ohne Nummer, z.B. "ueber-uns.jpg".
+ *  Unabhängig davon, ob es zusätzlich nummerierte Bilder gibt. */
+export function getSingleImage(base) {
+  return findFile(base);
+}

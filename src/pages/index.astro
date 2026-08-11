@@ -1,15 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
-import ContactForm from '../components/ContactForm.astro';
-import PhotoBanner from '../components/PhotoBanner.astro';
+import { getSingleImage, getNumberedImages } from '../utils/pageImages.js';
 
-const cards = [
-  { img: '/images/start-events.jpg', tag: 'Events & Hochzeiten', h: 'Event-Floristik',
-    p: 'Florale Begleitung für Firmenevents, Markenpräsentationen und Hochzeiten.', href: '/events/' },
-  { img: '/images/start-marken.jpg', tag: 'Markenpräsentation', h: 'Brand Events',
-    p: 'Szenografie und florale Inszenierung für Marken – wie hier für Caudalie.', href: '/events/' },
-  { img: '/images/start-straeusse.jpg', tag: 'Private Anlässe', h: 'Handgebundene Sträuße',
-    p: 'Liebevoll gebundene Sträuße als Geschenk oder für den besonderen Moment.', href: '/angebot/' },
+const hero = getSingleImage('hero');
+const editorial = getSingleImage('start-editorial');
+const events = getSingleImage('start-events');
+const marken = getSingleImage('start-marken');
+const straeusse = getSingleImage('start-straeusse');
+
+const leistungen = [
+  { nr: '01', h: 'Blumen-Abo',      p: 'Wöchentlich frische Arrangements für Räume, die wirken sollen.', href: '/abo/',      img: straeusse },
+  { nr: '02', h: 'Event-Floristik', p: 'Florale Begleitung für Firmenevents, Markenauftritte und Hochzeiten.', href: '/events/',  img: events },
+  { nr: '03', h: 'Szenografie',     p: 'Rauminszenierung, in der Blumen die Erzählung tragen.', href: '/events/szenografie/', img: marken },
+  { nr: '04', h: 'Sträuße',         p: 'Handgebunden, saisonal, als Geste gedacht.', href: '/angebot/straeusse/', img: editorial },
 ];
 ---
 <Base
@@ -17,156 +20,173 @@ const cards = [
   description="Florale Gestaltung in Berlin: Blumen-Abos für Geschäftskunden, Event- & Hochzeitsfloristik, Trauerfloristik & handgebundene Sträuße. Saisonal & ästhetisch."
   path="/"
 >
-  <!-- HERO -->
-  <section class="hero container">
-    <div class="hero-copy">
-      <span class="eyebrow" data-reveal>Floristik in Berlin</span>
-      <h1 data-reveal style="--reveal-delay:80ms">Arrangements, die einladen innezuhalten.</h1>
-      <p class="lead" data-reveal style="--reveal-delay:160ms">
-        Florale Kompositionen, die den Moment feiern – ob großes Bouquet oder eine
-        einzelne Blüte als Mittelpunkt des gedeckten Tisches. Saisonal, bewusst, ästhetisch.
-      </p>
-
+  <!-- HERO: asymmetrisch, viel Leerraum -->
+  <section class="v-hero">
+    <div class="v-hero-type">
+      <span class="v-eyebrow" data-reveal>Floristik in Berlin</span>
+      <h1 data-reveal style="--reveal-delay:100ms">Arrangements,<br>die einladen<br><em>innezuhalten.</em></h1>
     </div>
-    <div class="hero-media">
-      <img src="/images/hero.jpg" alt="Blumenarrangement mit Flieder und Bergamotte-Tönen"
-           width="560" height="620" loading="eager" />
+    {hero && (
+      <figure class="v-hero-img" data-reveal style="--reveal-delay:220ms">
+        <img src={hero} alt="Florales Arrangement mit Flieder" loading="eager" />
+      </figure>
+    )}
+  </section>
+
+  <!-- LEERSTELLE: eine Aussage, viel Luft -->
+  <section class="v-statement">
+    <p data-reveal>Form, Farbe, Rhythmus <span>—</span> und die Leerstelle.</p>
+  </section>
+
+  <!-- LEISTUNGEN: editoriale Liste statt Karten -->
+  <section class="v-liste">
+    <div class="v-inner">
+      {leistungen.map((l, i) => (
+        <a class="v-zeile" href={l.href} data-reveal style={`--reveal-delay:${i * 90}ms`}>
+          <span class="v-nr">{l.nr}</span>
+          <span class="v-titel">{l.h}</span>
+          <span class="v-text">{l.p}</span>
+          <span class="v-pfeil">→</span>
+          {l.img && <img class="v-hoverbild" src={l.img} alt="" aria-hidden="true" loading="lazy" />}
+        </a>
+      ))}
     </div>
   </section>
 
-  <!-- EDITORIAL -->
-  <section class="editorial container">
-    <div class="editorial-media" data-reveal>
-      <img src="/images/start-editorial.jpg" alt="Florale Tafelgestaltung für ein Event in Berlin"
-           width="600" height="560" loading="lazy" />
-    </div>
-    <div class="editorial-copy" data-reveal style="--reveal-delay:120ms">
-      <h2>Räume, die durchatmen lassen. Menschen, die sich aufgehoben fühlen. Und Blumen, die all das ermöglichen.</h2>
-      <p>Unsere Leidenschaft gilt Blumen – und ihrer Kraft, Räume zu verwandeln und Menschen
-        zu berühren. Ob im Abonnement frisch geliefert oder als private Überraschung: Wir beraten Sie gerne.</p>
-      <a href="/ueber-uns/" class="link-arrow">Mehr über uns →</a>
-    </div>
-  </section>
+  <!-- GROSSES BILD: randlos, allein für sich -->
+  {editorial && (
+    <section class="v-vollbild" data-reveal>
+      <img src={editorial} alt="Florale Tafelgestaltung für ein Event in Berlin" loading="lazy" />
+    </section>
+  )}
 
-  <!-- SERVICES -->
-  <section class="services">
-    <div class="container">
-      <div class="services-head">
-        <span class="eyebrow" data-reveal>Unser Angebot</span>
-        <h2 data-reveal style="--reveal-delay:80ms">Florale Gestaltung für Räume,<br>Menschen und Momente.</h2>
-      </div>
-      <div class="cards">
-        {cards.map((c, i) => (
-          <a class="card" href={c.href} data-reveal style={`--reveal-delay:${i * 120}ms`}>
-            <div class="card-media"><img src={c.img} alt={c.h} width="380" height="260" loading="lazy" /></div>
-            <span class="eyebrow">{c.tag}</span>
-            <h3>{c.h}</h3>
-            <p>{c.p}</p>
-          </a>
-        ))}
-      </div>
+  <!-- HALTUNG: versetzt, schmale Spalte -->
+  <section class="v-haltung">
+    <div class="v-haltung-copy" data-reveal>
+      <p class="v-gross">Ich arbeite im Einklang mit den Jahreszeiten — intuitiv, reduziert, mit dem, was gerade Saison hat.</p>
+      <p>Lilac &amp; Bergamot verbindet florale Gestaltung mit einem Blick aus der Kunst —
+        aus Raum, Licht und Bühne. Es geht um die Klarheit der Linie, die Krümmung des
+        lebendigen Materials und darum, was man weglässt.</p>
+      <a class="v-link" href="/ueber-uns/">Über uns</a>
     </div>
   </section>
 
-
-
-  <!-- CONTACT -->
-  <PhotoBanner height="360px" />
-
-  <section class="contact">
-    <div class="container contact-inner">
-      <div data-reveal>
-        <span class="eyebrow">Kontakt</span>
-        <h2>Erzählen Sie uns von<br>Ihrer Idee.</h2>
-        <p>Sie möchten eine florale Komposition anfragen oder einen Anlass gestalten lassen?
-          Wir freuen uns auf Ihre Nachricht.</p>
+  <!-- KONTAKT: minimal -->
+  <section class="v-kontakt">
+    <div class="v-inner">
+      <h2 data-reveal>Erzählen Sie uns<br>von Ihrer Idee.</h2>
+      <div class="v-kontakt-daten" data-reveal style="--reveal-delay:120ms">
+        <a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a>
+        <a href="tel:+493062904677">+49 (0) 30 629 046 77</a>
+        <a class="v-link" href="/kontakt/">Zum Kontaktformular</a>
       </div>
-      <div class="form" data-reveal style="--reveal-delay:120ms"><ContactForm compact={true} /></div>
     </div>
   </section>
 </Base>
 
 <style>
+  /* ---- Grundhaltung: scharfe Kanten, keine Schatten, viel Luft ---- */
+  .v-hero, .v-statement, .v-liste, .v-haltung, .v-kontakt { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
   /* HERO */
-  .hero {
-    display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sp-xl);
-    align-items: center; padding-block: var(--sp-xl) var(--sp-2xl);
+  .v-hero {
+    display: grid; grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 6vw, 6rem); align-items: end;
+    padding-block: clamp(3rem, 9vw, 8rem) clamp(4rem, 10vw, 9rem);
   }
-  .hero h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
-  .lead { font-size: 1.12rem; color: var(--text-soft); max-width: 46ch; }
-  .hero-media { overflow: hidden; border-radius: var(--r-lg); }
-  .hero-media img {
-    width: 100%; height: clamp(360px, 52vw, 620px); object-fit: cover;
-    border-radius: var(--r-lg); box-shadow: var(--shadow-card);
-    animation: bloom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .v-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--malve); display: block; margin-bottom: 2.5rem;
   }
-  @keyframes bloom {
-    0%   { opacity: 0; transform: scale(1.12); filter: blur(14px) saturate(0.7); }
-    60%  { opacity: 1; }
-    100% { opacity: 1; transform: scale(1); filter: blur(0) saturate(1); }
+  .v-hero h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 1.02;
+    letter-spacing: -0.02em; color: var(--pflaume);
   }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-media img { animation: none; }
+  .v-hero h1 em { font-style: italic; color: var(--malve); }
+  .v-hero-img { margin: 0; }
+  .v-hero-img img {
+    width: 100%; height: clamp(380px, 52vw, 660px);
+    object-fit: cover; display: block;      /* scharfe Kanten, kein Radius */
   }
 
-  /* SERVICES */
-  .services { background: #FBFBEF; padding-block: var(--sp-2xl); }
-  .services-head { text-align: center; margin-bottom: var(--sp-xl); }
-  .services-head h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top: var(--sp-sm); }
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
-  .card {
-    background: var(--bg); border-radius: var(--r-lg); padding: var(--sp-md);
-    box-shadow: var(--shadow-soft);
-    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s ease;
+  /* LEERSTELLE */
+  .v-statement { padding-block: clamp(4rem, 12vw, 10rem); text-align: center; }
+  .v-statement p {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.4rem, 3.4vw, 2.6rem); line-height: 1.4;
+    color: var(--pflaume); max-width: 24ch; margin-inline: auto;
   }
-  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
-  .card-media { overflow: hidden; border-radius: var(--r-md); margin-bottom: var(--sp-sm); }
-  .card-media img {
-    width: 100%; height: 220px; object-fit: cover; object-position: center 65%;
-    transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
-  }
-  .card:hover .card-media img { transform: scale(1.05); }
-  .card h3 { font-size: 1.4rem; margin: 0.5rem 0 0.6rem; }
-  .card p { font-size: 0.95rem; color: var(--text-soft); }
+  .v-statement span { color: var(--malve); }
 
-  /* EDITORIAL */
-  .editorial {
-    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-xl);
-    align-items: center; padding-block: var(--sp-2xl);
+  /* LEISTUNGSLISTE */
+  .v-liste { padding-block: 0 clamp(3rem, 8vw, 7rem); }
+  .v-zeile {
+    position: relative; display: grid;
+    grid-template-columns: 4rem 1fr 1.4fr 2rem;
+    gap: 1.5rem; align-items: baseline;
+    padding-block: 1.9rem;
+    border-top: 1px solid var(--linie-flieder);
+    transition: padding-left 0.5s cubic-bezier(0.22,1,0.36,1);
   }
-  .editorial-media img {
-    width: 100%; height: clamp(360px, 46vw, 560px); object-fit: cover;
-    border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+  .v-zeile:last-child { border-bottom: 1px solid var(--linie-flieder); }
+  .v-nr { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--malve); }
+  .v-titel { font-family: var(--serif); font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--pflaume); }
+  .v-text { color: var(--text-soft); font-size: 0.95rem; line-height: 1.6; }
+  .v-pfeil { color: var(--malve); justify-self: end; transition: transform 0.4s ease; }
+  .v-zeile:hover { padding-left: 1.2rem; }
+  .v-zeile:hover .v-pfeil { transform: translateX(6px); }
+  /* Bild erscheint dezent beim Überfahren */
+  .v-hoverbild {
+    position: absolute; right: 6rem; top: 50%; transform: translateY(-50%) scale(0.96);
+    width: 190px; height: 240px; object-fit: cover;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1);
   }
-  .editorial-copy h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.3; margin-bottom: var(--sp-md); }
-  .editorial-copy p { font-size: 1.08rem; color: var(--text-soft); margin-bottom: var(--sp-md); }
-  .link-arrow { color: var(--accent); font-weight: 500; letter-spacing: 0.03em; transition: letter-spacing 0.4s ease; }
-  .link-arrow:hover { letter-spacing: 0.08em; }
+  .v-zeile:hover .v-hoverbild { opacity: 1; transform: translateY(-50%) scale(1); }
 
-  /* CONTACT */
-  .contact { background: #FBFBEF; padding-block: var(--sp-2xl); }
-  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2xl); }
-  .contact h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: var(--sp-sm) 0 var(--sp-md); }
-  .contact p { color: var(--text-soft); font-size: 1.08rem; }
-  .form { display: flex; flex-direction: column; gap: var(--sp-sm); }
-  .field {
-    padding: 1rem 1.25rem; border-radius: var(--r-md);
-    background: var(--bg); border: 1px solid var(--n-200);
-    font-family: var(--sans); font-size: 1rem; color: var(--text);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* VOLLBILD */
+  .v-vollbild { margin-block: clamp(2rem, 6vw, 5rem); }
+  .v-vollbild img { width: 100%; height: clamp(320px, 58vw, 720px); object-fit: cover; display: block; }
+
+  /* HALTUNG */
+  .v-haltung { padding-block: clamp(4rem, 10vw, 8rem); display: grid; grid-template-columns: 1fr; }
+  .v-haltung-copy { max-width: 46ch; margin-left: auto; }   /* bewusst nach rechts versetzt */
+  .v-gross {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.4;
+    color: var(--pflaume); margin-bottom: 1.6rem;
   }
-  .field::placeholder { color: var(--text-muted); }
-  .field:focus {
-    outline: none; border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(138,62,125,0.15);
+  .v-haltung-copy p { color: var(--text-soft); line-height: 1.75; }
+  .v-link {
+    display: inline-block; margin-top: 1.8rem;
+    font-size: 0.74rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--pflaume); border-bottom: 1px solid var(--malve); padding-bottom: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
   }
-  .form .btn { align-self: flex-start; }
+  .v-link:hover { color: var(--malve); border-color: var(--pflaume); }
+
+  /* KONTAKT */
+  .v-kontakt { padding-block: clamp(3rem, 8vw, 7rem) clamp(4rem, 10vw, 8rem); border-top: 1px solid var(--linie-flieder); }
+  .v-kontakt .v-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-xl); align-items: start; }
+  .v-kontakt h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.9rem, 4.6vw, 3.4rem); line-height: 1.08; color: var(--pflaume);
+  }
+  .v-kontakt-daten { display: grid; gap: 0.7rem; align-content: start; }
+  .v-kontakt-daten a { color: var(--text-soft); transition: color 0.3s ease; }
+  .v-kontakt-daten a:hover { color: var(--pflaume); }
 
   @media (max-width: 860px) {
-    .hero, .editorial, .contact-inner { grid-template-columns: 1fr; gap: var(--sp-lg); }
-    .cards { grid-template-columns: 1fr; }
-    .hero { padding-block: var(--sp-lg) var(--sp-xl); }
-    .hero-media { order: -1; }
-    .form .btn { align-self: stretch; text-align: center; }
+    .v-hero { grid-template-columns: 1fr; gap: 2rem; padding-block: 2rem 3rem; }
+    .v-hero-img { order: -1; }
+    .v-hero-img img { height: 56vh; }
+    .v-eyebrow { margin-bottom: 1.2rem; }
+    .v-zeile { grid-template-columns: 2.6rem 1fr; gap: 0.6rem 1rem; padding-block: 1.4rem; }
+    .v-text { grid-column: 2; }
+    .v-pfeil { display: none; }
+    .v-hoverbild { display: none; }
+    .v-haltung-copy { margin-left: 0; }
+    .v-kontakt .v-inner { grid-template-columns: 1fr; gap: var(--sp-md); }
   }
 </style>
