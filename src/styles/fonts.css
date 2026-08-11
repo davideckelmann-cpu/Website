@@ -32,3 +32,19 @@
   font-display: swap;
   src: url('/fonts/EBGaramond-Italic.woff2') format('woff2');
 }
+
+/* Mulish — Fließtext / UI (lokal, kein Google-Aufruf) */
+@font-face {
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/Mulish.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Mulish';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/Mulish-Italic.woff2') format('woff2');
+}

@@ -84,15 +84,14 @@ const faq = [
   .head-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
   .head-set img { width: 100%; height: clamp(340px,46vw,560px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block; }
   @media (max-width: 760px) {
-    .head-set { grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-    .head-set figure { scroll-snap-align: center; }
-    .head-set img { height: 380px; }
+    .head-set { grid-auto-flow: row; grid-auto-columns: auto; }
+    .head-set img { height: auto; max-height: 62vh; object-fit: contain; background: var(--bg-alt); }
   }
 
   .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
   .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
   .page-head .eyebrow a { color: inherit; }
-  .page-head h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); }
+  .page-head h1 { font-size: clamp(2rem, 4.2vw, 3rem); margin: var(--sp-sm) 0 var(--sp-md); }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .services { padding-block: var(--sp-lg) var(--sp-2xl); }

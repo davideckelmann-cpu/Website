@@ -42,11 +42,11 @@
 
   /* Type */
   --serif:   'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --sans:    'EB Garamond', Georgia, serif;  /* durchgehend Serif */
+  --sans:    'Mulish', system-ui, -apple-system, sans-serif;  /* Fließtext */
 
   /* Spacing */
   --sp-xs: 0.5rem; --sp-sm: 1rem; --sp-md: 1.5rem; --sp-lg: 2.5rem;
-  --sp-xl: 4rem; --sp-2xl: 6rem;
+  --sp-xl: 3rem; --sp-2xl: 4.25rem;
 
   /* Radius — weich, 14–18px laut Markenregeln */
   --r-md: 14px; --r-lg: 18px; --r-full: 999px;

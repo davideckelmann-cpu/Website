@@ -99,7 +99,7 @@ function altFor(img, i) {
   .lp-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
   .lp-head { padding-block: var(--sp-2xl) var(--sp-md); }
   .lp-head .eyebrow a { color: inherit; }
-  .lp-head h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 22ch; }
+  .lp-head h1 { font-size: clamp(2rem, 4.2vw, 3rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 22ch; }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .lp-media { padding-bottom: var(--sp-lg); }
@@ -115,14 +115,17 @@ function altFor(img, i) {
     border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
   }
   @media (max-width: 760px) {
-    /* Auf dem Handy: nebeneinander scrollbar statt gequetscht */
-    .lp-media-set {
-      grid-auto-columns: 72%;
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+    /* Auf dem Handy untereinander – Bilder behalten ihre natürliche Form,
+       werden nicht beschnitten und passen immer in den Container. */
+    .lp-media-set { grid-auto-flow: row; grid-auto-columns: auto; gap: var(--sp-sm); }
+    .lp-portrait img {
+      height: auto; max-height: 62vh;
+      object-fit: contain; background: var(--bg-alt);
     }
-    .lp-portrait { scroll-snap-align: center; }
-    .lp-portrait img { height: 380px; }
+    .lp-media img {
+      height: auto; max-height: 62vh;
+      object-fit: contain; background: var(--bg-alt);
+    }
   }
 
   .lp-intro { padding-block: var(--sp-md) var(--sp-xl); }

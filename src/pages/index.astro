@@ -26,10 +26,10 @@ const cards = [
         Florale Kompositionen, die den Moment feiern – ob großes Bouquet oder eine
         einzelne Blüte als Mittelpunkt des gedeckten Tisches. Saisonal, bewusst, ästhetisch.
       </p>
-      <div class="cta-row" data-reveal style="--reveal-delay:240ms">
-        <a href="/angebot/" class="btn btn-primary">Angebot entdecken</a>
-        <a href="/abo/" class="btn btn-ghost">Blumen-Abo ansehen</a>
-      </div>
+      <p class="hero-note" data-reveal style="--reveal-delay:240ms">
+        Florale Gestaltung mit einem Blick aus der Kunst – saisonal, intuitiv und
+        im Einklang mit den Jahreszeiten. <a href="/ueber-uns/">Mehr über uns →</a>
+      </p>
     </div>
     <div class="hero-media">
       <img src="/images/hero.jpg" alt="Blumenarrangement mit Flieder und Bergamotte-Tönen"
@@ -93,9 +93,18 @@ const cards = [
     display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--sp-xl);
     align-items: center; padding-block: var(--sp-xl) var(--sp-2xl);
   }
-  .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
+  .hero h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
   .lead { font-size: 1.12rem; color: var(--text-soft); max-width: 46ch; }
-  .cta-row { display: flex; gap: var(--sp-sm); margin-top: var(--sp-lg); flex-wrap: wrap; }
+  .hero-note {
+    margin-top: var(--sp-md); max-width: 46ch;
+    font-size: 1.02rem; color: var(--text-soft); line-height: 1.7;
+  }
+  .hero-note a {
+    color: var(--accent); text-decoration: underline;
+    text-underline-offset: 3px; white-space: nowrap;
+    transition: color 0.3s ease;
+  }
+  .hero-note a:hover { color: var(--pflaume); }
   .hero-media { overflow: hidden; border-radius: var(--r-lg); }
   .hero-media img {
     width: 100%; height: clamp(360px, 52vw, 620px); object-fit: cover;
@@ -124,7 +133,7 @@ const cards = [
   .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
   .card-media { overflow: hidden; border-radius: var(--r-md); margin-bottom: var(--sp-sm); }
   .card-media img {
-    width: 100%; height: 220px; object-fit: cover; object-position: bottom;
+    width: 100%; height: 220px; object-fit: cover; object-position: center 65%;
     transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
   }
   .card:hover .card-media img { transform: scale(1.05); }
@@ -170,8 +179,5 @@ const cards = [
     .hero { padding-block: var(--sp-lg) var(--sp-xl); }
     .hero-media { order: -1; }
     .form .btn { align-self: stretch; text-align: center; }
-    /* Buttons gleich breit statt unterschiedlich lang */
-    .cta-row { flex-direction: column; align-items: stretch; }
-    .cta-row .btn { width: 100%; text-align: center; }
   }
 </style>
