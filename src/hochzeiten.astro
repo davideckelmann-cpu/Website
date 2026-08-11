@@ -27,24 +27,16 @@ try {
   files = [];
 }
 
-/** Findet die Datei für einen Namen. Liegen mehrere Endungen vor
- *  (z.B. alter Platzhalter .jpg + neues Foto .jpeg), gewinnt die NEUERE. */
+/** Findet die Datei für einen Namen.
+ *  Hinweis: Ein Vergleich nach Änderungsdatum funktioniert hier NICHT –
+ *  beim Bauen über GitHub bekommen alle Dateien denselben Zeitstempel.
+ *  Deshalb feste Reihenfolge: .jpg, .jpeg, .png, .webp. */
 function findFile(baseName) {
-  const matches = [];
   for (const ext of EXTENSIONS) {
     const candidate = `${baseName}.${ext}`;
-    if (files.includes(candidate)) {
-      let mtime = 0;
-      try {
-        mtime = fs.statSync(path.join(IMAGE_DIR, candidate)).mtimeMs;
-      } catch {}
-      matches.push({ candidate, mtime });
-    }
+    if (files.includes(candidate)) return `/images/${candidate}`;
   }
-  if (matches.length === 0) return null;
-  // neueste Datei zuerst
-  matches.sort((a, b) => b.mtime - a.mtime);
-  return `/images/${matches[0].candidate}`;
+  return null;
 }
 
 /**
