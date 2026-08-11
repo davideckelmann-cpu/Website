@@ -39,6 +39,12 @@ const canonical = new URL(path, Astro.site).href;
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content="de_DE" />
 
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(image, Astro.site).href} />
+
   <!-- Fonts -->
 
   <!-- Local business structured data (helps local SEO) -->

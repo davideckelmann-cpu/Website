@@ -15,24 +15,53 @@ const autoImages = images.length > 0 ? images : auto.images;
 const autoImage  = image || auto.image;
 const portraitSet = autoImages.length > 1;
 // Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
+// Nutzt jetzt die konkrete Seiten-Überschrift (h1) statt nur den Cluster-Namen,
+// dadurch etwas spezifischer. Für ein einzelnes Foto lässt sich weiterhin ein
+// eigener Alt-Text mitgeben: images={[{ src: '...', alt: 'genaue Beschreibung' }]}
 const altVariants = [
-  `Florale Gestaltung für ${cluster} in Berlin`,
-  `Blumenarrangement von Lilac & Bergamot für ${cluster}`,
-  `Detail einer floralen Komposition für ${cluster}`,
-  `Saisonale Floristik für ${cluster} in Berlin`,
+  `${h1} — Beispiel 1`,
+  `${h1} — Beispiel 2`,
+  `${h1} — Beispiel 3`,
+  `${h1} — Beispiel 4`,
 ];
 function altFor(img, i) {
   if (typeof img !== 'string' && img.alt) return img.alt;
   return altVariants[i % altVariants.length];
 }
+
+// STRUCTURED DATA: Breadcrumb (Home > Cluster > aktuelle Seite)
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/+$/, '') : '';
+const breadcrumbJson = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Start", "item": siteUrl + "/" },
+    { "@type": "ListItem", "position": 2, "name": clusterLabel, "item": siteUrl + clusterHref },
+    { "@type": "ListItem", "position": 3, "name": cluster, "item": siteUrl + path },
+  ],
+};
+
+// STRUCTURED DATA: FAQ (nur wenn FAQs vorhanden sind)
+const faqJson = faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+} : null;
 ---
 <Base title={title} description={description} path={path} image={image}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} />
+  {faqJson && <script type="application/ld+json" set:html={JSON.stringify(faqJson)} />}
   <section class="container lp-head">
     {icon && <img src={icon} alt="" class="lp-icon" data-reveal width="120" height="150" loading="lazy" />}
     <span class="eyebrow" data-reveal><a href={clusterHref}>{clusterLabel}</a> · {cluster}</span>
     <h1 data-reveal style="--reveal-delay:80ms">{h1}</h1>
     {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
   </section>
+
 
   {portraitSet && (
     <section class="container lp-media-set" data-reveal>
@@ -103,7 +132,10 @@ function altFor(img, i) {
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .lp-media { padding-bottom: var(--sp-lg); }
-  .lp-media img { width: 100%; height: clamp(280px, 40vw, 460px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
+  .lp-media img {
+    width: 100%; height: clamp(280px, 40vw, 460px); object-fit: contain;
+    background: var(--bg-alt); border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+  }
 
   /* Mehrere Hochkant-Bilder nebeneinander (Triptychon) */
   .lp-media-set {
@@ -111,8 +143,8 @@ function altFor(img, i) {
     gap: var(--sp-sm); padding-bottom: var(--sp-lg);
   }
   .lp-portrait img {
-    width: 100%; height: clamp(340px, 46vw, 560px); object-fit: cover;
-    border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
+    width: 100%; height: clamp(340px, 46vw, 560px); object-fit: contain;
+    background: var(--bg-alt); border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block;
   }
   @media (max-width: 760px) {
     /* Auf dem Handy untereinander – Bilder behalten ihre natürliche Form,
