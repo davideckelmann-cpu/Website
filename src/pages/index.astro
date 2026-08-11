@@ -26,14 +26,25 @@ const cards = [
         Florale Kompositionen, die den Moment feiern – ob großes Bouquet oder eine
         einzelne Blüte als Mittelpunkt des gedeckten Tisches. Saisonal, bewusst, ästhetisch.
       </p>
-      <p class="hero-note" data-reveal style="--reveal-delay:240ms">
-        Florale Gestaltung mit einem Blick aus der Kunst – saisonal, intuitiv und
-        im Einklang mit den Jahreszeiten. <a href="/ueber-uns/">Mehr über uns →</a>
-      </p>
+
     </div>
     <div class="hero-media">
       <img src="/images/hero.jpg" alt="Blumenarrangement mit Flieder und Bergamotte-Tönen"
            width="560" height="620" loading="eager" />
+    </div>
+  </section>
+
+  <!-- EDITORIAL -->
+  <section class="editorial container">
+    <div class="editorial-media" data-reveal>
+      <img src="/images/start-editorial.jpg" alt="Florale Tafelgestaltung für ein Event in Berlin"
+           width="600" height="560" loading="lazy" />
+    </div>
+    <div class="editorial-copy" data-reveal style="--reveal-delay:120ms">
+      <h2>Räume, die durchatmen lassen. Menschen, die sich aufgehoben fühlen. Und Blumen, die all das ermöglichen.</h2>
+      <p>Unsere Leidenschaft gilt Blumen – und ihrer Kraft, Räume zu verwandeln und Menschen
+        zu berühren. Ob im Abonnement frisch geliefert oder als private Überraschung: Wir beraten Sie gerne.</p>
+      <a href="/ueber-uns/" class="link-arrow">Mehr über uns →</a>
     </div>
   </section>
 
@@ -57,19 +68,7 @@ const cards = [
     </div>
   </section>
 
-  <!-- EDITORIAL -->
-  <section class="editorial container">
-    <div class="editorial-media" data-reveal>
-      <img src="/images/start-editorial.jpg" alt="Florale Tafelgestaltung für ein Event in Berlin"
-           width="600" height="560" loading="lazy" />
-    </div>
-    <div class="editorial-copy" data-reveal style="--reveal-delay:120ms">
-      <h2>Räume, die durchatmen lassen. Menschen, die sich aufgehoben fühlen. Und Blumen, die all das ermöglichen.</h2>
-      <p>Unsere Leidenschaft gilt Blumen – und ihrer Kraft, Räume zu verwandeln und Menschen
-        zu berühren. Ob im Abonnement frisch geliefert oder als private Überraschung: Wir beraten Sie gerne.</p>
-      <a href="/ueber-uns/" class="link-arrow">Mehr über uns →</a>
-    </div>
-  </section>
+
 
   <!-- CONTACT -->
   <PhotoBanner height="360px" />
@@ -95,16 +94,6 @@ const cards = [
   }
   .hero h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); margin-block: var(--sp-md); letter-spacing: -0.01em; }
   .lead { font-size: 1.12rem; color: var(--text-soft); max-width: 46ch; }
-  .hero-note {
-    margin-top: var(--sp-md); max-width: 46ch;
-    font-size: 1.02rem; color: var(--text-soft); line-height: 1.7;
-  }
-  .hero-note a {
-    color: var(--accent); text-decoration: underline;
-    text-underline-offset: 3px; white-space: nowrap;
-    transition: color 0.3s ease;
-  }
-  .hero-note a:hover { color: var(--pflaume); }
   .hero-media { overflow: hidden; border-radius: var(--r-lg); }
   .hero-media img {
     width: 100%; height: clamp(360px, 52vw, 620px); object-fit: cover;
