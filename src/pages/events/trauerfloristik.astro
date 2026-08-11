@@ -31,8 +31,10 @@ const faq = [
       und Trost spendet.
     </p>
   </section>
-  <section class="container head-img" data-reveal>
-    <img src="/images/trauerfloristik.jpg" alt="Trauerfloristik" width="1200" height="460" loading="lazy" />
+  <section class="container head-set" data-reveal>
+    <figure><img src="/images/trauerfloristik-1.jpg" alt="Trauerfloristik" loading="lazy" /></figure>
+    <figure><img src="/images/trauerfloristik-2.jpg" alt="Trauerfloristik" loading="lazy" /></figure>
+    <figure><img src="/images/trauerfloristik-3.jpg" alt="Trauerfloristik" loading="lazy" /></figure>
   </section>
 
 
@@ -79,6 +81,14 @@ const faq = [
 </Base>
 
 <style>
+  .head-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
+  .head-set img { width: 100%; height: clamp(340px,46vw,560px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block; }
+  @media (max-width: 760px) {
+    .head-set { grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .head-set figure { scroll-snap-align: center; }
+    .head-set img { height: 380px; }
+  }
+
   .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
   .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
   .page-head .eyebrow a { color: inherit; }
