@@ -72,3 +72,19 @@ export function getPageImages(base) {
 export function baseFromPath(pagePath = '') {
   return pagePath.replace(/\/+$/, '').split('/').filter(Boolean).pop() || '';
 }
+
+/**
+ * Sammelt ALLE durchnummerierten Bilder zu einem Namen.
+ * Beispiel: getNumberedImages('banner') findet banner-1, banner-2, ... banner-24.
+ * Lücken werden übersprungen (fehlt banner-3, geht es bei banner-4 weiter).
+ * @param {string} base - z.B. "banner"
+ * @param {number} max  - wie weit gesucht wird (Standard 24)
+ */
+export function getNumberedImages(base, max = 24) {
+  const found = [];
+  for (let i = 1; i <= max; i++) {
+    const file = findFile(`${base}-${i}`);
+    if (file) found.push(file);
+  }
+  return found;
+}
