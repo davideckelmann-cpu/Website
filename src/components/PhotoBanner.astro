@@ -2,13 +2,18 @@
 // Langsam durchlaufendes Foto-Banner (Endlosschleife)
 const { images = [], speed = 60, height = "260px" } = Astro.props;
 // Für nahtlose Schleife: Bilder verdoppeln
-const strip = [...images, ...images];
+// Erste Reihe: echte Bildbeschreibungen. Zweite Reihe: reine Deko für die
+// nahtlose Endlosschleife -> aria-hidden + leeres alt (keine SEO-Dubletten).
+const strip = [
+  ...images.map((img) => ({ ...img, decorative: false })),
+  ...images.map((img) => ({ ...img, decorative: true })),
+];
 ---
-<section class="banner" aria-label="Impressionen">
+<section class="banner" aria-label="Impressionen unserer Arbeit">
   <div class="banner-track" style={`--dur:${speed}s`}>
     {strip.map((img) => (
-      <figure class="banner-item" style={`--h:${height}`}>
-        <img src={img.src} alt={img.alt || ""} loading="lazy" />
+      <figure class="banner-item" style={`--h:${height}`} aria-hidden={img.decorative ? "true" : undefined}>
+        <img src={img.src} alt={img.decorative ? "" : (img.alt || "")} loading="lazy" />
       </figure>
     ))}
   </div>

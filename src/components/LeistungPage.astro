@@ -8,6 +8,17 @@ const {
 } = Astro.props;
 // Entweder ein Querformat-Bild (image) ODER mehrere Hochkant-Bilder (images)
 const portraitSet = images.length > 0;
+// Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
+const altVariants = [
+  `Florale Gestaltung für ${cluster} in Berlin`,
+  `Blumenarrangement von Lilac & Bergamot für ${cluster}`,
+  `Detail einer floralen Komposition für ${cluster}`,
+  `Saisonale Floristik für ${cluster} in Berlin`,
+];
+function altFor(img, i) {
+  if (typeof img !== 'string' && img.alt) return img.alt;
+  return altVariants[i % altVariants.length];
+}
 ---
 <Base title={title} description={description} path={path} image={image}>
   <section class="container lp-head">
@@ -19,10 +30,10 @@ const portraitSet = images.length > 0;
 
   {portraitSet && (
     <section class="container lp-media-set" data-reveal>
-      {images.map((img) => (
+      {images.map((img, i) => (
         <figure class="lp-portrait">
           <img src={typeof img === 'string' ? img : img.src}
-               alt={typeof img === 'string' ? h1 : (img.alt || h1)}
+               alt={altFor(img, i)}
                width="600" height="900" loading="lazy" />
         </figure>
       ))}
