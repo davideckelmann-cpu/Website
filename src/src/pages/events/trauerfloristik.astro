@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import { getPageImages } from '../../utils/pageImages.js';
+
+const bild = getPageImages('trauerfloristik');
 
 const services = [
   { h: 'Blumenkränze & Gestecke', p: 'Klassisch, modern oder naturnah – auf Wunsch mit Symbolblumen wie Lilien, Calla, Rosen oder Efeu.' },
@@ -21,7 +24,7 @@ const faq = [
   description="Stilvolle, einfühlsame Floristik für Trauerfeiern in Berlin. Individuelle Blumenarrangements, die Abschied & Erinnerung würdevoll begleiten."
   path="/events/trauerfloristik/"
 >
-  <section class="container page-head">
+  <section class="ed-head">
     <img src="/icons/icon-calla-herz.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
     <span class="eyebrow" data-reveal><a href="/events/">Events</a> · Trauer</span>
     <h1 data-reveal style="--reveal-delay:80ms">Florale Zeichen des Gedenkens</h1>
@@ -31,18 +34,25 @@ const faq = [
       und Trost spendet.
     </p>
   </section>
-  <section class="container head-set" data-reveal>
-    <figure><img onerror="this.closest('figure').style.display='none'" src="/images/trauerfloristik-1.jpg" alt="Trauerfloristik in Berlin – würdevolles Blumenarrangement" loading="lazy" /></figure>
-    <figure><img onerror="this.closest('figure').style.display='none'" src="/images/trauerfloristik-2.jpg" alt="Florale Gestaltung für eine Trauerfeier" loading="lazy" /></figure>
-    <figure><img onerror="this.closest('figure').style.display='none'" src="/images/trauerfloristik-3.jpg" alt="Detail eines Trauergestecks von Lilac & Bergamot" loading="lazy" /></figure>
-  </section>
 
+  {bild.mode === 'set' && (
+    <section class="container ed-media-set" data-reveal>
+      {bild.images.map((src, i) => (
+        <img src={src} alt={`Trauerfloristik in Berlin – Beispiel ${i + 1}`} loading="lazy" onerror="this.style.display='none'" />
+      ))}
+    </section>
+  )}
+  {bild.mode === 'single' && (
+    <section class="container ed-media" data-reveal>
+      <img src={bild.image} alt="Trauerfloristik in Berlin von Lilac & Bergamot" loading="lazy" onerror="this.closest('section').style.display='none'" />
+    </section>
+  )}
 
   <section class="container services">
     <h2 data-reveal>Für Abschied und Erinnerung</h2>
-    <div class="svc-grid">
+    <div class="svc-rows">
       {services.map((s, i) => (
-        <article class="svc" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+        <article class="svc-row" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
           <h3>{s.h}</h3>
           <p>{s.p}</p>
         </article>
@@ -81,45 +91,28 @@ const faq = [
 </Base>
 
 <style>
-  .head-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
-  .head-set img { width: 100%; height: clamp(340px,46vw,560px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block; }
-  @media (max-width: 760px) {
-    .head-set { grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-    .head-set figure { scroll-snap-align: center; }
-    .head-set img { height: 380px; }
-  }
-
   .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
-  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
-  .page-head .eyebrow a { color: inherit; }
-  .page-head h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); margin: var(--sp-sm) 0 var(--sp-md); }
-  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .services { padding-block: var(--sp-lg) var(--sp-2xl); }
-  .services > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
-  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
-  .svc { padding: var(--sp-md); border-radius: var(--r-lg); background: var(--bg-alt); }
-  .svc h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-  .svc p { font-size: 0.95rem; color: var(--text-soft); }
+  .services > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+  .svc-rows { border-top: 1px solid var(--linie-flieder); }
+  .svc-row { padding-block: 1.5rem; border-bottom: 1px solid var(--linie-flieder); }
+  .svc-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; color: var(--pflaume); margin-bottom: 0.35rem; }
+  .svc-row p { font-size: 0.98rem; color: var(--text-soft); }
 
   .meaning { background: var(--bg-alt); padding-block: var(--sp-2xl); }
   .meaning-inner { max-width: 72ch; }
-  .meaning h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-md); }
+  .meaning h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-md); }
   .meaning p { font-size: 1.08rem; color: var(--text-soft); }
 
   .faq { padding-block: var(--sp-2xl); }
-  .faq > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
-  .faq-list { display: grid; gap: 0.75rem; max-width: 76ch; }
-  .faq-item { border: 1px solid var(--n-200); border-radius: var(--r-md); padding: 0 1.25rem; background: var(--bg); transition: border-color 0.3s ease; }
-  .faq-item[open] { border-color: var(--accent); }
-  .faq-item summary { padding: 1.1rem 0; cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .faq > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+  .faq-list { display: grid; max-width: 76ch; border-top: 1px solid var(--linie-flieder); }
+  .faq-item { border-bottom: 1px solid var(--linie-flieder); padding: 0; background: transparent; }
+  .faq-item summary { padding: 1.3rem 0; cursor: pointer; font-family: var(--serif); font-size: 1.15rem; color: var(--pflaume); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
   .faq-item summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; transition: transform 0.3s ease; }
   .faq-item[open] summary::after { transform: rotate(45deg); }
   .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item p { padding: 0 0 1.1rem; color: var(--text-soft); }
+  .faq-item p { padding: 0 0 1.3rem; color: var(--text-soft); }
   .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 72ch; }
-
-  @media (max-width: 860px) { .svc-grid { grid-template-columns: 1fr; } }
-  .head-img { padding-bottom: var(--sp-lg); }
-  .head-img img { width: 100%; height: clamp(280px,40vw,460px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); }
 </style>

@@ -15,7 +15,7 @@ const sizes = [
   description="Blumensträuße mit Lieferung in Berlin aus saisonalen Blumen. Persönlich, frisch & mit Liebe gestaltet – ab 35 €."
   path="/angebot/straeusse/"
 >
-  <section class="container page-head">
+  <section class="ed-head">
     <img src="/icons/icon-tulpen-strauss.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
     <span class="eyebrow" data-reveal><a href="/angebot/">Angebot</a> · Sträuße</span>
     <h1 data-reveal style="--reveal-delay:80ms">Ein Strauß ist eine Geste voller Gefühl.</h1>
@@ -23,6 +23,10 @@ const sizes = [
       Für Gespräche, fürs Loslassen, fürs Feiern. Unsere handgebundenen Sträuße erzählen
       Geschichten – von Zuwendung, Stil und dem Moment.
     </p>
+  </section>
+
+  <section class="ed-statement" data-reveal>
+    <p>Jeder Strauß <span>—</span> ein Moment, der bleibt.</p>
   </section>
 
   <section class="container intro">
@@ -37,17 +41,19 @@ const sizes = [
   </section>
 
   <section class="container sizes">
-    <h2 data-reveal>Größen & Preise</h2>
-    <div class="size-grid">
+    <h2 data-reveal>Größen &amp; Preise</h2>
+    <div class="size-rows">
       {sizes.map((s, i) => (
-        <article class="size-card" data-reveal style={`--reveal-delay:${(i % 3) * 100}ms`}>
+        <article class="size-row" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
           {s.img && <img class="size-img" src={s.img} alt={`Blumenstrauß „${s.name}“`} width="600" height="400" loading="lazy" />}
-          <div class="size-top">
-            <h3>{s.name}</h3>
-            <span class="price">{s.price}</span>
+          <div class="size-copy">
+            <div class="size-top">
+              <h3>{s.name}</h3>
+              <span class="price">{s.price}</span>
+            </div>
+            <p>{s.desc}</p>
+            {s.hint && <span class="hint">{s.hint}</span>}
           </div>
-          <p>{s.desc}</p>
-          {s.hint && <span class="hint">{s.hint}</span>}
         </article>
       ))}
     </div>
@@ -63,10 +69,6 @@ const sizes = [
 
 <style>
   .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
-  .page-head { padding-block: var(--sp-2xl) var(--sp-md); }
-  .page-head .eyebrow a { color: inherit; }
-  .page-head h1 { font-size: clamp(2rem, 4.2vw, 3rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 18ch; }
-  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 54ch; }
 
   .intro { padding-bottom: var(--sp-xl); }
   .intro > div { max-width: 68ch; display: grid; gap: var(--sp-sm); }
@@ -74,24 +76,26 @@ const sizes = [
   .intro .muted { font-size: 0.98rem; color: var(--text-muted); }
 
   .sizes { padding-bottom: var(--sp-2xl); }
-  .sizes > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
-  .size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
-  .size-card {
-    background: var(--bg); border: 1px solid var(--n-200); border-radius: var(--r-lg);
-    overflow: hidden;
-    padding: 0 var(--sp-md) var(--sp-md); transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s ease, border-color 0.4s ease;
+  .sizes > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+
+  /* Editoriale Zeilen statt Karten mit Rahmen */
+  .size-rows { border-top: 1px solid var(--linie-flieder); }
+  .size-row {
+    display: grid; grid-template-columns: 220px 1fr; gap: var(--sp-lg); align-items: center;
+    padding-block: clamp(1.6rem, 3vw, 2.2rem); border-bottom: 1px solid var(--linie-flieder);
   }
   .size-img {
-    display: block; width: calc(100% + 2 * var(--sp-md)); margin: 0 calc(-1 * var(--sp-md)) var(--sp-md);
-    height: clamp(140px, 18vw, 190px); object-fit: cover;
+    display: block; width: 100%; height: 150px; object-fit: contain; background: var(--bg-alt);
   }
-  .size-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card); border-color: transparent; }
-  .size-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; padding-top: var(--sp-md); }
-  .size-card h3 { font-size: 1.35rem; }
-  .size-card .price { font-weight: 600; color: var(--accent); white-space: nowrap; }
-  .size-card p { font-size: 0.95rem; color: var(--text-soft); }
-  .hint { display: inline-block; margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+  .size-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .size-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--pflaume); }
+  .size-row .price { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: var(--accent); white-space: nowrap; }
+  .size-row p { font-size: 0.98rem; color: var(--text-soft); }
+  .hint { display: inline-block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
   .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 70ch; }
 
-  @media (max-width: 860px) { .size-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    .size-row { grid-template-columns: 1fr; gap: 0.9rem; }
+    .size-img { height: 190px; }
+  }
 </style>

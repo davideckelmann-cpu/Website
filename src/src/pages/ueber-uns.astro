@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { getNumberedImages, getSingleImage } from '../utils/pageImages.js';
+
+// Automatische Bilder:
+//   ueber-uns.jpg            -> großes Bild oben neben der Namensgeschichte
+//   ueber-uns-1.jpg, -2, ... -> weitere Fotos (zweites Bild + Fotoleiste unten)
+const hauptbild = getSingleImage('ueber-uns');
+const weitere = getNumberedImages('ueber-uns', 12);
+const zweitbild = weitere[0] || null;
+const leiste = weitere.slice(1);
+---
+<Base
+  title="Über uns — Lilac & Bergamot, Floristik in Berlin"
+  description="Hinter Lilac & Bergamot: florale Gestaltung mit einem Blick aus der Kunst. Saisonal, regional und persönlich — Floristik in Berlin."
+  path="/ueber-uns/"
+>
+  <section class="container page-head">
+    <span class="eyebrow" data-reveal>Über uns</span>
+    <h1 data-reveal style="--reveal-delay:80ms">Gesten der Aufmerksamkeit — ganz still, ganz lebendig</h1>
+  </section>
+
+  <!-- 1) Namensgeschichte: Bild links, Text rechts -->
+  <section class="container story">
+    {hauptbild && (
+      <div class="story-media" data-reveal>
+        <img src={hauptbild} alt="Florales Arrangement von Lilac & Bergamot"
+             loading="lazy" onerror="this.closest('.story-media').style.display='none'" />
+      </div>
+    )}
+    <div class="story-copy" data-reveal style="--reveal-delay:120ms">
+      <p class="zitat">Exploration der Erinnerung und Sinne</p>
+      <p>Der Duft von Flieder ist eine Erinnerung, die wohl die meisten Menschen mit dem nahenden
+        Sommer verbinden – ein kurzer, eindrücklicher Moment im Jahr. Die Präsenz, der Wandel, die
+        Farbnuancen des Flieders haben mich schon immer fasziniert.</p>
+      <p>Die Bergamotte begeistert mich ebenfalls: eine Zitrusfrucht mit klarer Form, markantem Duft
+        und begrenzter Saison, die es von dem kleinen, kalabrischen Küstenstreifen zu Weltruhm
+        gebracht hat.</p>
+      <p class="signature">Zwei Pflanzen, die Gegensätze vereinen – nie gleichzeitig in voller Blüte
+        und Fruchtstand – und deshalb den Namen meines Studios tragen.</p>
+    </div>
+  </section>
+
+  <!-- 2) Arbeit & Haltung: Text links, Bild rechts (abwechselnd) -->
+  <section class="container story reverse">
+    <div class="story-copy" data-reveal>
+      <p>Raum und Licht haben schon meine Arbeit in den Darstellenden Künsten geprägt, immer begleitet
+        von der Faszination für die natürliche Formensprache und deren Vielfalt. Form, Farbe, Rhythmus
+        und die Leerstelle begleiten mich bis heute.</p>
+      <p>Lilac &amp; Bergamot verbindet florale Gestaltung mit einem gestalterischen Blick aus der
+        Kunst. Inspiration finde ich unter anderem in der japanischen Blumenkunst — im
+        konzentrierten Blick auf die Klarheit der Linie, die Schnörkel und Krümmung des lebendigen
+        Materials. Oder in der Opulenz des fein arrangierten Bouquets, das erst durch seine
+        Vergänglichkeit zu strahlen beginnt.</p>
+    </div>
+    {zweitbild && (
+      <div class="story-media" data-reveal style="--reveal-delay:120ms">
+        <img src={zweitbild} alt="Florale Gestaltung im Studio von Lilac & Bergamot"
+             loading="lazy" onerror="this.closest('.story-media').style.display='none'" />
+      </div>
+    )}
+  </section>
+
+  <!-- 3) Arbeitsweise & Team: ruhiger Textblock, mittig -->
+  <section class="container story-text">
+    <div class="story-copy" data-reveal>
+      <p>Ich arbeite gerne im Einklang mit den Jahreszeiten – intuitiv, reduziert und mit dem, was
+        gerade Saison hat – und nutze möglichst regionale und saisonale Pflanzen als Grundlage meiner
+        Gestaltung. Materialien und Formen wähle ich mit Bedacht, aus dem Moment heraus. Dabei entsteht
+        eine Ästhetik, deren Eigenheiten, Formen, Texturen und Farben den Ausdruck der Komposition
+        bestimmen.</p>
+      <p>Hinter Lilac &amp; Bergamot stehen wir zu zweit: Ich kümmere mich um die florale Gestaltung,
+        während Justyna – Designerin mit einem Blick für das Ganze – Konzepte, Social Media und
+        visuelle Gestaltung übernimmt. Und manchmal ist auch Cashew, unser Pudel, mit dabei.</p>
+      <p class="signature gross">Flüchtig, lebendig, echt.</p>
+    </div>
+  </section>
+
+  <!-- 4) Foto-Bereich: alle weiteren Bilder -->
+  {leiste.length > 0 && (
+    <section class="container foto-leiste" data-reveal>
+      {leiste.map((src, i) => (
+        <figure>
+          <img src={src} alt={`Impression aus dem Studio von Lilac & Bergamot ${i + 1}`}
+               loading="lazy" onerror="this.closest('figure').style.display='none'" />
+        </figure>
+      ))}
+    </section>
+  )}
+
+  <section class="haltung-liste">
+    <div class="container">
+      <span class="eyebrow" data-reveal>Wie ich arbeite</span>
+      {[
+        { nr: '01', h: 'Die Leerstelle',
+          p: 'Was fehlt, trägt eine Komposition genauso wie das, was da ist. Ich arbeite mit Abstand, Richtung und Ruhe — nicht mit Fülle um jeden Preis.' },
+        { nr: '02', h: 'Vergänglichkeit',
+          p: 'Blumen welken. Genau das macht sie kostbar. Ein Arrangement ist kein Objekt, sondern ein Zustand — für diesen Raum, diese Woche, diesen Anlass.' },
+        { nr: '03', h: 'Aus dem Moment',
+          p: 'Entschieden wird vor dem Material, nicht am Schreibtisch. Was gerade Saison hat, was der Raum verlangt, was die Blüte zulässt — daraus entsteht die Form.' },
+      ].map((v, i) => (
+        <article class="haltung-zeile" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+          <span class="hz-nr">{v.nr}</span>
+          <h3 class="hz-titel">{v.h}</h3>
+          <p class="hz-text">{v.p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  /* H1 über die ganze Seitenbreite */
+  .page-head { padding-block: var(--sp-xl) var(--sp-lg); }
+  .page-head h1 {
+    font-size: clamp(2.3rem, 5.6vw, 4rem);
+    margin: var(--sp-sm) 0 0;
+    max-width: none;          /* volle Breite statt schmaler Spalte */
+    line-height: 1.05; letter-spacing: -0.02em; font-weight: 400;
+  }
+
+  /* Text und Bild abwechselnd */
+  .story {
+    display: grid; grid-template-columns: 1fr 1.15fr;
+    gap: var(--sp-xl); align-items: center;
+    padding-block: var(--sp-md) var(--sp-xl);
+  }
+  .story.reverse { grid-template-columns: 1.15fr 1fr; }
+  .story-media img {
+    width: 100%; height: clamp(340px, 42vw, 520px);
+    object-fit: contain; background: var(--bg-alt); display: block;
+  }
+
+  .story-copy { display: grid; gap: var(--sp-sm); }
+  .story-copy p { font-size: 1.05rem; color: var(--text-soft); line-height: 1.75; }
+
+  /* Zitate deutlich größer als der Fließtext */
+  .zitat {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.9rem !important; line-height: 1.25;
+    color: var(--pflaume) !important; margin-bottom: 0.4rem;
+  }
+  .signature {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.65rem !important; line-height: 1.35;
+    color: var(--accent) !important; margin-top: 0.4rem;
+  }
+  .signature.gross { font-size: 1.9rem !important; }
+
+  /* Ruhiger Textblock, angenehme Zeilenlänge */
+  .story-text { padding-bottom: var(--sp-xl); }
+  .story-text .story-copy { max-width: 68ch; }
+
+  /* Foto-Leiste */
+  .foto-leiste {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--sp-sm); padding-bottom: var(--sp-xl);
+  }
+  .foto-leiste img {
+    width: 100%; height: clamp(240px, 26vw, 340px);
+    object-fit: contain; background: var(--bg-alt); display: block;
+  }
+
+  .haltung-liste { border-top: 1px solid var(--linie-flieder); padding-block: var(--sp-xl); }
+  .haltung-liste .eyebrow { display: block; margin-bottom: var(--sp-lg); }
+  .haltung-zeile {
+    display: grid; grid-template-columns: 4rem 1fr 1.5fr; gap: 1.5rem;
+    align-items: baseline; padding-block: 1.7rem;
+    border-top: 1px solid var(--linie-flieder);
+  }
+  .haltung-zeile:last-child { border-bottom: 1px solid var(--linie-flieder); }
+  .hz-nr { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--malve); }
+  .hz-titel { font-family: var(--serif); font-weight: 400; font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--pflaume); }
+  .hz-text { color: var(--text-soft); line-height: 1.7; }
+
+  @media (max-width: 860px) {
+    .story, .story.reverse { grid-template-columns: 1fr; gap: var(--sp-md); }
+    .story-media { order: -1; }        /* Bild immer zuerst */
+    .story-media img { height: auto; max-height: 62vh; object-fit: contain; background: var(--bg-alt); }
+    .foto-leiste img { height: auto; max-height: 60vh; object-fit: contain; background: var(--bg-alt); }
+    .zitat { font-size: 1.5rem !important; }
+    .signature { font-size: 1.35rem !important; }
+    .signature.gross { font-size: 1.5rem !important; }
+    .haltung-zeile { grid-template-columns: 2.6rem 1fr; gap: 0.5rem 1rem; padding-block: 1.3rem; }
+    .hz-text { grid-column: 2; }
+  }
+</style>
