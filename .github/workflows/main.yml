@@ -1,28 +1,22 @@
 name: Build & Deploy to Bunny
-
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Code auschecken
         uses: actions/checkout@v4
-
       - name: Node einrichten
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - name: Abhaengigkeiten installieren
         run: npm ci || npm install
-
       - name: Seite bauen
         run: npm run build
-
       - name: Zu Bunny hochladen und Cache leeren
         uses: ayeressian/bunnycdn-storage-deploy@v2.4.0
         with:
@@ -33,7 +27,7 @@ jobs:
           accessKey: "${{ secrets.BUNNY_API_KEY }}"
           pullZoneId: "${{ secrets.BUNNY_PULL_ZONE_ID }}"
           upload: "true"
-          remove: "true"
+          remove: "false"
           purgePullZone: "true"
           purgePullZoneDelay: "5"
           maxRetries: "5"
