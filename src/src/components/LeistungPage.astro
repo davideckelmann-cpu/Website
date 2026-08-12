@@ -14,6 +14,17 @@ const auto = getPageImages(baseFromPath(path));
 const autoImages = images.length > 0 ? images : auto.images;
 const autoImage  = image || auto.image;
 const portraitSet = autoImages.length > 1;
+// Orientierung der Bilder (quer/hochkant) aus der Automatik übernehmen.
+const metaList = auto.metaList || [];
+const singleMeta = auto.meta || null;
+// Ist das Einzelbild ein Querformat? Dann volle Breite (Band), sonst asymmetrisch hochkant.
+const singleQuer = singleMeta && singleMeta.orientation === 'quer';
+// Sind im Set überwiegend Querformate? Dann als Band, sonst gestaffelte Treppe.
+const setQuer = metaList.length > 0 && metaList.filter(m => m && m.orientation === 'quer').length > metaList.length / 2;
+// Abwechslung links/rechts für Einzel-Hochkant: aus dem Seitennamen ein stabiles
+// Muster ableiten (gleiche Seite -> immer gleiche Seite, aber Seiten wechseln sich ab).
+const spiegelBasis = baseFromPath(path);
+const spiegeln = spiegelBasis.length % 2 === 1;
 // Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
 // Nutzt jetzt die konkrete Seiten-Überschrift (h1) statt nur den Cluster-Namen,
 // dadurch etwas spezifischer. Für ein einzelnes Foto lässt sich weiterhin ein
@@ -63,19 +74,37 @@ const faqJson = faq.length > 0 ? {
     {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
   </section>
 
-  {portraitSet && (
-    <section class="container ed-media-set" data-reveal>
+  {portraitSet && setQuer && (
+    <section class="container ed-band" data-reveal>
       {autoImages.map((img, i) => (
         <img src={typeof img === 'string' ? img : img.src}
-             alt={altFor(img, i)}
-             width="600" height="900" loading="lazy"
+             alt={altFor(img, i)} loading="lazy"
              onerror="this.style.display='none'" />
       ))}
     </section>
   )}
-  {!portraitSet && autoImage && (
-    <section class="container ed-media" data-reveal>
-      <img src={autoImage} alt={h1} width="1200" height="620" loading="lazy" onerror="this.closest('section').style.display='none'" />
+  {portraitSet && !setQuer && (
+    <section class="container ed-treppe" data-reveal>
+      {autoImages.map((img, i) => (
+        <figure class={`treppe-item pos-${i % 3}`}>
+          <img src={typeof img === 'string' ? img : img.src}
+               alt={altFor(img, i)} loading="lazy"
+               onerror="this.closest('figure').style.display='none'" />
+        </figure>
+      ))}
+    </section>
+  )}
+  {!portraitSet && autoImage && singleQuer && (
+    <section class="container ed-band-single" data-reveal>
+      <img src={autoImage} alt={h1} loading="lazy" onerror="this.closest('section').style.display='none'" />
+    </section>
+  )}
+  {!portraitSet && autoImage && !singleQuer && (
+    <section class={`container ed-solo ${spiegeln ? 'spiegeln' : ''}`} data-reveal>
+      <figure class="solo-media">
+        <img src={autoImage} alt={h1} loading="lazy" onerror="this.closest('section').style.display='none'" />
+      </figure>
+      <div class="solo-luft" aria-hidden="true"></div>
     </section>
   )}
 

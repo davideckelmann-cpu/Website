@@ -151,19 +151,50 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .ed-statement em, .ed-statement span { color: var(--malve); font-style: italic; }
 
-/* Randlose Bildmomente statt Karten mit Rahmen/Schatten */
-.ed-media { padding-bottom: var(--sp-lg); }
-.ed-media img {
-  width: 100%; height: clamp(300px, 42vw, 560px);
-  object-fit: contain; background: var(--bg-alt); display: block;
+/* Randlose Bildmomente in natürlicher Form (kein Auffüllen mehr) */
+
+/* Querformat: volles Band über die Breite */
+.ed-band-single { padding-bottom: var(--sp-lg); }
+.ed-band-single img { width: 100%; height: auto; display: block; }
+
+/* Einzelnes Hochkant-Foto: asymmetrisch, Bild auf einer Seite, Luft daneben.
+   Abwechselnd — jede zweite Seite spiegelt sich (siehe :nth-of-type unten NICHT
+   möglich über Seiten hinweg, daher wechseln wir pro Position im DOM). */
+.ed-solo {
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--sp-lg);
+  align-items: start; padding-bottom: var(--sp-xl);
 }
-.ed-media-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
-.ed-media-set img {
-  width: 100%; height: clamp(360px, 48vw, 580px); object-fit: contain; background: var(--bg-alt); display: block;
+.ed-solo .solo-media img { width: 100%; height: auto; display: block; }
+.ed-solo .solo-luft { min-height: 1px; }
+/* Abwechslung: Seiten, deren Pfad das Layout spiegeln soll, bekommen .spiegeln */
+.ed-solo.spiegeln .solo-media { order: 2; }
+.ed-solo.spiegeln .solo-luft { order: 1; }
+/* Hochkant-Foto soll nicht die ganze Spaltenhöhe sprengen */
+.ed-solo .solo-media { max-width: 460px; }
+.ed-solo.spiegeln .solo-media { margin-left: auto; }
+
+/* Mehrere Hochkant-Fotos: gestaffelte Treppe, unterschiedliche Höhen/Versatz */
+.ed-treppe {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md);
+  align-items: start; padding-bottom: var(--sp-xl);
 }
+.ed-treppe .treppe-item { margin: 0; }
+.ed-treppe .treppe-item img { width: 100%; height: auto; display: block; }
+.ed-treppe .pos-0 { margin-top: 0; }
+.ed-treppe .pos-1 { margin-top: clamp(2rem, 6vw, 5rem); }
+.ed-treppe .pos-2 { margin-top: clamp(1rem, 3vw, 2.5rem); }
+
+/* Querformat-Set: schlichtes Band nebeneinander */
+.ed-band { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
+.ed-band img { width: 100%; height: auto; display: block; }
+
 @media (max-width: 760px) {
-  .ed-media-set { grid-auto-flow: row; grid-auto-columns: auto; }
-  .ed-media-set img, .ed-media img { height: auto; max-height: 62vh; }
+  .ed-solo { grid-template-columns: 1fr; gap: 0; }
+  .ed-solo .solo-luft { display: none; }
+  .ed-solo .solo-media, .ed-solo.spiegeln .solo-media { max-width: 100%; margin: 0; }
+  .ed-treppe { grid-template-columns: 1fr; gap: var(--sp-md); }
+  .ed-treppe .pos-0, .ed-treppe .pos-1, .ed-treppe .pos-2 { margin-top: 0; }
+  .ed-band { grid-auto-flow: row; grid-auto-columns: auto; }
 }
 
 /* Editoriale Zeilen-Liste (Haarlinien statt Boxen) — z.B. für Preis-/Modellübersichten */
