@@ -123,3 +123,49 @@ img { display: block; max-width: 100%; height: auto; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   .btn { transition: none; }
 }
+
+/* ============================================================
+   Editorial-System — geteilte Bausteine, damit alle Unterseiten
+   dieselbe Sprache sprechen wie die Startseite: asymmetrisch,
+   randlos, viel Luft, Serifen-Kursiv als ruhiger Akzent.
+   ============================================================ */
+
+/* Kopfbereich: großzügig, Serifen-Überschrift, kein zentriertes Klein-Layout */
+.ed-head { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter);
+  padding-block: clamp(3rem, 8vw, 7rem) clamp(2rem, 5vw, 3.5rem); }
+.ed-head .eyebrow { display: block; margin-bottom: 1.5rem; }
+.ed-head .eyebrow a { color: inherit; }
+.ed-head h1 {
+  font-size: clamp(2.3rem, 5.6vw, 4.2rem); line-height: 1.04; letter-spacing: -0.02em;
+  font-weight: 400; max-width: 20ch; margin-bottom: var(--sp-md);
+}
+.ed-head .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 58ch; }
+
+/* Ruhige Zwischen-Aussage, wie auf der Startseite */
+.ed-statement { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter);
+  padding-block: clamp(3.5rem, 10vw, 7.5rem); text-align: center; }
+.ed-statement p {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 2.3rem); line-height: 1.4;
+  color: var(--pflaume); max-width: 30ch; margin-inline: auto;
+}
+.ed-statement em, .ed-statement span { color: var(--malve); font-style: italic; }
+
+/* Randlose Bildmomente statt Karten mit Rahmen/Schatten */
+.ed-media { padding-bottom: var(--sp-lg); }
+.ed-media img {
+  width: 100%; height: clamp(300px, 42vw, 560px);
+  object-fit: contain; background: var(--bg-alt); display: block;
+}
+.ed-media-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
+.ed-media-set img {
+  width: 100%; height: clamp(360px, 48vw, 580px); object-fit: contain; background: var(--bg-alt); display: block;
+}
+@media (max-width: 760px) {
+  .ed-media-set { grid-auto-flow: row; grid-auto-columns: auto; }
+  .ed-media-set img, .ed-media img { height: auto; max-height: 62vh; }
+}
+
+/* Editoriale Zeilen-Liste (Haarlinien statt Boxen) — z.B. für Preis-/Modellübersichten */
+.ed-rows { border-top: 1px solid var(--linie-flieder); }
+.ed-row { border-bottom: 1px solid var(--linie-flieder); padding-block: clamp(1.4rem, 3vw, 2rem); }

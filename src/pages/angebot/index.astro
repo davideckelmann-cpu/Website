@@ -16,7 +16,7 @@ const categories = [
 ];
 ---
 <Base title="Angebot — Lilac & Bergamot, Floristik in Berlin" description="Unser florales Angebot in Berlin: Sträuße, Blumen-Abos und Arrangements für Salons, Gastronomie, Galerien, Praxen und Kanzleien." path="/angebot/">
-  <section class="container page-head">
+  <section class="ed-head">
     <span class="eyebrow" data-reveal>Unser Angebot</span>
     <h1 data-reveal style="--reveal-delay:80ms">Florale Gestaltung für Räume, Menschen und Momente</h1>
     <p class="lead" data-reveal style="--reveal-delay:160ms">Für Salons, Gastronomie, Galerien, Praxen und Kanzleien – und für private Anlässe. Feinsinnig, saisonal, lebendig.</p>
@@ -25,8 +25,8 @@ const categories = [
   {bild.mode === 'set' && (
     <section class="container page-media-set" data-reveal>
       {bild.images.map((src, i) => (
-        <figure><img src={src} alt={`Florale Gestaltung – Impression ${i + 1}`} loading="lazy"
-          onerror="this.closest('figure').style.display='none'" /></figure>
+        <img src={src} alt={`Florale Gestaltung – Impression ${i + 1}`} loading="lazy"
+          onerror="this.style.display='none'" />
       ))}
     </section>
   )}
@@ -36,6 +36,11 @@ const categories = [
         onerror="this.closest('section').style.display='none'" />
     </section>
   )}
+
+  <section class="ed-statement" data-reveal>
+    <p>Für jeden Ort <span>—</span> die passende Geste.</p>
+  </section>
+
   <section class="container list">
     {categories.map((c, i) => (
       <a class="row" href={c.href} data-reveal style={`--reveal-delay:${(i%4)*70}ms`}>
@@ -48,22 +53,20 @@ const categories = [
 </Base>
 <style>
   .page-media { padding-bottom: var(--sp-lg); }
-  .page-media img { width: 100%; height: clamp(260px, 38vw, 440px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block; }
+  .page-media img { width: 100%; height: clamp(260px, 38vw, 440px); object-fit: contain; background: var(--bg-alt); display: block; }
   .page-media-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); padding-bottom: var(--sp-lg); }
-  .page-media-set img { width: 100%; height: clamp(320px, 42vw, 520px); object-fit: cover; border-radius: var(--r-lg); box-shadow: var(--shadow-card); display: block; }
+  .page-media-set img { width: 100%; height: clamp(320px, 42vw, 520px); object-fit: contain; background: var(--bg-alt); display: block; }
   @media (max-width: 760px) {
     .page-media-set { grid-auto-flow: row; grid-auto-columns: auto; }
-    .page-media-set img { height: auto; max-height: 60vh; object-fit: contain; background: var(--bg-alt); }
-    .page-media img { height: auto; max-height: 60vh; object-fit: contain; background: var(--bg-alt); }
+    .page-media-set img { height: auto; max-height: 60vh; }
+    .page-media img { height: auto; max-height: 60vh; }
   }
 
-  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
-  .page-head h1 { font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.05; letter-spacing: -0.015em; font-weight: 400; margin: var(--sp-sm) 0 var(--sp-md); max-width: 20ch; }
-  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 56ch; }
   .list { display: grid; gap: 0; padding-bottom: var(--sp-2xl); max-width: 820px; }
-  .row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md); padding: var(--sp-md) 0; border-bottom: 1px solid var(--n-200); transition: padding-left 0.4s cubic-bezier(.22,1,.36,1); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md); padding: var(--sp-md) 0; border-bottom: 1px solid var(--linie-flieder); transition: padding-left 0.4s cubic-bezier(.22,1,.36,1); }
+  .row:first-child { border-top: 1px solid var(--linie-flieder); }
   .row:hover { padding-left: 1rem; }
-  .row h3 { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; margin-bottom: 0.2rem; color: var(--pflaume); }
   .row p { color: var(--text-soft); font-size: 0.95rem; }
   .arrow { color: var(--accent); font-size: 1.5rem; transition: transform 0.4s cubic-bezier(.22,1,.36,1); }
   .row:hover .arrow { transform: translateX(6px); }

@@ -27,7 +27,7 @@ const gallery = getNumberedImages('impressionen', 40).map((src, i) => ({
   description="Impressionen unserer floralen Arbeiten in Berlin: Arrangements, Event-Floristik, Sträuße und Installationen. Ein Eindruck von Stil und Atmosphäre."
   path="/impressionen/"
 >
-  <section class="container page-head">
+  <section class="ed-head">
     <span class="eyebrow" data-reveal>Impressionen</span>
     <h1 data-reveal style="--reveal-delay:80ms">Ein Eindruck unserer Arbeit</h1>
     <p class="lead" data-reveal style="--reveal-delay:160ms">
@@ -49,7 +49,6 @@ const gallery = getNumberedImages('impressionen', 40).map((src, i) => ({
 
 <style>
   .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
-  .page-head h1 { font-size: clamp(2rem, 4.2vw, 3rem); margin: var(--sp-sm) 0 var(--sp-md); }
   .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
 
   .gallery {

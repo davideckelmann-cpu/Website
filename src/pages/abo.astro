@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 
 const models = [
-  { name: 'Basic', desc: 'Ein zarter Akzent für kleine Räume oder den Empfang. Kleiner Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 155 €' },
-  { name: 'Standard', desc: 'Ein ausgewogener Strauß, der Atmosphäre schafft. Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 235 €' },
-  { name: 'Flex', desc: 'Für mehr Präsenz – individuell auf den Raum abgestimmt. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 135 €' },
-  { name: 'Gallery', desc: 'Großzügig, wirkungsvoll – ein Statement im Raum. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 195 €' },
+  { name: 'Basic', desc: 'Ein zarter Akzent für kleine Räume oder den Empfang. Kleiner Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 155 €', img: '/images/ueber-uns-2.jpg' },
+  { name: 'Standard', desc: 'Ein ausgewogener Strauß, der Atmosphäre schafft. Strauß / Vase', rhythm: '1× pro Woche', price: 'ab 235 €', img: '/images/ueber-uns-3.jpg' },
+  { name: 'Flex', desc: 'Für mehr Präsenz – individuell auf den Raum abgestimmt. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 135 €', img: '/images/ueber-uns-5.jpg' },
+  { name: 'Gallery', desc: 'Großzügig, wirkungsvoll – ein Statement im Raum. Strauß / Vase', rhythm: '1× alle zwei Wochen', price: 'ab 195 €', img: '/images/ueber-uns-6.jpg' },
 ];
 
 const benefits = [
@@ -24,8 +24,8 @@ const benefits = [
   description="Für Geschäftsräume und Privathaushalte bieten wir individuelle Blumen-Abos und florale Designs – saisonal, handgebunden und auf Ihre Räume abgestimmt."
   path="/abo/"
 >
-  <section class="container page-head">
-    <span class="eyebrow" data-reveal>Abo & Preise</span>
+  <section class="ed-head">
+    <span class="eyebrow" data-reveal>Abo &amp; Preise</span>
     <h1 data-reveal style="--reveal-delay:80ms">Blumen-Abo in Berlin für Geschäftskunden</h1>
     <p class="lead" data-reveal style="--reveal-delay:160ms">
       Für Geschäftsräume und Privathaushalte bieten wir individuelle Blumen-Abos und florale
@@ -33,9 +33,12 @@ const benefits = [
     </p>
   </section>
 
+  <section class="ed-statement" data-reveal>
+    <p>Blumen, die bleiben <span>—</span> im Gefühl, nicht nur im Raum.</p>
+  </section>
+
   <section class="container split">
     <div data-reveal>
-      <h2>Blumen, die bleiben – im Gefühl, nicht nur im Raum.</h2>
       <p>Ein Strauß als Begleitung – zum Feiern, Verschenken, den Alltag verwandeln und eigene
         Blumen-Rituale genießen. Unsere Blumen sprechen von Wertschätzung, Stil und feiner
         Aufmerksamkeit. Saisonal, regional, bewusst.</p>
@@ -47,22 +50,20 @@ const benefits = [
 
   <section class="container models">
     <h2 data-reveal>Unsere Abo-Modelle</h2>
-    <div class="table-wrap" data-reveal style="--reveal-delay:80ms">
-      <table>
-        <thead>
-          <tr><th>Modell</th><th>Beschreibung</th><th>Rhythmus</th><th>Preis</th></tr>
-        </thead>
-        <tbody>
-          {models.map((m) => (
-            <tr>
-              <td class="model-name" data-label="Modell">{m.name}</td>
-              <td data-label="Beschreibung">{m.desc}</td>
-              <td class="nowrap" data-label="Rhythmus">{m.rhythm}</td>
-              <td class="price" data-label="Preis">{m.price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div class="model-rows">
+      {models.map((m, i) => (
+        <article class="model-row" data-reveal style={`--reveal-delay:${(i % 4) * 90}ms`}>
+          {m.img && <img class="model-img" src={m.img} alt={`Beispiel für das Abo-Modell ${m.name}`} width="300" height="220" loading="lazy" />}
+          <div class="model-copy">
+            <div class="model-top">
+              <h3>{m.name}</h3>
+              <span class="price">{m.price}</span>
+            </div>
+            <p>{m.desc}</p>
+            <span class="rhythm">{m.rhythm}</span>
+          </div>
+        </article>
+      ))}
     </div>
     <p class="note" data-reveal>
       Wir liefern wöchentlich und nach Bedarf frische Sträuße und Bouquets – abgestimmt auf Ihre
@@ -75,66 +76,32 @@ const benefits = [
 </Base>
 
 <style>
-  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
-  .page-head h1 { font-size: clamp(2rem, 4.2vw, 3rem); margin: var(--sp-sm) 0 var(--sp-md); max-width: 20ch; }
-  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 56ch; }
-
   .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-xl); align-items: center; padding-block: var(--sp-lg) var(--sp-2xl); }
-  .split h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.25; margin-bottom: var(--sp-sm); }
   .split p { color: var(--text-soft); font-size: 1.08rem; }
   .benefits { list-style: none; display: grid; gap: 0.75rem; }
   .benefits li { position: relative; padding-left: 1.6rem; color: var(--text); }
   .benefits li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 
   .models { padding-bottom: var(--sp-2xl); }
-  .models > h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); margin-bottom: var(--sp-lg); }
-  .table-wrap { overflow-x: auto; border-radius: var(--r-lg); box-shadow: var(--shadow-soft); }
-  table { width: 100%; border-collapse: collapse; background: var(--bg); min-width: 640px; }
-  thead th { background: var(--accent); color: #fff; text-align: left; font-family: var(--sans); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; padding: 1rem 1.25rem; }
-  tbody td { padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--n-200); vertical-align: top; color: var(--text-soft); font-size: 0.95rem; }
-  tbody tr:nth-child(odd) td { background: var(--lilac-50); }
-  .model-name { font-family: var(--serif); font-size: 1.25rem; color: var(--text); font-weight: 500; }
-  .price { font-weight: 600; color: var(--accent); white-space: nowrap; }
-  .nowrap { white-space: nowrap; }
-  .note { margin-top: var(--sp-md); color: var(--text-soft); max-width: 70ch; }
+  .models > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+
+  /* Editoriale Zeilen statt Tabelle */
+  .model-rows { border-top: 1px solid var(--linie-flieder); }
+  .model-row {
+    display: grid; grid-template-columns: 220px 1fr; gap: var(--sp-lg); align-items: center;
+    padding-block: clamp(1.6rem, 3vw, 2.2rem); border-bottom: 1px solid var(--linie-flieder);
+  }
+  .model-img { width: 100%; height: 150px; object-fit: contain; background: var(--bg-alt); display: block; }
+  .model-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .model-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--pflaume); }
+  .model-row .price { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: var(--accent); white-space: nowrap; }
+  .model-row p { font-size: 0.98rem; color: var(--text-soft); }
+  .rhythm { display: inline-block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+  .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 70ch; }
 
   @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: var(--sp-lg); } }
-
-  /* Auf dem Handy: aus jeder Tabellenzeile wird eine Karte (kein Wischen nötig) */
-  @media (max-width: 760px) {
-    .table-wrap { overflow-x: visible; box-shadow: none; background: transparent; }
-    table { min-width: 0; width: 100%; background: transparent; }
-    thead { display: none; }              /* Kopfzeile weg, Labels stehen in den Karten */
-    tbody, tr, td { display: block; width: 100%; }
-    tbody tr {
-      background: var(--bg-card) !important;
-      border-radius: var(--r-lg);
-      box-shadow: var(--shadow-soft);
-      padding: 1.25rem 1.35rem;
-      margin-bottom: var(--sp-sm);
-    }
-    tbody tr:nth-child(odd) td { background: transparent; }
-    tbody td {
-      border-bottom: none; padding: 0.35rem 0;
-      display: grid; grid-template-columns: 1fr; gap: 0.15rem;
-    }
-    /* Beschriftung über dem Wert */
-    tbody td::before {
-      content: attr(data-label);
-      font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.14em;
-      text-transform: uppercase; font-weight: 600; color: var(--malve);
-    }
-    /* Modellname als Karten-Überschrift, ohne Label */
-    tbody td.model-name {
-      font-family: var(--serif); font-size: 1.5rem; color: var(--pflaume);
-      font-weight: 600; padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-soft); margin-bottom: 0.6rem;
-    }
-    tbody td.model-name::before { display: none; }
-    /* Preis hervorheben */
-    tbody td.price {
-      font-family: var(--serif); font-size: 1.35rem; color: var(--pflaume);
-      font-weight: 600; margin-top: 0.4rem;
-    }
+  @media (max-width: 640px) {
+    .model-row { grid-template-columns: 1fr; gap: 0.9rem; }
+    .model-img { height: 190px; }
   }
 </style>

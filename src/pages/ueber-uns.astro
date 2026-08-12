@@ -116,10 +116,10 @@ const leiste = weitere.slice(1);
   /* H1 über die ganze Seitenbreite */
   .page-head { padding-block: var(--sp-xl) var(--sp-lg); }
   .page-head h1 {
-    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    font-size: clamp(2.3rem, 5.6vw, 4rem);
     margin: var(--sp-sm) 0 0;
     max-width: none;          /* volle Breite statt schmaler Spalte */
-    line-height: 1.1;
+    line-height: 1.05; letter-spacing: -0.02em; font-weight: 400;
   }
 
   /* Text und Bild abwechselnd */
@@ -131,8 +131,7 @@ const leiste = weitere.slice(1);
   .story.reverse { grid-template-columns: 1.15fr 1fr; }
   .story-media img {
     width: 100%; height: clamp(340px, 42vw, 520px);
-    object-fit: cover; border-radius: var(--r-lg);
-    box-shadow: var(--shadow-card); display: block;
+    object-fit: contain; background: var(--bg-alt); display: block;
   }
 
   .story-copy { display: grid; gap: var(--sp-sm); }
@@ -162,8 +161,7 @@ const leiste = weitere.slice(1);
   }
   .foto-leiste img {
     width: 100%; height: clamp(240px, 26vw, 340px);
-    object-fit: cover; border-radius: var(--r-lg);
-    box-shadow: var(--shadow-soft); display: block;
+    object-fit: contain; background: var(--bg-alt); display: block;
   }
 
   .haltung-liste { border-top: 1px solid var(--linie-flieder); padding-block: var(--sp-xl); }
