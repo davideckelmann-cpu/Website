@@ -1,0 +1,138 @@
+---
+// Wiederverwendbares Kontaktformular (Web3Forms).
+// WICHTIG: access_key unten durch euren echten Web3Forms-Key ersetzen.
+// Key holen (1 Min., kostenlos, kein Account): https://web3forms.com → E-Mail eintragen → Key kommt per Mail.
+const { compact = false, onDark = false } = Astro.props;
+const ACCESS_KEY = "799b7099-e75e-4b32-b151-9f7a2c7e13e2"; // Web3Forms Key (aktiv)
+---
+<form class={`cf-form ${onDark ? "on-dark" : ""}`} data-web3form>
+  <!-- Web3Forms Pflichtfeld -->
+  <input type="hidden" name="access_key" value={ACCESS_KEY} />
+  <!-- Betreff der E-Mail, die bei euch ankommt -->
+  <input type="hidden" name="subject" value="Neue Anfrage über lilac-bergamot.com" />
+  <input type="hidden" name="from_name" value="Lilac & Bergamot Website" />
+  <!-- Spam-Schutz: Honeypot (für Menschen unsichtbar) -->
+  <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" autocomplete="off" />
+
+  {!compact && (
+    <div class="cf-row">
+      <input class="field" type="text" name="Vorname" placeholder="Vorname" required />
+      <input class="field" type="text" name="Nachname" placeholder="Nachname" />
+    </div>
+  )}
+  {compact && (
+    <input class="field" type="text" name="Name" placeholder="Name" required />
+  )}
+  <input class="field" type="email" name="E-Mail" placeholder="E-Mail" required />
+  <textarea class="field" name="Nachricht" rows={compact ? 4 : 6} placeholder="Ihre Nachricht" required></textarea>
+
+  <label class="cf-consent">
+    <input type="checkbox" name="Einwilligung" required />
+    <span>Ich bin mit der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage einverstanden.
+      Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.</span>
+  </label>
+
+  <button type="submit" class="btn btn-primary cf-submit">Nachricht senden</button>
+
+  <p class="cf-status" data-status role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .cf-form { display: flex; flex-direction: column; gap: var(--sp-sm); }
+  .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-sm); }
+  .field {
+    padding: 1rem 1.25rem; border-radius: var(--r-md);
+    background: var(--bg-card); border: 1px solid var(--border-soft);
+    font-family: var(--sans); font-size: 1rem; color: var(--text);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .field::placeholder { color: var(--text-muted); }
+  .field:focus {
+    outline: none; border-color: var(--malve);
+    box-shadow: 0 0 0 3px rgba(138,62,125,0.15);
+  }
+  /* Honeypot — visuell versteckt, aber für Bots ausfüllbar */
+  .cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+  .cf-consent { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.85rem; color: var(--text-soft); line-height: 1.5; }
+  .cf-consent input { margin-top: 0.25rem; accent-color: var(--pflaume); flex: none; }
+  .cf-consent a { color: var(--malve); text-decoration: underline; }
+
+  .cf-submit { align-self: flex-start; margin-top: 0.25rem; }
+  .cf-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+  .cf-status { font-size: 0.9rem; min-height: 1.2em; }
+  .cf-status.ok { color: var(--pflaume); font-weight: 600; }
+  .cf-status.err { color: #A3342E; }
+
+  @media (max-width: 860px) {
+    .cf-row { grid-template-columns: 1fr; }
+    .cf-submit { align-self: stretch; text-align: center; }
+  }
+
+  /* Auf dunklem (Pflaume) Grund: helle Felder */
+  .cf-form.on-dark .field {
+    background: rgba(255,255,255,0.92);
+    border-color: transparent; color: var(--pflaume);
+  }
+  .cf-form.on-dark .field::placeholder { color: var(--text-sek); }
+  .cf-form.on-dark .field:focus {
+    border-color: var(--flieder);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.30);
+  }
+  .cf-form.on-dark .cf-consent { color: rgba(248,254,206,0.82); }
+  .cf-form.on-dark .cf-consent a { color: var(--flieder); }
+  .cf-form.on-dark .cf-consent input { accent-color: var(--flieder); }
+  .cf-form.on-dark .btn-primary { background: var(--limette); color: var(--pflaume); }
+  .cf-form.on-dark .btn-primary:hover { background: #fff; }
+  .cf-form.on-dark .cf-status.ok { color: var(--limette); }
+  .cf-form.on-dark .cf-status.err { color: #F0B8B2; }
+</style>
+
+<script>
+  document.querySelectorAll('form[data-web3form]').forEach((form) => {
+    const status = form.querySelector('[data-status]');
+    const btn = form.querySelector('.cf-submit');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = ''; status.className = 'cf-status';
+
+      // Honeypot: wenn ausgefüllt -> stiller Abbruch (Bot)
+      if (form.querySelector('.cf-hp')?.checked) return;
+
+      const key = form.querySelector('input[name="access_key"]').value;
+      if (!key || key === 'DEIN-WEB3FORMS-KEY') {
+        status.textContent = 'Formular ist noch nicht konfiguriert (Web3Forms-Key fehlt).';
+        status.className = 'cf-status err';
+        return;
+      }
+
+      btn.disabled = true;
+      const original = btn.textContent;
+      btn.textContent = 'Wird gesendet …';
+
+      try {
+        const data = Object.fromEntries(new FormData(form));
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (json.success) {
+          status.textContent = 'Vielen Dank! Ihre Nachricht ist bei uns eingegangen – wir melden uns bald.';
+          status.className = 'cf-status ok';
+          form.reset();
+        } else {
+          throw new Error(json.message || 'Fehler');
+        }
+      } catch (err) {
+        status.textContent = 'Es gab ein Problem beim Senden. Bitte versuchen Sie es später erneut oder schreiben Sie an hello@lilac-bergamot.com.';
+        status.className = 'cf-status err';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  });
+</script>
