@@ -1,0 +1,40 @@
+---
+import ContactForm from './ContactForm.astro';
+const { compact = false } = Astro.props;
+---
+<section class={`cta-band ${compact ? 'compact' : ''}`}>
+  <div class="container cta-inner" data-reveal>
+    <div class="cta-copy">
+      <span class="eyebrow">Kontakt</span>
+      <h2>Erzählen Sie uns von Ihrer Idee.</h2>
+      <p>Sie möchten eine florale Komposition anfragen, einen besonderen Anlass gestalten
+        lassen oder haben eine Idee für eine Zusammenarbeit? Wir freuen uns auf Ihre Nachricht.</p>
+      <div class="cta-contact">
+        <a href="tel:+493062904677">+49 (0) 30 629 046 77</a>
+        <a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a>
+      </div>
+    </div>
+    <div class="cta-form">
+      <ContactForm compact={true} onDark={true} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band { background: var(--bg-inverse); color: var(--limette); padding-block: var(--sp-2xl); }
+  .cta-band.compact { padding-block: var(--sp-xl); }
+  .cta-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2xl); align-items: start;
+  }
+  .cta-band .eyebrow { color: var(--flieder); }
+  .cta-band h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin: var(--sp-xs) 0 var(--sp-sm); color: var(--limette); }
+  .cta-band p { color: rgba(248,254,206,0.80); max-width: 46ch; }
+  .cta-contact { display: flex; flex-direction: column; gap: 0.4rem; margin-top: var(--sp-md); font-size: 0.95rem; }
+  .cta-contact a { color: var(--flieder); transition: color 0.3s ease; }
+  .cta-contact a:hover { color: #fff; }
+  @media (max-width: 860px) {
+    .cta-band { padding-block: var(--sp-lg); }
+    .cta-band.compact { padding-block: var(--sp-md); }
+    .cta-inner { grid-template-columns: 1fr; gap: var(--sp-md); }
+  }
+</style>
