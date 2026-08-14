@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPageImages, baseFromPath } from '../utils/pageImages.js';
+import ContactCTA from './ContactCTA.astro';
+
+const {
+  title, description, path, cluster, clusterHref, clusterLabel,
+  eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, images = [], icon,
+} = Astro.props;
+// AUTOMATISCHE BILD-ERKENNUNG
+// Schaut selbst nach, welche Bilder in public/images liegen.
+// Manuell gesetzte image=/images= Werte haben weiterhin Vorrang.
+const auto = getPageImages(baseFromPath(path));
+const autoImages = images.length > 0 ? images : auto.images;
+const autoImage  = image || auto.image;
+const portraitSet = autoImages.length > 1;
+// Orientierung der Bilder (quer/hochkant) aus der Automatik übernehmen.
+const metaList = auto.metaList || [];
+const singleMeta = auto.meta || null;
+// Ist das Einzelbild ein Querformat? Dann volle Breite (Band), sonst asymmetrisch hochkant.
+const singleQuer = singleMeta && singleMeta.orientation === 'quer';
+// Sind im Set überwiegend Querformate? Dann als Band, sonst gestaffelte Treppe.
+const setQuer = metaList.length > 0 && metaList.filter(m => m && m.orientation === 'quer').length > metaList.length / 2;
+// Abwechslung links/rechts für Einzel-Hochkant: aus dem Seitennamen ein stabiles
+// Muster ableiten (gleiche Seite -> immer gleiche Seite, aber Seiten wechseln sich ab).
+const spiegelBasis = baseFromPath(path);
+const spiegeln = spiegelBasis.length % 2 === 1;
+// Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
+// Nutzt jetzt die konkrete Seiten-Überschrift (h1) statt nur den Cluster-Namen,
+// dadurch etwas spezifischer. Für ein einzelnes Foto lässt sich weiterhin ein
+// eigener Alt-Text mitgeben: images={[{ src: '...', alt: 'genaue Beschreibung' }]}
+const altVariants = [
+  `${h1} — Beispiel 1`,
+  `${h1} — Beispiel 2`,
+  `${h1} — Beispiel 3`,
+  `${h1} — Beispiel 4`,
+];
+function altFor(img, i) {
+  if (typeof img !== 'string' && img.alt) return img.alt;
+  return altVariants[i % altVariants.length];
+}
+
+// STRUCTURED DATA: Breadcrumb (Home > Cluster > aktuelle Seite)
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/+$/, '') : '';
+const breadcrumbJson = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Start", "item": siteUrl + "/" },
+    { "@type": "ListItem", "position": 2, "name": clusterLabel, "item": siteUrl + clusterHref },
+    { "@type": "ListItem", "position": 3, "name": cluster, "item": siteUrl + path },
+  ],
+};
+
+// STRUCTURED DATA: FAQ (nur wenn FAQs vorhanden sind)
+const faqJson = faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+} : null;
+---
+<Base title={title} description={description} path={path} image={image}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} />
+  {faqJson && <script type="application/ld+json" set:html={JSON.stringify(faqJson)} />}
+
+  <section class="ed-head">
+    {icon && <img src={icon} alt="" class="lp-icon" data-reveal width="120" height="150" loading="lazy" />}
+    <span class="eyebrow" data-reveal><a href={clusterHref}>{clusterLabel}</a> · {cluster}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{h1}</h1>
+    {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
+  </section>
+
+  {portraitSet && (
+    <section class="container ed-treppe" data-reveal>
+      {autoImages.map((img, i) => (
+        <figure class={`treppe-item pos-${i % 3}`}>
+          <img src={typeof img === 'string' ? img : img.src}
+               alt={altFor(img, i)} loading="lazy"
+               onerror="this.closest('figure').style.display='none'" />
+        </figure>
+      ))}
+    </section>
+  )}
+  {!portraitSet && autoImage && (
+    <section class={`container ed-solo ${spiegeln ? 'spiegeln' : ''}`} data-reveal>
+      <figure class="solo-media">
+        <img src={autoImage} alt={h1} loading="lazy" onerror="this.closest('section').style.display='none'" />
+      </figure>
+      <div class="solo-luft" aria-hidden="true"></div>
+    </section>
+  )}
+
+  {intro && (
+    <section class="container lp-intro">
+      <div data-reveal set:html={intro} />
+    </section>
+  )}
+
+  {services.length > 0 && (
+    <section class="container lp-services">
+      <h2 data-reveal>Unsere Leistungen</h2>
+      <ul class="svc-list">
+        {services.map((s, i) => (
+          <li data-reveal style={`--reveal-delay:${(i % 4) * 70}ms`}>{s}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {sections.map((sec) => (
+    <section class="lp-band">
+      <div class="container" data-reveal>
+        <h2>{sec.h}</h2>
+        <div set:html={sec.body} />
+      </div>
+    </section>
+  ))}
+
+  {faq.length > 0 && (
+    <section class="container lp-faq">
+      <h2 data-reveal>Häufige Fragen</h2>
+      <div class="faq-list">
+        {faq.map((f, i) => (
+          <details data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .lp-icon { width: 64px; height: auto; margin-bottom: var(--sp-md); opacity: 0.9; }
+  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
+
+  .lp-intro { padding-block: var(--sp-md) var(--sp-xl); }
+  .lp-intro > div { max-width: 70ch; display: grid; gap: var(--sp-sm); }
+  .lp-intro :global(p) { font-size: 1.08rem; color: var(--text-soft); }
+  .lp-intro :global(a) { color: var(--accent); }
+
+  .lp-services { padding-bottom: var(--sp-xl); }
+  .lp-services > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom: var(--sp-md); }
+  .svc-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem 2rem; max-width: 70ch; }
+  .svc-list li { position: relative; padding-left: 1.6rem; color: var(--text); }
+  .svc-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  .lp-band { background: var(--bg-alt); padding-block: var(--sp-xl); margin-block: var(--sp-sm); }
+  .lp-band h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 3.2vw, 2.1rem); margin-bottom: var(--sp-sm); }
+  .lp-band :global(p) { color: var(--text-soft); max-width: 70ch; margin-bottom: 0.5rem; }
+  .lp-band :global(ul) { color: var(--text-soft); max-width: 70ch; padding-left: 1.2rem; display: grid; gap: 0.4rem; }
+
+  /* Häufige Fragen: Haarlinien statt Boxen — passend zur Startseite */
+  .lp-faq { padding-block: var(--sp-xl) var(--sp-2xl); }
+  .lp-faq > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom: var(--sp-md); }
+  .faq-list { display: grid; max-width: 76ch; border-top: 1px solid var(--linie-flieder); }
+  .lp-faq details { border-bottom: 1px solid var(--linie-flieder); padding: 0; background: transparent; transition: none; }
+  .lp-faq summary {
+    padding: 1.3rem 0; cursor: pointer; font-family: var(--serif); font-size: 1.15rem;
+    color: var(--pflaume); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  }
+  .lp-faq summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; transition: transform 0.3s ease; }
+  .lp-faq details[open] summary::after { transform: rotate(45deg); }
+  .lp-faq summary::-webkit-details-marker { display: none; }
+  .lp-faq details p { padding: 0 0 1.3rem; color: var(--text-soft); }
+
+  @media (max-width: 720px) { .svc-list { grid-template-columns: 1fr; } }
+</style>
