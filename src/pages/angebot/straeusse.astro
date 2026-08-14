@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+
+const sizes = [
+  { name: 'Mini Zierde', desc: 'Ein zarter Akzent für kleine Räume oder den Empfang – für den Schreibtisch, als Tischdeko oder als charmante Beigabe.', price: 'ab 8 €', hint: 'ab 4. Stück oder mit einem Strauß', img: '/images/banner-1.jpg' },
+  { name: 'Kleine Geste', desc: 'Ein feiner, handgebundener Strauß – ideal als kleine Aufmerksamkeit oder liebevolle Geste zwischendurch.', price: 'ab 35 €', img: '/images/banner-3.jpg' },
+  { name: 'Wertschätzung', desc: 'Ein mittelgroßes Bouquet mit saisonalen Akzenten, ausgewogen und mit mehr Volumen und Ausdruck.', price: 'ab 55 €', img: '/images/banner-4.jpg' },
+  { name: 'Herzstück', desc: 'Ein großzügiger Strauß mit Präsenz – sorgfältig komponiert, stilvoll und lebendig.', price: 'ab 75 €', img: '/images/banner-5.jpg' },
+  { name: 'Besondere Verbindung', desc: 'Eine individuelle Komposition, im Vorgespräch geplant – großzügig, beeindruckend, auf Wunsch mit Vase.', price: 'ab 120 €', img: '/images/banner-6.jpg' },
+];
+---
+<Base
+  title="Handgebundene Blumensträuße Berlin — Lilac & Bergamot"
+  description="Blumensträuße mit Lieferung in Berlin aus saisonalen Blumen. Persönlich, frisch & mit Liebe gestaltet – ab 35 €."
+  path="/angebot/straeusse/"
+>
+  <section class="ed-head">
+    <img src="/icons/icon-tulpen-strauss.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
+    <span class="eyebrow" data-reveal><a href="/angebot/">Angebot</a> · Sträuße</span>
+    <h1 data-reveal style="--reveal-delay:80ms">Ein Strauß ist eine Geste voller Gefühl.</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">
+      Für Gespräche, fürs Loslassen, fürs Feiern. Unsere handgebundenen Sträuße erzählen
+      Geschichten – von Zuwendung, Stil und dem Moment.
+    </p>
+  </section>
+
+  <section class="ed-statement" data-reveal>
+    <p>Jeder Strauß <span>—</span> ein Moment, der bleibt.</p>
+  </section>
+
+  <section class="container intro">
+    <div data-reveal>
+      <p>Ob als Zeichen der Wertschätzung, Begleitung in einem neuen Lebensabschnitt oder kreative
+        Geste: Jeder Strauß wird saisonal, individuell und mit viel Gespür für Farbe, Form und
+        Anlass gestaltet. Regional bezogen, liebevoll komponiert und zuverlässig in Berlin geliefert.</p>
+      <p class="muted">Los geht es ab 35 € – für liebevoll von Hand gebundene, saisonale Kompositionen,
+        die berühren. Je nach Saison und Besonderheit einzelner Blumen kann der Preis leicht variieren:
+        eine Artischocke hat einen anderen Wert als eine Zinnie.</p>
+    </div>
+  </section>
+
+  <section class="container sizes">
+    <h2 data-reveal>Größen &amp; Preise</h2>
+    <div class="size-rows">
+      {sizes.map((s, i) => (
+        <article class="size-row" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+          {s.img && <img class="size-img" src={s.img} alt={`Blumenstrauß „${s.name}“`} width="600" height="400" loading="lazy" />}
+          <div class="size-copy">
+            <div class="size-top">
+              <h3>{s.name}</h3>
+              <span class="price">{s.price}</span>
+            </div>
+            <p>{s.desc}</p>
+            {s.hint && <span class="hint">{s.hint}</span>}
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="note" data-reveal>
+      Jeder Blumenstrauß entsteht intuitiv und mit Sorgfalt – inspiriert von der Jahreszeit, dem
+      Moment und dem Menschen, für den er gedacht ist. Mit Liebe arrangiert, sicher verpackt und
+      direkt zu Ihnen oder Ihren Lieblingsmenschen geliefert.
+    </p>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
+
+  .intro { padding-bottom: var(--sp-xl); }
+  .intro > div { max-width: 68ch; display: grid; gap: var(--sp-sm); }
+  .intro p { font-size: 1.08rem; color: var(--text-soft); }
+  .intro .muted { font-size: 0.98rem; color: var(--text-muted); }
+
+  .sizes { padding-bottom: var(--sp-2xl); }
+  .sizes > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+
+  /* Editoriale Zeilen statt Karten mit Rahmen */
+  .size-rows { border-top: 1px solid var(--linie-flieder); }
+  .size-row {
+    display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-lg); align-items: start;
+    padding-block: clamp(1.6rem, 3vw, 2.2rem); border-bottom: 1px solid var(--linie-flieder);
+  }
+  .size-img {
+    display: block; width: 100%; height: auto;
+  }
+  .size-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .size-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--pflaume); }
+  .size-row .price { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: var(--accent); white-space: nowrap; }
+  .size-row p { font-size: 0.98rem; color: var(--text-soft); }
+  .hint { display: inline-block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+  .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 70ch; }
+
+  @media (max-width: 640px) {
+    .size-row { grid-template-columns: 1fr; gap: 0.9rem; }
+    .size-img { height: auto; }
+  }
+</style>
