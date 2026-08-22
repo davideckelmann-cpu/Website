@@ -1,19 +1,40 @@
 ---
+import { getLangFromUrl, useTranslations, localizePath, alternatePath, languages } from '../i18n/index.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const L = (p) => localizePath(p, lang);
+
 const links = [
-  { href: '/ueber-uns/', label: 'Über uns' },
-  { href: '/angebot/', label: 'Angebot' },
-  { href: '/events/', label: 'Events' },
-  { href: '/abo/', label: 'Abo & Preise' },
-  { href: '/angebot/straeusse/', label: 'Sträuße' },
-  { href: '/impressionen/', label: 'Impressionen' },
-  { href: '/kontakt/', label: 'Kontakt' },
+  { href: L('/ueber-uns/'), label: t.nav.ueberUns },
+  { href: L('/angebot/'), label: t.nav.angebot },
+  { href: L('/events/'), label: t.nav.events },
+  { href: L('/abo/'), label: t.nav.abo },
+  { href: L('/angebot/straeusse/'), label: t.nav.straeusse },
+  { href: L('/impressionen/'), label: t.nav.impressionen },
+  { href: L('/kontakt/'), label: t.nav.kontakt },
 ];
+
+// Sprachumschalter: Ziel-Pfade in beiden Sprachen
+const langLinks = Object.keys(languages).map((code) => ({
+  code,
+  href: alternatePath(Astro.url, code),
+  active: code === lang,
+}));
 ---
 <header class="nav">
   <div class="container nav-inner">
-    <a href="/" class="logo"><img src="/logo/logo-schriftzug.svg" alt="Lilac & Bergamot" /></a>
+    <a href={L('/')} class="logo"><img src="/logo/logo-schriftzug.svg" alt="Lilac & Bergamot" /></a>
     <nav class="nav-links" aria-label="Hauptnavigation">
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <span class="nav-lang" aria-label="Sprache wählen">
+        {langLinks.map((ll, i) => (
+          <>
+            {i > 0 && <span class="nav-lang-sep">/</span>}
+            <a href={ll.href} class={ll.active ? 'nav-lang-link active' : 'nav-lang-link'} hreflang={ll.code}>{ll.code.toUpperCase()}</a>
+          </>
+        ))}
+      </span>
     </nav>
     <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -33,7 +54,18 @@ const links = [
   .nav-toggle span { width: 24px; height: 2px; background: var(--pflaume); border-radius: 2px; transition: 0.3s; }
   .nav-backdrop { display: none; }
 
-  @media (max-width: 900px) {
+  /* Sprachumschalter */
+  .nav-lang { display: inline-flex; align-items: center; gap: 0.4rem; margin-left: 0.6rem; }
+  .nav-lang-sep { color: var(--n-200); font-size: 0.75rem; }
+  .nav-lang-link {
+    font-size: 0.78rem; letter-spacing: 0.1em; font-weight: 600;
+    color: var(--text-muted); transition: color 0.3s ease;
+  }
+  .nav-lang-link.active { color: var(--accent); }
+  .nav-lang-link:hover { color: var(--text); }
+  .nav-lang-link::after { display: none; }
+
+  @media (max-width: 1050px) {
     .nav-toggle { display: flex; }
     /* Abdunkler hinter dem Menü */
     .nav-backdrop {
@@ -61,6 +93,11 @@ const links = [
     }
     .nav-links a::after { background: var(--limette); height: 1.5px; }
     .nav-links a:hover { color: #fff; }
+    /* Sprachumschalter im mobilen Menü */
+    .nav-lang { margin-left: 0; margin-top: 1rem; gap: 0.6rem; }
+    .nav-lang-sep { color: rgba(248,254,206,0.5); }
+    .nav-lang-link { color: var(--limette); font-size: 0.95rem; }
+    .nav-lang-link.active { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
 
     /* Hamburger -> X wenn offen */
     .nav-toggle.open span:first-child { transform: translateY(3.5px) rotate(45deg); }

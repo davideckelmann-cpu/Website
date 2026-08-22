@@ -1,21 +1,25 @@
 ---
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/index.js';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const L = (p) => localizePath(p, lang);
 ---
 <footer class="footer">
   <div class="container footer-grid">
     <!-- Links: Navigation -->
     <nav class="f-col f-nav" aria-label="Footer-Navigation">
-      <h4 class="f-head">Navigation</h4>
-      <a href="/ueber-uns/">Über uns</a>
-      <a href="/angebot/">Angebot</a>
-      <a href="/events/">Events</a>
-      <a href="/abo/">Abo &amp; Preise</a>
-      <a href="/impressionen/">Impressionen</a>
-      <a href="/kontakt/">Kontakt</a>
+      <h4 class="f-head">{t.footer.navigation}</h4>
+      <a href={L('/ueber-uns/')}>{t.nav.ueberUns}</a>
+      <a href={L('/angebot/')}>{t.nav.angebot}</a>
+      <a href={L('/events/')}>{t.nav.events}</a>
+      <a href={L('/abo/')}>{t.nav.abo}</a>
+      <a href={L('/impressionen/')}>{t.nav.impressionen}</a>
+      <a href={L('/kontakt/')}>{t.nav.kontakt}</a>
     </nav>
 
     <!-- Mitte: Kontakt + Telefon -->
     <div class="f-col f-contact">
-      <h4 class="f-head">Kontakt</h4>
+      <h4 class="f-head">{t.footer.kontakt}</h4>
       <a href="tel:+493062904677">+49 (0) 30 629 046 77</a>
       <a href="tel:+4917669118837">+49 (0) 17 669 118 837</a>
       <a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a>
@@ -39,7 +43,7 @@
 
     <!-- Daneben: Adresse -->
     <div class="f-col f-address">
-      <h4 class="f-head">Adresse</h4>
+      <h4 class="f-head">{t.footer.adresse}</h4>
       <p class="f-name">Lilac &amp; Bergamot</p>
       <p>Berliner Allee 121</p>
       <p>13088 Berlin</p>
@@ -47,10 +51,10 @@
 
     <!-- Rechts: Rechtliches -->
     <nav class="f-col f-legal" aria-label="Rechtliches">
-      <h4 class="f-head">Rechtliches</h4>
-      <a href="/impressum/">Impressum</a>
-      <a href="/datenschutz/">Datenschutz</a>
-      <a href="/agb/">AGB</a>
+      <h4 class="f-head">{t.footer.rechtliches}</h4>
+      <a href={L('/impressum/')}>{t.footer.impressum}</a>
+      <a href={L('/datenschutz/')}>{t.footer.datenschutz}</a>
+      <a href={L('/agb/')}>{t.footer.agb}</a>
     </nav>
   </div>
 
