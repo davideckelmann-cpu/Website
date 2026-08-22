@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from './ContactCTA.astro';
+import { getNumberedImages, getSingleImage } from '../utils/pageImages.js';
+import { getLangFromUrl, useTranslations } from '../i18n/index.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).ueberUns;
+
+const hauptbild = getSingleImage('ueber-uns');
+const weitere = getNumberedImages('ueber-uns', 12);
+const zweitbild = weitere[0] || null;
+const leiste = weitere.slice(1);
+---
+<Base title={t.metaTitle} description={t.metaDescription} path="/ueber-uns/">
+  <section class="container page-head">
+    <span class="eyebrow" data-reveal>{t.eyebrow}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{t.h1}</h1>
+  </section>
+
+  <!-- 1) Namensgeschichte: Bild links, Text rechts -->
+  <section class="container story">
+    {hauptbild && (
+      <div class="story-media" data-reveal>
+        <img src={hauptbild} alt="Lilac & Bergamot" loading="lazy" onerror="this.closest('.story-media').style.display='none'" />
+      </div>
+    )}
+    <div class="story-copy" data-reveal style="--reveal-delay:120ms">
+      <p class="zitat">{t.zitat}</p>
+      <p>{t.story1a}</p>
+      <p>{t.story1b}</p>
+      <p class="signature">{t.story1sig}</p>
+    </div>
+  </section>
+
+  <!-- 2) Arbeit & Haltung: Text links, Bild rechts -->
+  <section class="container story reverse">
+    <div class="story-copy" data-reveal>
+      <p>{t.story2a}</p>
+      <p set:html={t.story2b} />
+    </div>
+    {zweitbild && (
+      <div class="story-media" data-reveal style="--reveal-delay:120ms">
+        <img src={zweitbild} alt="Lilac & Bergamot" loading="lazy" onerror="this.closest('.story-media').style.display='none'" />
+      </div>
+    )}
+  </section>
+
+  <!-- 3) Arbeitsweise & Team -->
+  <section class="container story-text">
+    <div class="story-copy" data-reveal>
+      <p>{t.story3a}</p>
+      <p set:html={t.story3b} />
+      <p class="signature gross">{t.story3sig}</p>
+    </div>
+  </section>
+
+  <!-- 4) Foto-Bereich -->
+  {leiste.length > 0 && (
+    <section class="container foto-leiste" data-reveal>
+      {leiste.map((src, i) => (
+        <figure>
+          <img src={src} alt={`Lilac & Bergamot ${i + 1}`} loading="lazy" onerror="this.closest('figure').style.display='none'" />
+        </figure>
+      ))}
+    </section>
+  )}
+
+  <section class="haltung-liste">
+    <div class="container">
+      <span class="eyebrow" data-reveal>{t.haltungEyebrow}</span>
+      {t.haltung.map((v, i) => (
+        <article class="haltung-zeile" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+          <span class="hz-nr">{v.nr}</span>
+          <h3 class="hz-titel">{v.h}</h3>
+          <p class="hz-text">{v.p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-head { padding-block: var(--sp-xl) var(--sp-lg); }
+  .page-head h1 { font-size: clamp(2.3rem, 5.6vw, 4rem); margin: var(--sp-sm) 0 0; max-width: none; line-height: 1.05; letter-spacing: -0.02em; font-weight: 400; }
+  .story { display: grid; grid-template-columns: 1fr 1.15fr; gap: var(--sp-xl); align-items: center; padding-block: var(--sp-md) var(--sp-xl); }
+  .story.reverse { grid-template-columns: 1.15fr 1fr; }
+  .story-media img { width: 100%; height: auto; display: block; }
+  .story-copy { display: grid; gap: var(--sp-sm); }
+  .story-copy p { font-size: 1.05rem; color: var(--text-soft); line-height: 1.75; }
+  .zitat { font-family: var(--serif); font-style: italic; font-size: 1.9rem !important; line-height: 1.25; color: var(--pflaume) !important; margin-bottom: 0.4rem; }
+  .signature { font-family: var(--serif); font-style: italic; font-size: 1.65rem !important; line-height: 1.35; color: var(--accent) !important; margin-top: 0.4rem; }
+  .signature.gross { font-size: 1.9rem !important; }
+  .story-text { padding-bottom: var(--sp-xl); }
+  .story-text .story-copy { max-width: 68ch; }
+  .foto-leiste { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sp-sm); padding-bottom: var(--sp-xl); }
+  .foto-leiste img { width: 100%; height: auto; display: block; }
+  .haltung-liste { border-top: 1px solid var(--linie-flieder); padding-block: var(--sp-xl); }
+  .haltung-liste .eyebrow { display: block; margin-bottom: var(--sp-lg); }
+  .haltung-zeile { display: grid; grid-template-columns: 4rem 1fr 1.5fr; gap: 1.5rem; align-items: baseline; padding-block: 1.7rem; border-top: 1px solid var(--linie-flieder); }
+  .haltung-zeile:last-child { border-bottom: 1px solid var(--linie-flieder); }
+  .hz-nr { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--malve); }
+  .hz-titel { font-family: var(--serif); font-weight: 400; font-size: clamp(1.4rem, 2.4vw, 2rem); color: var(--pflaume); }
+  .hz-text { color: var(--text-soft); line-height: 1.7; }
+  @media (max-width: 860px) {
+    .story, .story.reverse { grid-template-columns: 1fr; gap: var(--sp-md); }
+    .story-media { order: -1; }
+    .story-media img { height: auto; }
+    .foto-leiste img { height: auto; }
+    .zitat { font-size: 1.5rem !important; }
+    .signature { font-size: 1.35rem !important; }
+    .signature.gross { font-size: 1.5rem !important; }
+    .haltung-zeile { grid-template-columns: 2.6rem 1fr; gap: 0.5rem 1rem; padding-block: 1.3rem; }
+    .hz-text { grid-column: 2; }
+  }
+</style>

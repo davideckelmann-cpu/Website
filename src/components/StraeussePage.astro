@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from './ContactCTA.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/index.js';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).straeusse;
+const L = (p) => localizePath(p, lang);
+---
+<Base title={t.metaTitle} description={t.metaDescription} path="/angebot/straeusse/">
+  <section class="ed-head">
+    <img src="/icons/icon-tulpen-strauss.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
+    <span class="eyebrow" data-reveal><a href={L('/angebot/')}>{t.eyebrowLink}</a> · {t.eyebrow}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{t.h1}</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">{t.lead}</p>
+  </section>
+
+  <section class="ed-statement" data-reveal>
+    <p>{t.statement} <span>—</span> {t.statementEm}</p>
+  </section>
+
+  <section class="container intro">
+    <div data-reveal>
+      <p>{t.introA}</p>
+      <p class="muted">{t.introMuted}</p>
+    </div>
+  </section>
+
+  <section class="container sizes">
+    <h2 data-reveal>{t.groessenH2}</h2>
+    <div class="size-rows">
+      {t.sizes.map((s, i) => (
+        <article class="size-row" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+          {s.img && <img class="size-img" src={s.img} alt={s.name} width="600" height="400" loading="lazy" />}
+          <div class="size-copy">
+            <div class="size-top">
+              <h3>{s.name}</h3>
+              <span class="price">{s.price}</span>
+            </div>
+            <p>{s.desc}</p>
+            {s.hint && <span class="hint">{s.hint}</span>}
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="note" data-reveal>{t.note}</p>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
+  .intro { padding-bottom: var(--sp-xl); }
+  .intro > div { max-width: 68ch; display: grid; gap: var(--sp-sm); }
+  .intro p { font-size: 1.08rem; color: var(--text-soft); }
+  .intro .muted { font-size: 0.98rem; color: var(--text-muted); }
+  .sizes { padding-bottom: var(--sp-2xl); }
+  .sizes > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+  .size-rows { border-top: 1px solid var(--linie-flieder); }
+  .size-row { display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-lg); align-items: start; padding-block: clamp(1.6rem, 3vw, 2.2rem); border-bottom: 1px solid var(--linie-flieder); }
+  .size-img { display: block; width: 100%; height: auto; }
+  .size-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .size-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--pflaume); }
+  .size-row .price { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: var(--accent); white-space: nowrap; }
+  .size-row p { font-size: 0.98rem; color: var(--text-soft); }
+  .hint { display: inline-block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+  .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 70ch; }
+  @media (max-width: 640px) {
+    .size-row { grid-template-columns: 1fr; gap: 0.9rem; }
+    .size-img { height: auto; }
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from './ContactCTA.astro';
+import { getNumberedImages } from '../utils/pageImages.js';
+import { getLangFromUrl, useTranslations } from '../i18n/index.js';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).impressionen;
+
+const gallery = getNumberedImages('impressionen', 40).map((src, i) => ({
+  src,
+  alt: `Lilac & Bergamot ${i + 1}`,
+  tall: i % 3 === 0,
+}));
+---
+<Base title={t.metaTitle} description={t.metaDescription} path="/impressionen/">
+  <section class="ed-head">
+    <span class="eyebrow" data-reveal>{t.eyebrow}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{t.h1}</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">{t.lead}</p>
+  </section>
+
+  <section class="container gallery">
+    {gallery.map((img, i) => (
+      <figure class={`tile ${img.tall ? 'tall' : ''}`} data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+        <img src={img.src} alt={img.alt} loading="lazy" />
+      </figure>
+    ))}
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-head { padding-block: var(--sp-2xl) var(--sp-lg); }
+  .lead { font-size: 1.15rem; color: var(--text-soft); max-width: 60ch; }
+  .gallery { columns: 3; column-gap: var(--sp-md); padding-bottom: var(--sp-2xl); }
+  .tile { break-inside: avoid; margin-bottom: var(--sp-md); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-soft); }
+  .tile img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .tile:hover img { transform: scale(1.05); }
+  .tile.tall img { height: 420px; aspect-ratio: 3/4; object-fit: cover; }
+  @media (max-width: 900px) { .gallery { columns: 2; } }
+  @media (max-width: 560px) { .gallery { columns: 1; } }
+</style>

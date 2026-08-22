@@ -1,38 +1,36 @@
 ---
 // Wiederverwendbares Kontaktformular (Web3Forms).
-// WICHTIG: access_key unten durch euren echten Web3Forms-Key ersetzen.
-// Key holen (1 Min., kostenlos, kein Account): https://web3forms.com → E-Mail eintragen → Key kommt per Mail.
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/index.js';
 const { compact = false, onDark = false } = Astro.props;
 const ACCESS_KEY = "799b7099-e75e-4b32-b151-9f7a2c7e13e2"; // Web3Forms Key (aktiv)
+const lang = getLangFromUrl(Astro.url);
+const f = useTranslations(lang).form;
+const L = (p) => localizePath(p, lang);
 ---
 <form class={`cf-form ${onDark ? "on-dark" : ""}`} data-web3form>
-  <!-- Web3Forms Pflichtfeld -->
   <input type="hidden" name="access_key" value={ACCESS_KEY} />
-  <!-- Betreff der E-Mail, die bei euch ankommt -->
-  <input type="hidden" name="subject" value="Neue Anfrage über lilac-bergamot.com" />
+  <input type="hidden" name="subject" value={f.subject} />
   <input type="hidden" name="from_name" value="Lilac & Bergamot Website" />
-  <!-- Spam-Schutz: Honeypot (für Menschen unsichtbar) -->
   <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" autocomplete="off" />
 
   {!compact && (
     <div class="cf-row">
-      <input class="field" type="text" name="Vorname" placeholder="Vorname" required />
-      <input class="field" type="text" name="Nachname" placeholder="Nachname" />
+      <input class="field" type="text" name="Vorname" placeholder={f.vorname} required />
+      <input class="field" type="text" name="Nachname" placeholder={f.nachname} />
     </div>
   )}
   {compact && (
-    <input class="field" type="text" name="Name" placeholder="Name" required />
+    <input class="field" type="text" name="Name" placeholder={f.name} required />
   )}
-  <input class="field" type="email" name="E-Mail" placeholder="E-Mail" required />
-  <textarea class="field" name="Nachricht" rows={compact ? 4 : 6} placeholder="Ihre Nachricht" required></textarea>
+  <input class="field" type="email" name="E-Mail" placeholder={f.email} required />
+  <textarea class="field" name="Nachricht" rows={compact ? 4 : 6} placeholder={f.nachricht} required></textarea>
 
   <label class="cf-consent">
     <input type="checkbox" name="Einwilligung" required />
-    <span>Ich bin mit der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage einverstanden.
-      Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.</span>
+    <span>{f.consent} <a href={L('/datenschutz/')}>{f.consentLink}</a>.</span>
   </label>
 
-  <button type="submit" class="btn btn-primary cf-submit">Nachricht senden</button>
+  <button type="submit" class="btn btn-primary cf-submit">{f.submit}</button>
 
   <p class="cf-status" data-status role="status" aria-live="polite"></p>
 </form>

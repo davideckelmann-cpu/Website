@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from './ContactCTA.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/index.js';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).abo;
+---
+<Base title={t.metaTitle} description={t.metaDescription} path="/abo/">
+  <section class="ed-head">
+    <span class="eyebrow" data-reveal>{t.eyebrow}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{t.h1}</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">{t.lead}</p>
+  </section>
+
+  <section class="ed-statement" data-reveal>
+    <p>{t.statement} <span>—</span> {t.statementEm}</p>
+  </section>
+
+  <section class="container split">
+    <div data-reveal>
+      <p>{t.splitText}</p>
+    </div>
+    <ul class="benefits" data-reveal style="--reveal-delay:120ms">
+      {t.benefits.map((b) => <li>{b}</li>)}
+    </ul>
+  </section>
+
+  <section class="container models">
+    <h2 data-reveal>{t.modelleH2}</h2>
+    <div class="model-rows">
+      {t.models.map((m, i) => (
+        <article class="model-row" data-reveal style={`--reveal-delay:${(i % 4) * 90}ms`}>
+          {m.img && <img class="model-img" src={m.img} alt={m.name} width="300" height="220" loading="lazy" />}
+          <div class="model-copy">
+            <div class="model-top">
+              <h3>{m.name}</h3>
+              <span class="price">{m.price}</span>
+            </div>
+            <p>{m.desc}</p>
+            <span class="rhythm">{m.rhythm}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="note" data-reveal>{t.note}</p>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-xl); align-items: center; padding-block: var(--sp-lg) var(--sp-2xl); }
+  .split p { color: var(--text-soft); font-size: 1.08rem; }
+  .benefits { list-style: none; display: grid; gap: 0.75rem; }
+  .benefits li { position: relative; padding-left: 1.6rem; color: var(--text); }
+  .benefits li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .models { padding-bottom: var(--sp-2xl); }
+  .models > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+  .model-rows { border-top: 1px solid var(--linie-flieder); }
+  .model-row { display: grid; grid-template-columns: 240px 1fr; gap: var(--sp-lg); align-items: start; padding-block: clamp(1.6rem, 3vw, 2.2rem); border-bottom: 1px solid var(--linie-flieder); }
+  .model-img { width: 100%; height: auto; display: block; }
+  .model-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .model-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--pflaume); }
+  .model-row .price { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: var(--accent); white-space: nowrap; }
+  .model-row p { font-size: 0.98rem; color: var(--text-soft); }
+  .rhythm { display: inline-block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+  .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 70ch; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: var(--sp-lg); } }
+  @media (max-width: 640px) {
+    .model-row { grid-template-columns: 1fr; gap: 0.9rem; }
+    .model-img { height: auto; }
+  }
+</style>
