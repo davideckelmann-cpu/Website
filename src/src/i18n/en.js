@@ -1,0 +1,46 @@
+// English texts — Stage 1 (Navigation, Footer, Home)
+// DRAFT translation by Claude — please review and refine the tone.
+export const en = {
+  nav: {
+    ueberUns: 'About',
+    angebot: 'Services',
+    events: 'Events',
+    abo: 'Subscription & Pricing',
+    straeusse: 'Bouquets',
+    impressionen: 'Gallery',
+    kontakt: 'Contact',
+  },
+  footer: {
+    navigation: 'Navigation',
+    kontakt: 'Contact',
+    adresse: 'Address',
+    rechtliches: 'Legal',
+    impressum: 'Imprint',
+    datenschutz: 'Privacy',
+    agb: 'Terms',
+  },
+  home: {
+    metaTitle: 'Lilac & Bergamot — Floral Design in Berlin',
+    metaDescription: 'Floral design in Berlin: flower subscriptions for businesses, event & wedding floristry, funeral flowers & hand-tied bouquets. Seasonal & considered.',
+    eyebrow: 'Floristry in Berlin',
+    h1_line1: 'Arrangements',
+    h1_line2: 'that invite you',
+    h1_em: 'to pause.',
+    heroAlt: 'Floral arrangement with lilac',
+    statement: 'Form, colour, rhythm',
+    statementEm: 'and the space between.',
+    leistungen: [
+      { nr: '01', h: 'Flower Subscription', p: 'Fresh arrangements every week, for spaces that are meant to resonate.' },
+      { nr: '02', h: 'Event Floristry',     p: 'Floral accompaniment for corporate events, brand moments and weddings.' },
+      { nr: '03', h: 'Scenography',         p: 'Spatial staging in which flowers carry the narrative.' },
+      { nr: '04', h: 'Bouquets',            p: 'Hand-tied, seasonal, conceived as a gesture.' },
+    ],
+    vollbildAlt: 'Floral table design for an event in Berlin',
+    haltungGross: 'I work in tune with the seasons — intuitively, pared back, with whatever is in season right now.',
+    haltungText: 'Lilac & Bergamot brings together floral design and a perspective drawn from the arts — from space, light and stage. It is about the clarity of the line, the curve of living material, and what you choose to leave out.',
+    haltungLink: 'About us',
+    kontaktH2_line1: 'Tell us',
+    kontaktH2_line2: 'about your idea.',
+    kontaktLink: 'To the contact form',
+  },
+};

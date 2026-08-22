@@ -10,7 +10,12 @@ const {
   path = '',
 } = Astro.props;
 
-const canonical = new URL(path, Astro.site).href;
+// Basis-URL für kanonische Links / Open Graph.
+// Fällt auf die feste Domain zurück, falls Astro.site in der Config fehlt –
+// so bricht der Build nicht mit "Invalid URL" ab.
+const SITE = Astro.site ?? new URL('https://www.lilac-bergamot.com');
+const canonical = new URL(path || '/', SITE).href;
+const ogImage = new URL(image, SITE).href;
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -35,7 +40,7 @@ const canonical = new URL(path, Astro.site).href;
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL(image, Astro.site).href} />
+  <meta property="og:image" content={ogImage} />
   <meta property="og:url" content={canonical} />
   <meta property="og:locale" content="de_DE" />
 
@@ -43,7 +48,7 @@ const canonical = new URL(path, Astro.site).href;
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={new URL(image, Astro.site).href} />
+  <meta name="twitter:image" content={ogImage} />
 
   <!-- Fonts -->
 
@@ -52,7 +57,7 @@ const canonical = new URL(path, Astro.site).href;
     "@context": "https://schema.org",
     "@type": "Florist",
     "name": "Lilac & Bergamot",
-    "image": new URL(image, Astro.site).href,
+    "image": ogImage,
     "description": description,
     "address": {
       "@type": "PostalAddress",
