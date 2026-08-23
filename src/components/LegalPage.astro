@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { getLangFromUrl } from '../i18n/index.js';
+import { legalDe, legalEn } from '../i18n/legal.js';
+
+const { docKey, path } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const doc = (lang === 'en' ? legalEn : legalDe)[docKey];
+---
+<Base title={doc.metaTitle} description={doc.metaDescription} path={path}>
+  <section class="container legal">
+    <span class="eyebrow" data-reveal>{doc.eyebrow}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{doc.h1}</h1>
+    <div class="legal-body" data-reveal style="--reveal-delay:120ms">
+      {doc.notice && <p class="hint">{doc.notice}</p>}
+      <div set:html={doc.body} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding-block: var(--sp-2xl); max-width: 820px; }
+  .legal .eyebrow { display: block; margin-bottom: 1.2rem; }
+  .legal h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400; margin-bottom: var(--sp-lg); }
+  .legal-body { display: grid; gap: var(--sp-sm); }
+  .legal-body :global(h2) { font-size: 1.35rem; margin-top: var(--sp-md); color: var(--accent); }
+  .legal-body :global(p) { color: var(--text-soft); line-height: 1.75; }
+  .hint { background: var(--bg-alt); border-left: 3px solid var(--accent-warm); padding: 1rem 1.25rem; border-radius: var(--r-md); font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+</style>

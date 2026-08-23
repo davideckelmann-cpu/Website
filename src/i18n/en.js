@@ -169,4 +169,28 @@ straeusse: {
     ],
     note: 'Every bouquet comes into being intuitively and with care — inspired by the season, the moment and the person it is meant for. Lovingly arranged, safely packaged and delivered straight to you or your loved ones.',
   },
+trauer: {
+    metaTitle: 'Funeral Floristry Berlin — Lilac & Bergamot',
+    metaDescription: 'Stylish, sensitive floristry for funeral services in Berlin. Individual flower arrangements that accompany farewell & remembrance with dignity.',
+    eyebrowLink: 'Events', eyebrow: 'Funeral',
+    h1: 'Floral signs of remembrance',
+    lead: 'Flowers often say more than words – especially when it comes to farewell. In this quiet time we accompany you with sensitively designed funeral floristry that honours memories and offers comfort.',
+    servicesH2: 'For farewell and remembrance',
+    services: [
+      { h: 'Wreaths & arrangements', p: 'Classic, modern or close to nature – with symbolic flowers such as lilies, calla, roses or ivy on request.' },
+      { h: 'Urn and casket flowers', p: 'Simple floral bands or elaborately designed framings for the ceremony.' },
+      { h: 'Condolence bouquets & farewell flowers', p: 'As a gesture of sympathy or for a personal farewell at the grave.' },
+      { h: 'Delivery & setup in Berlin', p: 'On time to the place of the funeral service or to the cemetery.' },
+      { h: 'Consultation with sensitivity', p: 'In a personal conversation we clarify blooms, colours and design – at short notice if needed.' },
+    ],
+    meaningH2: 'Flowers with meaning',
+    meaningText: 'Which flower suits the farewell of a loved one? White lilies stand for purity, calla for dignity, roses for love. We help you choose and create floral memories that resonate – restrained, strong or entirely individual. Personal objects or handwritten cards can also be included.',
+    faqH2: 'Frequently asked questions',
+    faq: [
+      { q: 'Which flowers are suitable for a funeral service?', a: 'Flowers with symbolic character such as lilies, calla, carnations or roses in muted colours are customary – we are glad to advise you.' },
+      { q: 'Is a restrained, modern design also possible?', a: 'Yes. We also offer natural, pared-back or seasonal concepts – suited to the personality of the deceased.' },
+      { q: 'When should I order?', a: 'As early as possible – in emergencies, short-notice orders are also possible.' },
+    ],
+    note: 'Prices depend on the effort, the choice of blooms and the size of the arrangement. We calculate transparently and advise you personally. Funeral floristry is also possible by subscription, for example for grave design or regular days of remembrance.',
+  },
 };

@@ -168,4 +168,28 @@ straeusse: {
     ],
     note: 'Jeder Blumenstrauß entsteht intuitiv und mit Sorgfalt – inspiriert von der Jahreszeit, dem Moment und dem Menschen, für den er gedacht ist. Mit Liebe arrangiert, sicher verpackt und direkt zu Ihnen oder Ihren Lieblingsmenschen geliefert.',
   },
+trauer: {
+    metaTitle: 'Trauerfloristik Berlin — Lilac & Bergamot',
+    metaDescription: 'Stilvolle, einfühlsame Floristik für Trauerfeiern in Berlin. Individuelle Blumenarrangements, die Abschied & Erinnerung würdevoll begleiten.',
+    eyebrowLink: 'Events', eyebrow: 'Trauer',
+    h1: 'Florale Zeichen des Gedenkens',
+    lead: 'Blumen sagen oft mehr als Worte – besonders, wenn es um Abschied geht. In dieser stillen Zeit begleiten wir Sie mit einfühlsam gestalteter Trauerfloristik, die Erinnerungen ehrt und Trost spendet.',
+    servicesH2: 'Für Abschied und Erinnerung',
+    services: [
+      { h: 'Blumenkränze & Gestecke', p: 'Klassisch, modern oder naturnah – auf Wunsch mit Symbolblumen wie Lilien, Calla, Rosen oder Efeu.' },
+      { h: 'Urnen- und Sargschmuck', p: 'Schlichte Blumenbänder oder aufwändig gestaltete Umrahmungen für die Zeremonie.' },
+      { h: 'Kondolenzsträuße & Abschiedsblumen', p: 'Als Geste der Anteilnahme oder zur persönlichen Verabschiedung am Grab.' },
+      { h: 'Lieferung & Aufstellung in Berlin', p: 'Pünktlich zum Ort der Trauerfeier oder zum Friedhof.' },
+      { h: 'Beratung mit Feingefühl', p: 'In einem persönlichen Gespräch klären wir Blüten, Farben und Gestaltung – auch kurzfristig.' },
+    ],
+    meaningH2: 'Blumen mit Bedeutung',
+    meaningText: 'Welche Blume passt zum Abschied eines geliebten Menschen? Weiße Lilien stehen für Reinheit, Calla für Würde, Rosen für Liebe. Wir helfen Ihnen bei der Auswahl und gestalten florale Erinnerungen, die wirken – zurückhaltend, stark oder ganz individuell. Auch persönliche Gegenstände oder handgeschriebene Kärtchen lassen sich einfügen.',
+    faqH2: 'Häufige Fragen',
+    faq: [
+      { q: 'Welche Blumen sind für eine Trauerfeier geeignet?', a: 'Blumen mit Symbolcharakter wie Lilien, Calla, Nelken oder Rosen in gedeckten Farben sind üblich – wir beraten Sie gerne.' },
+      { q: 'Ist auch eine dezente, moderne Gestaltung möglich?', a: 'Ja. Wir bieten auch naturnahe, reduzierte oder saisonale Konzepte – passend zur Persönlichkeit des Verstorbenen.' },
+      { q: 'Wann sollte ich bestellen?', a: 'Gerne so früh wie möglich – in Notfällen sind auch kurzfristige Aufträge möglich.' },
+    ],
+    note: 'Die Preise richten sich nach Aufwand, Blütenwahl und Größe des Arrangements. Wir kalkulieren transparent und beraten Sie persönlich. Trauerfloristik ist auch im Abo möglich, etwa zur Grabgestaltung oder für regelmäßige Gedenktage.',
+  },
 };

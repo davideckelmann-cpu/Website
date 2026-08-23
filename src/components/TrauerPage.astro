@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCTA from './ContactCTA.astro';
+import { getPageImages } from '../utils/pageImages.js';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/index.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).trauer;
+const L = (p) => localizePath(p, lang);
+const bild = getPageImages('trauerfloristik');
+---
+<Base title={t.metaTitle} description={t.metaDescription} path="/events/trauerfloristik/">
+  <section class="ed-head">
+    <img src="/icons/icon-calla-herz.png" alt="" class="page-icon" data-reveal width="120" height="150" loading="lazy" />
+    <span class="eyebrow" data-reveal><a href={L('/events/')}>{t.eyebrowLink}</a> · {t.eyebrow}</span>
+    <h1 data-reveal style="--reveal-delay:80ms">{t.h1}</h1>
+    <p class="lead" data-reveal style="--reveal-delay:160ms">{t.lead}</p>
+  </section>
+
+  {bild.mode === 'set' && (
+    <section class="container ed-media-set" data-reveal>
+      {bild.images.map((src, i) => (
+        <img src={src} alt={`${t.eyebrow} – ${i + 1}`} loading="lazy" onerror="this.style.display='none'" />
+      ))}
+    </section>
+  )}
+  {bild.mode === 'single' && (
+    <section class="container ed-media" data-reveal>
+      <img src={bild.image} alt="Lilac & Bergamot" loading="lazy" onerror="this.closest('section').style.display='none'" />
+    </section>
+  )}
+
+  <section class="container services">
+    <h2 data-reveal>{t.servicesH2}</h2>
+    <div class="svc-rows">
+      {t.services.map((s, i) => (
+        <article class="svc-row" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+          <h3>{s.h}</h3>
+          <p>{s.p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="meaning">
+    <div class="container meaning-inner" data-reveal>
+      <h2>{t.meaningH2}</h2>
+      <p>{t.meaningText}</p>
+    </div>
+  </section>
+
+  <section class="container faq">
+    <h2 data-reveal>{t.faqH2}</h2>
+    <div class="faq-list">
+      {t.faq.map((f, i) => (
+        <details class="faq-item" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <p class="note" data-reveal>{t.note}</p>
+  </section>
+
+  <ContactCTA />
+</Base>
+
+<style>
+  .page-icon { width: 88px; height: auto; margin-bottom: var(--sp-sm); }
+  .ed-media img, .ed-media-set img { width: 100%; height: auto; display: block; }
+  .ed-media-set { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--sp-sm); }
+  @media (max-width: 760px) { .ed-media-set { grid-auto-flow: row; } }
+  .services { padding-block: var(--sp-lg) var(--sp-2xl); }
+  .services > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+  .svc-rows { border-top: 1px solid var(--linie-flieder); }
+  .svc-row { padding-block: 1.5rem; border-bottom: 1px solid var(--linie-flieder); }
+  .svc-row h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; color: var(--pflaume); margin-bottom: 0.35rem; }
+  .svc-row p { font-size: 0.98rem; color: var(--text-soft); }
+  .meaning { background: var(--bg-alt); padding-block: var(--sp-2xl); }
+  .meaning-inner { max-width: 72ch; }
+  .meaning h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-md); }
+  .meaning p { font-size: 1.08rem; color: var(--text-soft); }
+  .faq { padding-block: var(--sp-2xl); }
+  .faq > h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.5rem); margin-bottom: var(--sp-lg); }
+  .faq-list { display: grid; max-width: 76ch; border-top: 1px solid var(--linie-flieder); }
+  .faq-item { border-bottom: 1px solid var(--linie-flieder); padding: 0; background: transparent; }
+  .faq-item summary { padding: 1.3rem 0; cursor: pointer; font-family: var(--serif); font-size: 1.15rem; color: var(--pflaume); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .faq-item summary::after { content: '+'; color: var(--accent); font-size: 1.3rem; transition: transform 0.3s ease; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item p { padding: 0 0 1.3rem; color: var(--text-soft); }
+  .note { margin-top: var(--sp-lg); color: var(--text-soft); max-width: 72ch; }
+</style>

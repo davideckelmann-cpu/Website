@@ -2,29 +2,46 @@
 import Base from '../layouts/Base.astro';
 import { getPageImages, baseFromPath } from '../utils/pageImages.js';
 import ContactCTA from './ContactCTA.astro';
+import { getLangFromUrl, useTranslations, localizePath, defaultLang } from '../i18n/index.js';
+import { kategorienDe } from '../i18n/kategorien-angebot-de.js';
+import { kategorienEn } from '../i18n/kategorien-angebot-en.js';
+import { kategorienEventsDe } from '../i18n/kategorien-events-de.js';
+import { kategorienEventsEn } from '../i18n/kategorien-events-en.js';
+
+const lang = getLangFromUrl(Astro.url);
+const L = (p) => localizePath(p, lang);
+
+// Wenn dataKey gesetzt ist, holt die Seite ihre Texte sprachabhängig aus den
+// zentralen Kategorie-Dateien. Sonst gelten weiterhin die direkten Props.
+const { dataKey } = Astro.props;
+const katDe = { ...kategorienDe, ...kategorienEventsDe };
+const katEn = { ...kategorienEn, ...kategorienEventsEn };
+let props = Astro.props;
+if (dataKey) {
+  const src = (lang === 'en' ? katEn : katDe)[dataKey] || katDe[dataKey];
+  // Pfad wird aus dem Slug abgeleitet und bleibt in beiden Sprachen gleich (Präfix /en/ kommt aus der Seite)
+  props = { ...src, path: Astro.props.path, icon: Astro.props.icon };
+}
 
 const {
   title, description, path, cluster, clusterHref, clusterLabel,
   eyebrow, h1, intro, lead, sections = [], services = [], faq = [], image, images = [], icon,
-} = Astro.props;
+} = props;
 // AUTOMATISCHE BILD-ERKENNUNG
-// Schaut selbst nach, welche Bilder in public/images liegen.
-// Manuell gesetzte image=/images= Werte haben weiterhin Vorrang.
 const auto = getPageImages(baseFromPath(path));
 const autoImages = images.length > 0 ? images : auto.images;
 const autoImage  = image || auto.image;
 const portraitSet = autoImages.length > 1;
-// Orientierung der Bilder (quer/hochkant) aus der Automatik übernehmen.
 const metaList = auto.metaList || [];
 const singleMeta = auto.meta || null;
-// Ist das Einzelbild ein Querformat? Dann volle Breite (Band), sonst asymmetrisch hochkant.
 const singleQuer = singleMeta && singleMeta.orientation === 'quer';
-// Sind im Set überwiegend Querformate? Dann als Band, sonst gestaffelte Treppe.
 const setQuer = metaList.length > 0 && metaList.filter(m => m && m.orientation === 'quer').length > metaList.length / 2;
-// Abwechslung links/rechts für Einzel-Hochkant: aus dem Seitennamen ein stabiles
-// Muster ableiten (gleiche Seite -> immer gleiche Seite, aber Seiten wechseln sich ab).
 const spiegelBasis = baseFromPath(path);
 const spiegeln = spiegelBasis.length % 2 === 1;
+// Interne Links im Intro-HTML für die englische Version auf /en/ umschreiben.
+const introLocalized = (intro && lang !== defaultLang)
+  ? intro.replace(/href="\/(?!en\/)/g, `href="/${lang}/`)
+  : intro;
 // Eigene Bildbeschreibung je Bild (keine Dubletten – wichtig für SEO & Screenreader)
 // Nutzt jetzt die konkrete Seiten-Überschrift (h1) statt nur den Cluster-Namen,
 // dadurch etwas spezifischer. Für ein einzelnes Foto lässt sich weiterhin ein
@@ -69,7 +86,7 @@ const faqJson = faq.length > 0 ? {
 
   <section class="ed-head">
     {icon && <img src={icon} alt="" class="lp-icon" data-reveal width="120" height="150" loading="lazy" />}
-    <span class="eyebrow" data-reveal><a href={clusterHref}>{clusterLabel}</a> · {cluster}</span>
+    <span class="eyebrow" data-reveal><a href={L(clusterHref)}>{clusterLabel}</a> · {cluster}</span>
     <h1 data-reveal style="--reveal-delay:80ms">{h1}</h1>
     {lead && <p class="lead" data-reveal style="--reveal-delay:160ms">{lead}</p>}
   </section>
@@ -96,7 +113,7 @@ const faqJson = faq.length > 0 ? {
 
   {intro && (
     <section class="container lp-intro">
-      <div data-reveal set:html={intro} />
+      <div data-reveal set:html={introLocalized} />
     </section>
   )}
 

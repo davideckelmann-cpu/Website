@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getLangFromUrl, localizePath, defaultLang } from '../i18n/index.js';
 
 const {
   title = 'Lilac & Bergamot — Florale Gestaltung in Berlin',
@@ -11,14 +12,19 @@ const {
 } = Astro.props;
 
 // Basis-URL für kanonische Links / Open Graph.
-// Fällt auf die feste Domain zurück, falls Astro.site in der Config fehlt –
-// so bricht der Build nicht mit "Invalid URL" ab.
 const SITE = Astro.site ?? new URL('https://www.lilac-bergamot.com');
-const canonical = new URL(path || '/', SITE).href;
+const lang = getLangFromUrl(Astro.url);
+// Der übergebene path ist immer der "nackte" Pfad (z. B. /angebot/).
+// Kanonisch = die aktuelle Sprachvariante.
+const cleanPath = path || '/';
+const canonical = new URL(localizePath(cleanPath, lang), SITE).href;
 const ogImage = new URL(image, SITE).href;
+// hreflang: beide Sprachvarianten + x-default (zeigt auf Deutsch).
+const hrefDe = new URL(localizePath(cleanPath, 'de'), SITE).href;
+const hrefEn = new URL(localizePath(cleanPath, 'en'), SITE).href;
 ---
 <!DOCTYPE html>
-<html lang="de">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,6 +41,10 @@ const ogImage = new URL(image, SITE).href;
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
+  <!-- hreflang: Sprachvarianten für Google -->
+  <link rel="alternate" hreflang="de" href={hrefDe} />
+  <link rel="alternate" hreflang="en" href={hrefEn} />
+  <link rel="alternate" hreflang="x-default" href={hrefDe} />
 
   <!-- Open Graph (social sharing) -->
   <meta property="og:type" content="website" />
