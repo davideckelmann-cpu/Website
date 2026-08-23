@@ -1,14 +1,16 @@
 ---
 import ContactForm from './ContactForm.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/index.js';
 const { compact = false } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).cta;
 ---
 <section class={`cta-band ${compact ? 'compact' : ''}`}>
   <div class="container cta-inner" data-reveal>
     <div class="cta-copy">
-      <span class="eyebrow">Kontakt</span>
-      <h2>Erzählen Sie uns von Ihrer Idee.</h2>
-      <p>Sie möchten eine florale Komposition anfragen, einen besonderen Anlass gestalten
-        lassen oder haben eine Idee für eine Zusammenarbeit? Wir freuen uns auf Ihre Nachricht.</p>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2>{t.h2}</h2>
+      <p>{t.text}</p>
       <div class="cta-contact">
         <a href="tel:+493062904677">+49 (0) 30 629 046 77</a>
         <a href="mailto:hello@lilac-bergamot.com">hello@lilac-bergamot.com</a>

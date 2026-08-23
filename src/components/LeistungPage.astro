@@ -9,6 +9,7 @@ import { kategorienEventsDe } from '../i18n/kategorien-events-de.js';
 import { kategorienEventsEn } from '../i18n/kategorien-events-en.js';
 
 const lang = getLangFromUrl(Astro.url);
+const ui = useTranslations(lang);
 const L = (p) => localizePath(p, lang);
 
 // Wenn dataKey gesetzt ist, holt die Seite ihre Texte sprachabhängig aus den
@@ -119,7 +120,7 @@ const faqJson = faq.length > 0 ? {
 
   {services.length > 0 && (
     <section class="container lp-services">
-      <h2 data-reveal>Unsere Leistungen</h2>
+      <h2 data-reveal>{ui.leistung.services}</h2>
       <ul class="svc-list">
         {services.map((s, i) => (
           <li data-reveal style={`--reveal-delay:${(i % 4) * 70}ms`}>{s}</li>
@@ -139,7 +140,7 @@ const faqJson = faq.length > 0 ? {
 
   {faq.length > 0 && (
     <section class="container lp-faq">
-      <h2 data-reveal>Häufige Fragen</h2>
+      <h2 data-reveal>{ui.leistung.faq}</h2>
       <div class="faq-list">
         {faq.map((f, i) => (
           <details data-reveal style={`--reveal-delay:${i * 70}ms`}>

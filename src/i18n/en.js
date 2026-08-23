@@ -193,4 +193,13 @@ trauer: {
     ],
     note: 'Prices depend on the effort, the choice of blooms and the size of the arrangement. We calculate transparently and advise you personally. Funeral floristry is also possible by subscription, for example for grave design or regular days of remembrance.',
   },
+cta: {
+    eyebrow: 'Contact',
+    h2: 'Tell us about your idea.',
+    text: 'Would you like to enquire about a floral composition, have a special occasion designed, or have an idea for a collaboration? We look forward to hearing from you.',
+  },
+  leistung: {
+    services: 'Our Services',
+    faq: 'Frequently Asked Questions',
+  },
 };

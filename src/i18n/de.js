@@ -192,4 +192,13 @@ trauer: {
     ],
     note: 'Die Preise richten sich nach Aufwand, Blütenwahl und Größe des Arrangements. Wir kalkulieren transparent und beraten Sie persönlich. Trauerfloristik ist auch im Abo möglich, etwa zur Grabgestaltung oder für regelmäßige Gedenktage.',
   },
+cta: {
+    eyebrow: 'Kontakt',
+    h2: 'Erzählen Sie uns von Ihrer Idee.',
+    text: 'Sie möchten eine florale Komposition anfragen, einen besonderen Anlass gestalten lassen oder haben eine Idee für eine Zusammenarbeit? Wir freuen uns auf Ihre Nachricht.',
+  },
+  leistung: {
+    services: 'Unsere Leistungen',
+    faq: 'Häufige Fragen',
+  },
 };
