@@ -1,0 +1,41 @@
+/* ============================================================
+   Bild-Fix — verhindert verzerrte Fotos
+   ------------------------------------------------------------
+   Diese Datei ergänzt die bestehenden Styles. Sie überschreibt
+   keine Seite, sondern stellt nur sicher, dass Bilder nie
+   gestreckt oder gestaucht werden.
+   ============================================================ */
+
+/* Grundregel: Bilder behalten immer ihr Seitenverhältnis.
+   Wenn ein Rahmen eine feste Höhe hat, wird das Bild
+   beschnitten statt verzerrt. */
+img {
+  object-fit: cover;
+}
+
+/* Bilder, die ganz sichtbar bleiben sollen (nichts abschneiden) */
+.v-hero-img img,
+.hero-media img,
+.lp-media img,
+.lp-portrait img,
+.story-media img,
+.page-media img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Auf dem Handy: hochkante Fotos vollständig zeigen statt
+   in einen breiten Rahmen zu quetschen */
+@media (max-width: 860px) {
+  .v-hero-img img,
+  .hero-media img,
+  .lp-media img,
+  .lp-portrait img,
+  .story-media img,
+  .page-media img {
+    height: auto !important;
+    max-height: 72vh;
+    object-fit: contain;
+    background: #FBFBEF;
+  }
+}
