@@ -33,10 +33,10 @@ export const legalDe = {
     metaDescription: 'Datenschutzerklärung von Lilac & Bergamot, Floristik in Berlin. Informationen zur Verarbeitung personenbezogener Daten nach DSGVO.',
     eyebrow: 'Rechtliches',
     h1: 'Datenschutzerklärung',
-    notice: 'Hinweis: Diese Datenschutzerklärung ist ein strukturierter Entwurf. Bitte an eure tatsächlich eingesetzten Dienste anpassen (Hosting, Formular-Dienst, Analyse-Tools) und rechtlich prüfen lassen – z. B. mit einem geprüften Generator (eRecht24, Dr. Schwenke) oder durch eine:n Anwält:in. Die [ ]-Stellen müssen ausgefüllt werden.',
+   
     body: `
       <h2>1. Verantwortliche Stelle</h2>
-      <p>Verantwortlich für die Datenverarbeitung auf dieser Website:<br>[Vor- und Nachname / Inhaber:in]<br>Lilac &amp; Bergamot, Berliner Allee 121, 13088 Berlin<br>E-Mail: hello@lilac-bergamot.com · Telefon: +49 (0) 30 629 046 77</p>
+      <p>Verantwortlich für die Datenverarbeitung auf dieser Website:<br>[David Eckelmann / Inhaber]<br>Lilac &amp; Bergamot, Berliner Allee 121, 13088 Berlin<br>E-Mail: hello@lilac-bergamot.com · Telefon: +49 (0) 30 629 046 77</p>
       <h2>2. Allgemeines zur Datenverarbeitung</h2>
       <p>Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist. Rechtsgrundlage ist in der Regel Art. 6 DSGVO.</p>
       <h2>3. Hosting &amp; Auslieferung (Bunny.net)</h2>
