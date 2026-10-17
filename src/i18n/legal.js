@@ -33,7 +33,7 @@ export const legalDe = {
     metaDescription: 'Datenschutzerklärung von Lilac & Bergamot, Floristik in Berlin. Informationen zur Verarbeitung personenbezogener Daten nach DSGVO.',
     eyebrow: 'Rechtliches',
     h1: 'Datenschutzerklärung',
-   
+    notice: '',
     body: `
       <h2>1. Verantwortliche Stelle</h2>
       <p>Verantwortlich für die Datenverarbeitung auf dieser Website:<br>[David Eckelmann / Inhaber]<br>Lilac &amp; Bergamot, Berliner Allee 121, 13088 Berlin<br>E-Mail: hello@lilac-bergamot.com · Telefon: +49 (0) 30 629 046 77</p>
@@ -55,28 +55,15 @@ export const legalDe = {
     `,
   },
   agb: {
-    // AGB-Seite · Stand Oktober 2026
-// Pfad im Repository: src/pages/agb.astro  → erreichbar unter /agb/
-const title = 'Allgemeine Geschäftsbedingungen · Lilac & Bergamot';
-const description = 'Allgemeine Geschäftsbedingungen von Lilac & Bergamot, Floristik-Studio in Berlin. Stand Oktober 2026.';
----
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href="https://www.lilac-bergamot.com/agb/" />
-  </head>
-  <body>
-    <Nav />
-    <main class="agb">
-      <p class="ueberzeile">Rechtliches</p>
-      <h1>Allgemeine Geschäftsbedingungen</h1>
-      <p class="stand">Lilac &amp; Bergamot · David Eckelmann · Berliner Allee 121, 13088 Berlin<br />Stand: Oktober 2026</p>
+    metaTitle: 'AGB — Lilac & Bergamot',
+    metaDescription: 'Allgemeine Geschäftsbedingungen von Lilac & Bergamot, Floristik in Berlin: Abonnements, Event-Floristik und Einzelaufträge. Stand Oktober 2026.',
+    eyebrow: 'Rechtliches',
+    h1: 'Allgemeine Geschäftsbedingungen',
+    notice: '',
+    body: `
+      <p>Lilac &amp; Bergamot · David Eckelmann · Berliner Allee 121, 13088 Berlin<br>Stand: Oktober 2026</p>
       <h2>§ 1 Geltungsbereich</h2>
-      <p>(1) Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Lilac &amp; Bergamot (im Folgenden &bdquo;wir&ldquo;) und unseren Kundinnen und Kunden (im Folgenden &bdquo;Kunde&ldquo;) über floristische Leistungen. Dazu gehören regelmäßige Blumenlieferungen (Abonnements), Floristik für Veranstaltungen (Events), Einzelaufträge und Musterarrangements.</p>
+      <p>(1) Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Lilac &amp; Bergamot (im Folgenden „wir“) und unseren Kundinnen und Kunden (im Folgenden „Kunde“) über floristische Leistungen. Dazu gehören regelmäßige Blumenlieferungen (Abonnements), Floristik für Veranstaltungen (Events), Einzelaufträge und Musterarrangements.</p>
       <p>(2) Sie gelten für Unternehmer und Verbraucher. Wo einzelne Regelungen nur für eine der beiden Gruppen gelten, ist das ausdrücklich gesagt.</p>
       <p>(3) Abweichende Bedingungen des Kunden gelten nur, wenn wir ihnen ausdrücklich in Textform zustimmen. Individuelle Vereinbarungen im Angebot oder in der Auftragsbestätigung haben Vorrang vor diesen AGB.</p>
       <h2>§ 2 Angebot und Vertragsschluss</h2>
@@ -146,57 +133,6 @@ const description = 'Allgemeine Geschäftsbedingungen von Lilac & Bergamot, Flor
       <p>(1) Es gilt das Recht der Bundesrepublik Deutschland.</p>
       <p>(2) Gerichtsstand für Kaufleute, juristische Personen des öffentlichen Rechts und öffentlich-rechtliche Sondervermögen ist Berlin.</p>
       <p>(3) Sollten einzelne Bestimmungen unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
-    </main>
-    <Footer />
-  </body>
-</html>
-
-<style>
-  .agb {
-    max-width: 46rem;
-    margin: 0 auto;
-    padding: 8rem 1.5rem 6rem;
-    color: #6E3663;
-    font-family: 'Mulish', Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.65;
-  }
-  .ueberzeile {
-    font-size: 0.8rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #8A3E7D;
-    margin: 0 0 1rem;
-  }
-  h1 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    font-size: 2.6rem;
-    line-height: 1.1;
-    color: #561C4C;
-    margin: 0 0 1.5rem;
-  }
-  .stand {
-    color: #8A6383;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #E4E6B2;
-    margin-bottom: 2.5rem;
-  }
-  h2 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
-    font-size: 1.6rem;
-    color: #561C4C;
-    margin: 2.5rem 0 0.75rem;
-  }
-  p { margin: 0 0 1rem; }
-  ul { margin: 0 0 1rem; padding-left: 1.2rem; }
-  li { margin-bottom: 0.3rem; }
-  @media (max-width: 600px) {
-    .agb { padding-top: 6rem; }
-    h1 { font-size: 2rem; }
-  }
-</style>
     `,
   },
 };
@@ -257,38 +193,85 @@ export const legalEn = {
     `,
   },
   agb: {
-    metaTitle: 'Terms & Conditions — Lilac & Bergamot, Floristry in Berlin',
-    metaDescription: 'General terms and conditions of Lilac & Bergamot – for flower subscriptions, event floristry and floral services in Berlin.',
+    metaTitle: 'Terms & Conditions — Lilac & Bergamot',
+    metaDescription: 'General terms and conditions of Lilac & Bergamot, floristry in Berlin: subscriptions, event floristry and individual orders. As of October 2026.',
     eyebrow: 'Legal',
-    h1: 'General Terms & Conditions',
+    h1: 'General Terms and Conditions',
     notice: EN_DISCLAIMER,
     body: `
-      <h2>1. Scope</h2>
-      <p>These general terms and conditions apply to all contracts between Lilac &amp; Bergamot – floristry studio (hereinafter “Contractor”) and the customer regarding the regular delivery of floral arrangements and other floristic services, unless expressly agreed otherwise.</p>
-      <h2>2. Scope of services</h2>
-      <p>The design, delivery and care of the floral arrangements takes place by arrangement within an agreed delivery interval (e.g. weekly). The type, scope and frequency of deliveries result from the respective offer or contract. The Contractor reserves the right to adapt materials, colours and forms in line with seasonal conditions and artistic freedom.</p>
-      <h2>3. Artistic freedom of design</h2>
-      <p>The floral design is carried out at artistic discretion and taking the spatial conditions into account. Deviations in form, colour or material compared to sample images are possible and do not constitute a defect.</p>
-      <h2>4. Loan of vessels and materials</h2>
-      <p>As part of the floral design, vases, vessels and decorative elements (loan material) are provided on loan. Ownership of these items remains with the Contractor. The customer undertakes to treat the loan material with care, to leave it in the agreed area and to report damage or loss immediately. Damage to or loss of the loan material will be invoiced to the customer at replacement value. On termination of the contractual relationship, all loan material must be returned complete and undamaged.</p>
-      <h2>5. Retention of title</h2>
-      <p>Delivered floral works and materials remain the property of the Contractor until full payment. For subscription or ongoing deliveries, all loan vessels remain the property of the Contractor.</p>
-      <h2>6. Prices and payment terms</h2>
-      <p>The agreed prices are final prices. VAT is not shown in accordance with § 19 UStG (small-business regulation).</p>
-      <p>For orders with a total value over 250 euros, a deposit of 50 % of the order sum is due immediately upon order confirmation. The remaining amount is payable after delivery or performance within 7 days without deduction.</p>
-      <p>Unless otherwise agreed, monthly invoicing applies to ongoing subscription services. The Contractor reserves the right to suspend further delivery in the event of late payment until payment is received.</p>
-      <h2>7. Delivery terms</h2>
-      <p>Deliveries take place according to the cycle specified in the offer or contract. The Contractor is entitled to adjust the timing of deliveries in exceptional circumstances (e.g. material shortages, weather conditions). A one-off postponement or pause by mutual agreement is possible.</p>
-      <h2>8. Liability</h2>
-      <p>The Contractor is liable only for damage based on intentional or grossly negligent conduct. No liability is accepted for slightly negligent breaches of duty, unless they concern the breach of essential contractual obligations. No liability is accepted for damage to provided surfaces, furniture or fittings, unless caused by gross negligence.</p>
-      <h2>9. Contract term, intervals and termination</h2>
-      <p>The contract term is based on the individual agreement between the Contractor and the customer. Unless otherwise agreed, the minimum term for regular delivery or design subscriptions is three months.</p>
-      <p>Delivery intervals (e.g. weekly, fortnightly or monthly) and possible delivery pauses can be individually agreed and adjusted by mutual consent. A temporary pause (e.g. for company holidays or seasonal breaks) is possible provided it is announced at least two weeks in advance.</p>
-      <p>The contract may be terminated in writing with four weeks’ notice to the end of the month. The right to terminate without notice for good cause remains unaffected.</p>
-      <h2>10. Final provisions</h2>
-      <p>German law applies. The place of jurisdiction is Berlin, as far as legally permissible. Should any provision of these terms be invalid, the validity of the remaining provisions remains unaffected.</p>
-      <h2>Contact</h2>
-      <p>Lilac &amp; Bergamot – floral studio<br>David Eckelmann<br>Berliner Allee 121 · 13088 Berlin</p>
+      <p>Lilac &amp; Bergamot · David Eckelmann · Berliner Allee 121, 13088 Berlin<br>As of: October 2026</p>
+      <h2>§ 1 Scope</h2>
+      <p>(1) These General Terms and Conditions apply to all contracts between Lilac &amp; Bergamot (“we”) and our customers (“the customer”) for floristry services. These include regular flower deliveries (subscriptions), floristry for events, individual orders and sample arrangements.</p>
+      <p>(2) They apply to businesses and consumers. Where a provision applies to only one of these groups, this is stated expressly.</p>
+      <p>(3) Deviating terms of the customer apply only if we agree to them expressly in text form. Individual agreements in the quote or order confirmation take precedence over these terms.</p>
+      <h2>§ 2 Quote and conclusion of contract</h2>
+      <p>(1) Our quotes are non-binding and valid for 14 days from the date of the quote, unless the quote states otherwise. Prices for flowers and plants follow the market and may change after the validity period.</p>
+      <p>(2) The contract is concluded when the customer accepts the quote in text form (for example by email) and we confirm the order in text form.</p>
+      <p>(3) Changes and additions must be made in text form.</p>
+      <h2>§ 3 Scope of services</h2>
+      <p>(1) The type, scope, quantity, dimensions and frequency of our services are set out in the quote or contract.</p>
+      <p>(2) For subscriptions, we adapt materials, colours and shapes to the season.</p>
+      <p>(3) For events, the customer may change quantities up to 21 days before the event. Increases after that are possible subject to availability. Reductions less than 21 days before the event count as a partial cancellation under § 10 for the items omitted.</p>
+      <p>(4) We include elements provided by the customer (for example vessels, centrepieces or decoration) in our planning. We are not responsible for their condition or suitability.</p>
+      <h2>§ 4 Artistic design and availability</h2>
+      <p>(1) Every arrangement is made by hand. Sketches, collages, mood boards and sample images show the effect, colour palette and proportion, not the exact result. Deviations in shape, colour or material are possible and do not constitute a defect.</p>
+      <p>(2) Flowers, plants and fruit are natural products and depend on season, weather and market. If a material is not available, or not available in the agreed quality, on the delivery date, we replace it with one of the same colour, shape and effect. The agreed price remains unchanged.</p>
+      <h2>§ 5 Sample arrangement</h2>
+      <p>(1) We make sample arrangements only against payment. The price is stated in the quote.</p>
+      <p>(2) If the order is placed, the price of the sample arrangement is credited only if this is expressly agreed in the quote.</p>
+      <h2>§ 6 Hire of vessels and materials</h2>
+      <p>(1) Vessels, trays, vases, stands, plinths and other materials that we provide on loan remain our property.</p>
+      <p>(2) The customer treats hired material with care, reports damage or loss without delay and returns it in full at the end of the contract.</p>
+      <p>(3) For events, we collect hired material in the agreed time window after the event. Until collection, the customer is responsible for the hired material and ensures that it is accessible and not disposed of.</p>
+      <p>(4) We charge damaged or unreturned hired material at replacement value. The customer may prove that no damage or less damage has occurred.</p>
+      <h2>§ 7 Retention of title</h2>
+      <p>Delivered arrangements and works remain our property until paid in full. Hired material under § 6 remains our property at all times.</p>
+      <h2>§ 8 Prices and payment</h2>
+      <p>(1) All prices are final prices. In accordance with § 19 of the German VAT Act (UStG), no VAT is charged (small business regulation).</p>
+      <p>(2) For orders over 250 euros, a deposit of 50 % of the order value is due with the order confirmation. The order becomes binding for us only once the deposit has been received; before that, we cannot reserve material or the date.</p>
+      <p>(3) For events, the balance is due within 14 days after the event. Additional services agreed on the day of the event are invoiced separately.</p>
+      <p>(4) Subscriptions are usually invoiced monthly.</p>
+      <p>(5) Invoices are payable without deduction. In the event of late payment, we may suspend further deliveries until the outstanding amount has been paid.</p>
+      <h2>§ 9 Delivery, setup and removal</h2>
+      <p>(1) We deliver subscriptions at the agreed intervals. A one-off postponement or pause is possible by mutual agreement.</p>
+      <p>(2) For events, we deliver and set up in the agreed time window. The customer ensures that we can access the location at that time, that access and loading areas can be used and that the setup areas are clear. The customer names a contact person on site.</p>
+      <p>(3) Waiting times or additional journeys for which we are not responsible are charged according to time spent. We state the hourly rate in advance.</p>
+      <p>(4) If a date cannot be met for reasons beyond our control (for example force majeure, severe weather, strikes, official orders or supplier failures), the service is postponed accordingly. We inform the customer without delay and, where possible, offer an equivalent solution.</p>
+      <p>(5) If arrangements are placed outdoors, we replace cold-sensitive flowers with suitable material by agreement.</p>
+      <h2>§ 10 Cancellation and postponement of events</h2>
+      <p>(1) The customer may cancel an event order at any time in text form. The date on which we receive the cancellation is decisive.</p>
+      <p>(2) In the event of cancellation, we charge the following flat rates, based on the order value:</p>
+      <ul>
+        <li>up to 60 days before the event: only services already provided (for example concept, sample arrangement), at most the deposit</li>
+        <li>59 to 30 days before: 30 %</li>
+        <li>29 to 14 days before: 50 %</li>
+        <li>13 to 4 days before: 80 %</li>
+        <li>from 3 days before or in case of non-acceptance: 100 %</li>
+      </ul>
+      <p>(3) The deposit is credited against the flat rate. The customer may prove that no damage or less damage has occurred. We reserve the right to prove greater damage.</p>
+      <p>(4) The event date may be postponed once without cancellation costs up to 30 days before, provided we are available on the new date. Seasonal price changes for the new date remain reserved.</p>
+      <h2>§ 11 Open flames and safety</h2>
+      <p>(1) Our arrangements may contain flammable materials, such as feathers, grasses, branches or dried material. The customer and the location are responsible for candles and open flames near the floristry. Candles should only be placed in hurricane lanterns and at a sufficient distance.</p>
+      <p>(2) Fruit, petals and pollen may stain textiles and surfaces. We use protective bases where possible. Sensitive surfaces, for example lacquered instruments, must be pointed out to us in advance.</p>
+      <h2>§ 12 Liability</h2>
+      <p>(1) We are liable without limitation for intent and gross negligence, for injury to life, body or health and under the German Product Liability Act.</p>
+      <p>(2) In the case of slight negligence, we are liable only for breach of essential contractual obligations, i.e. obligations whose fulfilment makes the proper performance of the contract possible in the first place. In this case, liability is limited to the typical, foreseeable damage.</p>
+      <p>(3) For damage to surfaces, furniture or fittings caused by water, fruit, plant sap or pollen, we are liable only for gross negligence, unless paragraph 1 provides otherwise.</p>
+      <p>(4) We are not liable for damage caused by open flames not lit by us.</p>
+      <h2>§ 13 Subscriptions: term, pauses and termination</h2>
+      <p>(1) The minimum term of a subscription is three months, unless agreed otherwise.</p>
+      <p>(2) Pauses must be announced at least two weeks in advance.</p>
+      <p>(3) Ordinary termination must be made in text form with four weeks' notice to the end of the month. The right to terminate without notice for good cause remains unaffected.</p>
+      <h2>§ 14 Photos and references</h2>
+      <p>We may photograph our work and use the photos on our website and social media channels. Guests are not shown in an identifiable way. The customer may object to this use in text form, also afterwards; we name the customer and the occasion only with their consent.</p>
+      <h2>§ 15 Information for consumers</h2>
+      <p>(1) For goods made to customer specifications or that can spoil quickly, there is no right of withdrawal under § 312g (2) no. 1 and 2 of the German Civil Code (BGB). Otherwise, the statutory provisions apply.</p>
+      <p>(2) We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+      <h2>§ 16 Final provisions</h2>
+      <p>(1) The law of the Federal Republic of Germany applies.</p>
+      <p>(2) The place of jurisdiction for merchants, legal entities under public law and special funds under public law is Berlin.</p>
+      <p>(3) Should individual provisions be or become invalid, the validity of the remaining provisions remains unaffected.</p>
+      <p>(4) This English version is a translation for convenience. In case of doubt, the German version prevails.</p>
     `,
   },
 };
