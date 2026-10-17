@@ -1,99 +1,146 @@
 ---
 import Base from '../layouts/Base.astro';
+// AGB-Seite · Stand Oktober 2026
+// Pfad im Repository: src/pages/agb.astro  → erreichbar unter /agb/
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+const title = 'Allgemeine Geschäftsbedingungen · Lilac & Bergamot';
+const description = 'Allgemeine Geschäftsbedingungen von Lilac & Bergamot, Floristik-Studio in Berlin. Stand Oktober 2026.';
 ---
-<Base
-  title="AGB — Lilac & Bergamot, Floristik in Berlin"
-  description="Allgemeine Geschäftsbedingungen von Lilac & Bergamot – für Blumen-Abos, Event-Floristik und florale Dienstleistungen in Berlin."
-  path="/agb/"
->
-  <section class="container legal">
-    <span class="eyebrow" data-reveal>Rechtliches</span>
-    <h1 data-reveal style="--reveal-delay:80ms">Allgemeine Geschäftsbedingungen</h1>
-
-    <div class="legal-body" data-reveal style="--reveal-delay:120ms">
-      <h2>1. Geltungsbereich</h2>
-      <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Lilac &amp; Bergamot
-        – Floristikstudio (nachfolgend „Auftragnehmer“) und dem Kunden über die regelmäßige Lieferung
-        floraler Arrangements sowie sonstige floristische Dienstleistungen, sofern nicht ausdrücklich
-        abweichende Vereinbarungen getroffen wurden.</p>
-
-      <h2>2. Leistungsumfang</h2>
-      <p>Die Gestaltung, Lieferung und Pflege der floralen Arrangements erfolgt nach Absprache im
-        Rahmen eines vereinbarten Lieferintervalls (z. B. wöchentlich). Art, Umfang und Häufigkeit der
-        Lieferungen ergeben sich aus dem jeweiligen Angebot oder Vertrag. Der Auftragnehmer behält sich
-        vor, Materialien, Farben und Formen entsprechend saisonaler Gegebenheiten und künstlerischer
-        Freiheit anzupassen.</p>
-
-      <h2>3. Künstlerische Gestaltungsfreiheit</h2>
-      <p>Die florale Gestaltung erfolgt nach künstlerischem Ermessen und unter Berücksichtigung der
-        räumlichen Gegebenheiten. Abweichungen in Form, Farbe oder Material im Vergleich zu
-        Musterabbildungen sind möglich und stellen keinen Mangel dar.</p>
-
-      <h2>4. Leihweise Überlassung von Gefäßen und Materialien</h2>
-      <p>Im Rahmen der floralen Gestaltung werden Vasen, Gefäße und Dekorationselemente (Leihmaterial)
-        leihweise zur Verfügung gestellt. Das Eigentum an diesen Gegenständen verbleibt beim
-        Auftragnehmer. Der Kunde verpflichtet sich, das Leihmaterial pfleglich zu behandeln, im
-        vereinbarten Bereich zu belassen und Schäden oder Verluste umgehend mitzuteilen.
-        Beschädigungen oder Verlust des Leihmaterials werden dem Kunden zum Wiederbeschaffungswert in
-        Rechnung gestellt. Nach Beendigung des Vertragsverhältnisses ist sämtliches Leihmaterial
-        vollständig und unbeschädigt zurückzugeben.</p>
-
-      <h2>5. Eigentumsvorbehalt</h2>
-      <p>Gelieferte florale Werke und Materialien bleiben bis zur vollständigen Bezahlung Eigentum des
-        Auftragnehmers. Bei Abonnement- oder Dauerlieferungen verbleiben alle Leihgefäße im Eigentum
-        des Auftragnehmers.</p>
-
-      <h2>6. Preise und Zahlungsbedingungen</h2>
-      <p>Die vereinbarten Preise sind Endpreise. Umsatzsteuer wird gemäß § 19 UStG (Kleinunternehmerregelung) nicht ausgewiesen.</p>
-      <p>Für Aufträge mit einem Gesamtwert über 250 Euro ist eine Anzahlung in Höhe von 50 % der
-        Auftragssumme bei Auftragsbestätigung sofort fällig. Der Restbetrag ist nach Lieferung bzw.
-        Leistungserbringung innerhalb von 7 Tagen ohne Abzug zahlbar.</p>
-      <p>Sofern nicht anders vereinbart, gelten für laufende Abonnementleistungen monatliche
-        Abrechnungen. Der Auftragnehmer behält sich vor, bei Zahlungsverzug die weitere Belieferung
-        bis zum Zahlungseingang auszusetzen.</p>
-
-      <h2>7. Lieferbedingungen</h2>
-      <p>Lieferungen erfolgen nach dem im Angebot oder Vertrag festgelegten Turnus. Der Auftragnehmer
-        ist berechtigt, Lieferungen bei außergewöhnlichen Umständen (z. B. Materialknappheit,
-        Witterungseinflüsse) zeitlich anzupassen. Eine einmalige Verschiebung oder Pausierung im
-        gegenseitigen Einvernehmen ist möglich.</p>
-
-      <h2>8. Haftung</h2>
-      <p>Der Auftragnehmer haftet nur für Schäden, die auf vorsätzlichem oder grob fahrlässigem
-        Verhalten beruhen. Für leicht fahrlässige Pflichtverletzungen wird keine Haftung übernommen,
-        es sei denn, es handelt sich um Verletzungen wesentlicher Vertragspflichten. Für Schäden an
-        bereitgestellten Flächen, Möbeln oder Einrichtungen wird keine Haftung übernommen, sofern diese
-        nicht durch grobe Fahrlässigkeit verursacht wurden.</p>
-
-      <h2>9. Vertragsdauer, Intervalle und Kündigung</h2>
-      <p>Die Vertragsdauer richtet sich nach der individuell getroffenen Vereinbarung zwischen dem
-        Auftragnehmer und dem Kunden. Sofern nichts Abweichendes vereinbart wurde, beträgt die
-        Mindestlaufzeit für regelmäßige Liefer- oder Gestaltungsabonnements drei Monate.</p>
-      <p>Lieferintervalle (z. B. wöchentlich, zweiwöchentlich oder monatlich) sowie mögliche
-        Lieferpausen können individuell vereinbart und in gegenseitigem Einvernehmen angepasst werden.
-        Eine vorübergehende Pausierung (z. B. bei Betriebsferien oder saisonalen Unterbrechungen) ist
-        möglich, sofern sie mindestens zwei Wochen im Voraus angekündigt wird.</p>
-      <p>Der Vertrag kann mit einer Frist von vier Wochen zum Monatsende schriftlich gekündigt werden.
-        Eine fristlose Kündigung aus wichtigem Grund bleibt hiervon unberührt.</p>
-
-      <h2>10. Schlussbestimmungen</h2>
-      <p>Es gilt deutsches Recht. Gerichtsstand ist Berlin, soweit gesetzlich zulässig. Sollte eine
-        Bestimmung dieser AGB unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen
-        unberührt.</p>
-
-      <h2>Kontakt</h2>
-      <p>Lilac &amp; Bergamot – Florales Studio<br>
-        David Eckelmann<br>
-        Berliner Allee 121 · 13088 Berlin</p>
-    </div>
-  </section>
-</Base>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://www.lilac-bergamot.com/agb/" />
+  </head>
+  <body>
+    <Nav />
+    <main class="agb">
+      <p class="ueberzeile">Rechtliches</p>
+      <h1>Allgemeine Geschäftsbedingungen</h1>
+      <p class="stand">Lilac &amp; Bergamot · David Eckelmann · Berliner Allee 121, 13088 Berlin<br />Stand: Oktober 2026</p>
+      <h2>§ 1 Geltungsbereich</h2>
+      <p>(1) Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Lilac &amp; Bergamot (im Folgenden &bdquo;wir&ldquo;) und unseren Kundinnen und Kunden (im Folgenden &bdquo;Kunde&ldquo;) über floristische Leistungen. Dazu gehören regelmäßige Blumenlieferungen (Abonnements), Floristik für Veranstaltungen (Events), Einzelaufträge und Musterarrangements.</p>
+      <p>(2) Sie gelten für Unternehmer und Verbraucher. Wo einzelne Regelungen nur für eine der beiden Gruppen gelten, ist das ausdrücklich gesagt.</p>
+      <p>(3) Abweichende Bedingungen des Kunden gelten nur, wenn wir ihnen ausdrücklich in Textform zustimmen. Individuelle Vereinbarungen im Angebot oder in der Auftragsbestätigung haben Vorrang vor diesen AGB.</p>
+      <h2>§ 2 Angebot und Vertragsschluss</h2>
+      <p>(1) Unsere Angebote sind freibleibend und 14 Tage ab Angebotsdatum gültig, sofern im Angebot nichts anderes steht. Preise für Blumen und Pflanzen richten sich nach dem Markt; nach Ablauf der Gültigkeit können sie sich ändern.</p>
+      <p>(2) Der Vertrag kommt zustande, wenn der Kunde das Angebot in Textform annimmt (zum Beispiel per E-Mail) und wir den Auftrag in Textform bestätigen.</p>
+      <p>(3) Änderungen und Ergänzungen bedürfen der Textform.</p>
+      <h2>§ 3 Leistungsumfang</h2>
+      <p>(1) Art, Umfang, Stückzahl, Maße und Häufigkeit unserer Leistungen ergeben sich aus dem Angebot oder dem Vertrag.</p>
+      <p>(2) Bei Abonnements passen wir Materialien, Farben und Formen der Saison an.</p>
+      <p>(3) Bei Events kann der Kunde Stückzahlen bis 21 Tage vor der Veranstaltung ändern. Erhöhungen danach sind nach Verfügbarkeit möglich. Reduzierungen weniger als 21 Tage vor der Veranstaltung gelten für die entfallenden Positionen als Teilstornierung nach § 10.</p>
+      <p>(4) Vom Kunden gestellte Elemente (zum Beispiel Gefäße, Centerpieces oder Dekoration) beziehen wir in die Planung ein. Für deren Zustand und Eignung sind wir nicht verantwortlich.</p>
+      <h2>§ 4 Künstlerische Gestaltung und Verfügbarkeit</h2>
+      <p>(1) Jedes Arrangement wird von Hand gefertigt. Skizzen, Collagen, Moodboards und Musterbilder zeigen Wirkung, Farbwelt und Proportion, nicht das exakte Ergebnis. Abweichungen in Form, Farbe oder Material sind möglich und stellen keinen Mangel dar.</p>
+      <p>(2) Blumen, Pflanzen und Früchte sind Naturprodukte und von Saison, Wetter und Markt abhängig. Ist ein Material zum Liefertermin nicht oder nicht in der vereinbarten Qualität verfügbar, ersetzen wir es durch eines mit gleicher Farbe, Form und Wirkung. Der vereinbarte Preis bleibt unverändert.</p>
+      <h2>§ 5 Musterarrangement</h2>
+      <p>(1) Ein Musterarrangement fertigen wir nur gegen Vergütung. Der Preis steht im Angebot.</p>
+      <p>(2) Kommt der Auftrag zustande, wird der Preis des Musterarrangements nur angerechnet, wenn dies im Angebot ausdrücklich vereinbart ist.</p>
+      <h2>§ 6 Leihweise Überlassung von Gefäßen und Materialien</h2>
+      <p>(1) Gefäße, Tabletts, Vasen, Ständer, Sockel und sonstige Materialien, die wir leihweise stellen, bleiben unser Eigentum.</p>
+      <p>(2) Der Kunde behandelt das Leihmaterial sorgfältig, meldet Schäden oder Verluste unverzüglich und gibt es nach Vertragsende vollständig zurück.</p>
+      <p>(3) Bei Events holen wir das Leihmaterial im vereinbarten Zeitfenster nach der Veranstaltung ab. Bis zur Abholung trägt der Kunde die Verantwortung für das Leihmaterial; er sorgt dafür, dass es zugänglich ist und nicht entsorgt wird.</p>
+      <p>(4) Beschädigtes oder nicht zurückgegebenes Leihmaterial berechnen wir zum Wiederbeschaffungswert. Dem Kunden bleibt der Nachweis vorbehalten, dass kein oder ein geringerer Schaden entstanden ist.</p>
+      <h2>§ 7 Eigentumsvorbehalt</h2>
+      <p>Gelieferte Arrangements und Werke bleiben bis zur vollständigen Bezahlung unser Eigentum. Leihmaterial nach § 6 bleibt dauerhaft unser Eigentum.</p>
+      <h2>§ 8 Preise und Zahlung</h2>
+      <p>(1) Alle Preise sind Endpreise. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
+      <p>(2) Bei Aufträgen über 250 Euro ist eine Anzahlung von 50 % des Auftragswerts mit der Auftragsbestätigung fällig. Der Auftrag ist erst mit Eingang der Anzahlung verbindlich für uns; vorher können wir Material und Termin nicht reservieren.</p>
+      <p>(3) Bei Events ist der Restbetrag innerhalb von 14 Tagen nach der Veranstaltung fällig. Mehrleistungen, die am Veranstaltungstag vereinbart werden, rechnen wir zusätzlich ab.</p>
+      <p>(4) Abonnements rechnen wir in der Regel monatlich ab.</p>
+      <p>(5) Rechnungen sind ohne Abzug zahlbar. Bei Zahlungsverzug können wir weitere Lieferungen aussetzen, bis der offene Betrag beglichen ist.</p>
+      <h2>§ 9 Lieferung, Aufbau und Abbau</h2>
+      <p>(1) Abonnements liefern wir im vereinbarten Turnus. Eine einmalige Verschiebung oder Pause ist im gegenseitigen Einvernehmen möglich.</p>
+      <p>(2) Bei Events liefern und bauen wir im vereinbarten Zeitfenster auf. Der Kunde sorgt dafür, dass wir die Location zu dieser Zeit betreten können, Zufahrt und Ladezone nutzbar sind und die Aufbauflächen frei sind. Er nennt uns eine Ansprechperson vor Ort.</p>
+      <p>(3) Wartezeiten oder zusätzliche Anfahrten, die wir nicht zu vertreten haben, berechnen wir nach Aufwand. Den Stundensatz nennen wir vorher.</p>
+      <p>(4) Kann ein Termin aus Gründen, die wir nicht zu vertreten haben (zum Beispiel höhere Gewalt, Unwetter, Streik, behördliche Anordnungen oder Ausfälle bei Lieferanten), nicht eingehalten werden, verschiebt sich die Leistung angemessen. Wir informieren den Kunden unverzüglich und bieten, wo möglich, eine gleichwertige Lösung an.</p>
+      <p>(5) Stehen Arrangements im Freien, tauschen wir kälteempfindliche Blüten nach Absprache gegen geeignetes Material.</p>
+      <h2>§ 10 Stornierung und Verschiebung von Events</h2>
+      <p>(1) Der Kunde kann einen Event-Auftrag jederzeit in Textform stornieren. Maßgeblich ist der Eingang der Stornierung bei uns.</p>
+      <p>(2) Bei einer Stornierung berechnen wir folgende Pauschalen, bezogen auf den Auftragswert:</p>
+      <ul>
+        <li>bis 60 Tage vor der Veranstaltung: nur bereits erbrachte Leistungen (zum Beispiel Konzept, Musterarrangement), höchstens die Anzahlung</li>
+        <li>59 bis 30 Tage vorher: 30 %</li>
+        <li>29 bis 14 Tage vorher: 50 %</li>
+        <li>13 bis 4 Tage vorher: 80 %</li>
+        <li>ab 3 Tagen vorher oder bei Nichtabnahme: 100 %</li>
+      </ul>
+      <p>(3) Die Anzahlung wird auf die Pauschale angerechnet. Dem Kunden bleibt der Nachweis vorbehalten, dass uns kein oder ein geringerer Schaden entstanden ist. Uns bleibt der Nachweis eines höheren Schadens vorbehalten.</p>
+      <p>(4) Eine Verschiebung des Veranstaltungstermins ist bis 30 Tage vorher einmalig ohne Stornokosten möglich, sofern wir am neuen Termin verfügbar sind. Preisänderungen durch die Saison am neuen Termin bleiben vorbehalten.</p>
+      <h2>§ 11 Offenes Feuer und Sicherheit</h2>
+      <p>(1) Unsere Arrangements können brennbare Materialien enthalten, etwa Federn, Gräser, Zweige oder Trockenmaterial. Für Kerzen und offene Flammen in der Nähe der Floristik sind der Kunde und die Location verantwortlich. Kerzen sollen nur in Windlichtern und mit ausreichendem Abstand stehen.</p>
+      <p>(2) Früchte, Blütenblätter und Pollen können auf Textilien und Oberflächen abfärben. Wir setzen nach Möglichkeit Unterlagen ein. Empfindliche Flächen, zum Beispiel lackierte Instrumente, sind uns vorher zu nennen.</p>
+      <h2>§ 12 Haftung</h2>
+      <p>(1) Wir haften unbeschränkt bei Vorsatz und grober Fahrlässigkeit, bei der Verletzung von Leben, Körper oder Gesundheit sowie nach dem Produkthaftungsgesetz.</p>
+      <p>(2) Bei leichter Fahrlässigkeit haften wir nur für die Verletzung wesentlicher Vertragspflichten, also solcher Pflichten, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags erst ermöglicht. In diesem Fall ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt.</p>
+      <p>(3) Für Schäden an Flächen, Möbeln oder Einrichtungen, die durch Wasser, Früchte, Pflanzensäfte oder Pollen entstehen, haften wir nur bei grober Fahrlässigkeit, soweit Absatz 1 nicht etwas anderes bestimmt.</p>
+      <p>(4) Für Schäden durch offene Flammen, die nicht von uns gesetzt wurden, haften wir nicht.</p>
+      <h2>§ 13 Abonnements: Laufzeit, Pausen und Kündigung</h2>
+      <p>(1) Die Mindestlaufzeit eines Abonnements beträgt drei Monate, sofern nichts anderes vereinbart ist.</p>
+      <p>(2) Pausen sind mindestens zwei Wochen vorher anzukündigen.</p>
+      <p>(3) Die ordentliche Kündigung erfolgt in Textform mit einer Frist von vier Wochen zum Monatsende. Das Recht zur fristlosen Kündigung aus wichtigem Grund bleibt unberührt.</p>
+      <h2>§ 14 Fotos und Referenzen</h2>
+      <p>Wir dürfen unsere Arbeiten fotografieren und die Fotos für unsere Website und unsere Social-Media-Kanäle nutzen. Gäste zeigen wir dabei nicht erkennbar. Der Kunde kann der Nutzung in Textform widersprechen, auch nachträglich; Name und Anlass nennen wir nur mit seiner Zustimmung.</p>
+      <h2>§ 15 Hinweise für Verbraucher</h2>
+      <p>(1) Für Waren, die nach Kundenspezifikation angefertigt werden oder schnell verderben können, besteht nach § 312g Abs. 2 Nr. 1 und 2 BGB kein Widerrufsrecht. Im Übrigen gelten die gesetzlichen Bestimmungen.</p>
+      <p>(2) Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      <h2>§ 16 Schlussbestimmungen</h2>
+      <p>(1) Es gilt das Recht der Bundesrepublik Deutschland.</p>
+      <p>(2) Gerichtsstand für Kaufleute, juristische Personen des öffentlichen Rechts und öffentlich-rechtliche Sondervermögen ist Berlin.</p>
+      <p>(3) Sollten einzelne Bestimmungen unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
+    </main>
+    <Footer />
+  </body>
+</html>
 
 <style>
-  .legal { padding-block: var(--sp-lg) var(--sp-2xl); max-width: 820px; }
-  .legal .eyebrow { display: block; margin-bottom: 1.2rem; }
-  .legal h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; font-weight: 400; margin-bottom: var(--sp-lg); }
-  .legal-body { display: grid; gap: var(--sp-sm); }
-  .legal-body h2 { font-size: 1.3rem; margin-top: var(--sp-md); color: var(--accent); }
-  .legal-body p { color: var(--text-soft); line-height: 1.75; }
+  .agb {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 8rem 1.5rem 6rem;
+    color: #6E3663;
+    font-family: 'Mulish', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .ueberzeile {
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8A3E7D;
+    margin: 0 0 1rem;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    color: #561C4C;
+    margin: 0 0 1.5rem;
+  }
+  .stand {
+    color: #8A6383;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E4E6B2;
+    margin-bottom: 2.5rem;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: #561C4C;
+    margin: 2.5rem 0 0.75rem;
+  }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+  li { margin-bottom: 0.3rem; }
+  @media (max-width: 600px) {
+    .agb { padding-top: 6rem; }
+    h1 { font-size: 2rem; }
+  }
 </style>
