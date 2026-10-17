@@ -57,8 +57,6 @@ export const legalDe = {
   agb: {
     // AGB-Seite · Stand Oktober 2026
 // Pfad im Repository: src/pages/agb.astro  → erreichbar unter /agb/
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 const title = 'Allgemeine Geschäftsbedingungen · Lilac & Bergamot';
 const description = 'Allgemeine Geschäftsbedingungen von Lilac & Bergamot, Floristik-Studio in Berlin. Stand Oktober 2026.';
 ---
